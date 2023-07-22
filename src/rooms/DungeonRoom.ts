@@ -8,7 +8,7 @@ import { DungeonState, RewardState } from "./DungeonState";
 import mongoose from 'mongoose';
 export class DungeonRoom extends Room<DungeonState> {
   maxClients = 1;
-
+  map:string;
   async onCreate(options:any) {
 
     await mongoose.connect('mongodb+srv://CPAY-CF-USER:Pul6GVdRV5C7j82f@cpay-cf.zcgbftb.mongodb.net/crypterium-fantasy-game?retryWrites=true&w=majority');
@@ -23,10 +23,9 @@ export class DungeonRoom extends Room<DungeonState> {
 
     const characters = await fetchHeroes(options.ethAddress);
     
-    console.log("FinishedfetchWaveMonsters")
-    console.log(monsters)
+ 
     const dungeonId = await createDungeonRecord(options.ethAddress, characters, options.map)
-
+    this.map = options.map;
     this.state.wave = 1;
     this.state.ethAddress = options.ethAddress;
     this.state.map = options.map
@@ -76,12 +75,14 @@ export class DungeonRoom extends Room<DungeonState> {
     })
   }
 
-  onJoin(client: Client) {
+  async onJoin(client: Client) {
     this.broadcast("messages", `${client.sessionId} joined.`);
     console.log(client.sessionId, "joined!");
-    
-    const monsters = await fetchWaveMonsters(options.map, 1)
+
+    const monsters = await fetchWaveMonsters(this.map, 1)
     this.state.monsters = monsters;
+    console.log("FinishedfetchWaveMonsters")
+    console.log(monsters)
   }
 
   onLeave(client: Client, consented: boolean) {
