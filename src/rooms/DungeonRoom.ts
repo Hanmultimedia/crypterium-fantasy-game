@@ -22,7 +22,7 @@ export class DungeonRoom extends Room<DungeonState> {
     this.setSeatReservationTime(100000) 
 
     const characters = await fetchHeroes(options.ethAddress);
-    const monsters = await fetchWaveMonsters(options.map, 1)
+    
     console.log("FinishedfetchWaveMonsters")
     console.log(monsters)
     const dungeonId = await createDungeonRecord(options.ethAddress, characters, options.map)
@@ -32,7 +32,6 @@ export class DungeonRoom extends Room<DungeonState> {
     this.state.map = options.map
     this.state.dungeonId = dungeonId
     this.state.heroes = characters;
-    this.state.monsters = monsters;
 
     this.onMessage("incrementWave", (client, data) => {
     this.state.wave++;
@@ -80,6 +79,9 @@ export class DungeonRoom extends Room<DungeonState> {
   onJoin(client: Client) {
     this.broadcast("messages", `${client.sessionId} joined.`);
     console.log(client.sessionId, "joined!");
+    
+    const monsters = await fetchWaveMonsters(options.map, 1)
+    this.state.monsters = monsters;
   }
 
   onLeave(client: Client, consented: boolean) {
