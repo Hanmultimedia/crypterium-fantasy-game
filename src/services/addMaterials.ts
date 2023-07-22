@@ -1,6 +1,5 @@
 import { fetchDiamond } from "./fetchDiamond";
 import { fetchItemPotionPools } from "../services/itemPotionPools";
-import { firestore } from "firebase-admin";
 import { Potion,Potion_Inventory } from "../rooms/MenuState";
 import { CharacterSchema } from './character.schema';  
 import mongoose, { Schema, Document }  from 'mongoose';

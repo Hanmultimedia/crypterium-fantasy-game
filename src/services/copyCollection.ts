@@ -1,6 +1,5 @@
 
 import { Equipment } from "../rooms/MenuState";
-import { firestore } from "firebase-admin";
 
 export async function CopyCollection(eth:string,id:string): Promise<any> {
   
