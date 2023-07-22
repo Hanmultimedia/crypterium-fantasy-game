@@ -18,7 +18,7 @@ export async function userAuth(eth: string) {
     }
 
     // Use the model to query for a user with a matching eth address
-    let user = await User.findOne({ eth });
+    let user:any = await User.findOne({ eth });
     if (!user) {
       user = new User({
         eth,
@@ -44,7 +44,7 @@ export async function userNonAuth(eth: string) {
     }
 
     // Use the model to query for a user with a matching eth address
-    let user = await User.findOne({ eth });
+    let user:any = await User.findOne({ eth });
     if (user) {
       user.status = false
     }
@@ -67,7 +67,7 @@ export async function getOnlineStatus(eth: string) {
     }
 
     // Use the model to query for a user with a matching eth address
-    let user = await User.findOne({ eth });
+    let user:any = await User.findOne({ eth });
     if (user) {
       return user.status
     }

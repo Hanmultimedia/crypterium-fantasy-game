@@ -1,8 +1,8 @@
-export function randomRewards(config, rewards) {
+export function randomRewards(config:any, rewards:any) {
   rewards.diamond += config.diamond
   rewards.exp += config.exp
 
-  config.items.forEach(item => {
+  config.items.forEach((item:any) => {
     if (!rewards[item.uid]) {
       rewards[item.uid] = calcReward(item.percent, item.tick)
     } else {

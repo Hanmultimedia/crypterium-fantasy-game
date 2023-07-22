@@ -16,17 +16,17 @@ export function randomIndex(distribution:any){
   return distribution[index];  
 };
 
-export function calcBonus(character, key) {
+export function calcBonus(character:any, key:any) {
   const max = character.bonus[key]
   const bonus = Math.floor(max * Math.random());
   return bonus
 }
 
-export function calcStatBonus(character, key, bonus) {
+export function calcStatBonus(character:any, key:any, bonus:any) {
   return character[key] + bonus[key]
 }
 
-export function calcHeroHPMax(character) {
+export function calcHeroHPMax(character:any) {
   let bonus = 0;
   bonus += (character.level) * 28
   if (character.job === 'Swordman') {
@@ -38,7 +38,7 @@ export function calcHeroHPMax(character) {
   );
 }
 
-export function calcHeroSPMax(character) {
+export function calcHeroSPMax(character:any) {
   let bonus = 0;
   bonus += (character.level * 10);
   if (character.job === 'Acolyte' || character.job === 'Magician') {

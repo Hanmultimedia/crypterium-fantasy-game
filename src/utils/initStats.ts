@@ -74,7 +74,7 @@ function calcHeroAtk(character: Character) {
   }
 }
 
-function calcHeroMatk(character) {
+function calcHeroMatk(character: Character) {
   let bonus = 0;
   let level = character.level;
   if (
@@ -96,20 +96,20 @@ function calcHeroMatk(character) {
   );
 }
 
-function calcHeroDef(character) {
+function calcHeroDef(character: Character) {
   let vit = character.attributes.vit;
   let armor = 0;
   return Math.floor(vit / 2 + vit * 5);
 }
 
-function calcHeroMdef(character) {
+function calcHeroMdef(character: Character) {
   let vit = character.attributes.vit;
   let int = character.attributes.int;
   let armor = 0;
   return Math.floor((vit / 2) * 0.5 + vit * 2.5 + int);
 }
 
-function calcHeroHPMax(character) {
+function calcHeroHPMax(character: Character) {
   let bonus = 0;
   if (character.job === "Swordman") {
     bonus += character.level * 10;
@@ -119,7 +119,7 @@ function calcHeroHPMax(character) {
   return Math.floor(character.hp + vit * 25);
 }
 
-function calcHeroSPMax(character) {
+function calcHeroSPMax(character: Character) {
   let bonus = 0;
   if (
     character.job === "Acolyte" ||
@@ -132,7 +132,7 @@ function calcHeroSPMax(character) {
   return Math.floor(character.sp + (int / 2) * 10);
 }
 
-function calcHeroHit(character) {
+function calcHeroHit(character: Character) {
   let bonus = 0;
   if (character.job === "Archer") {
     bonus += character.level;
@@ -143,14 +143,14 @@ function calcHeroHit(character) {
   return Math.floor(dex * 2 + agi + bonus + dex * 10);
 }
 
-function calcHeroFlee(character) {
+function calcHeroFlee(character: Character) {
   let luk = character.attributes.luk;
   let agi = character.attributes.agi;
 
   return Math.floor(luk + (agi / 2) * 2 + luk * 5);
 }
 
-function calcHeroCri(character) {
+function calcHeroCri(character: Character) {
   let bonus = 0;
   if (character.job === "Lancer") {
     bonus += character.level * 0.1;
@@ -160,11 +160,11 @@ function calcHeroCri(character) {
   return (luk / 2) * 0.3 + bonus + luk;
 }
 
-function calcHeroDropRate(luk, level) {
+function calcHeroDropRate(luk:any, level:any) {
   return 0;
 }
 
-function calcHeroAtkSpeed(character) {
+function calcHeroAtkSpeed(character: Character) {
   let bonus = 0;
   let agi = character.attributes.agi;
 

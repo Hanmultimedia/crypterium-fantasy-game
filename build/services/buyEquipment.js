@@ -53,7 +53,7 @@ exports.InventoryEquipmentSchema = new mongoose_1.Schema({
 async function buyEquipment(eth, equipment_uid, amount) {
     let diamonds = await (0, fetchDiamond_1.fetchDiamond)(eth);
     const equipments = await (0, fetchEquipments_1.fetchEquipments)();
-    const equipment = equipments.find(e => e.uid === equipment_uid);
+    const equipment = equipments.find((e) => e.uid === equipment_uid);
     const e = new MenuState_1.Equipment_Inventory();
     e.uid = equipment.uid;
     const price = equipment.price * amount;

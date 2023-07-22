@@ -46,9 +46,9 @@ export async function addPotion(eth:string , amount:number) {
   potion.sprite = p.sprite
   potion.price = p.price
 
-  const result = []
+  const result:any = []
 
-    const p2 = new Potion_Inventory()
+    const p2:any = new Potion_Inventory()
     p2.uid = potion.uid
     p2.amount = amount
 

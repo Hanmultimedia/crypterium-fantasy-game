@@ -47,7 +47,7 @@ export async function buyPotion(eth:string, potion_uid: string , amount: number)
 
   //console.log(eth + " buy potion " + potion.uid + " buy amount " + amount +" total price " + price + " have diamond " + diamonds)
 
-  const result = []
+  const result:any = []
 
   if(diamonds >= price )
   {

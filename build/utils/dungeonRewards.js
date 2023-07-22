@@ -4,7 +4,7 @@ exports.calcReward = exports.randomRewards = void 0;
 function randomRewards(config, rewards) {
     rewards.diamond += config.diamond;
     rewards.exp += config.exp;
-    config.items.forEach(item => {
+    config.items.forEach((item) => {
         if (!rewards[item.uid]) {
             rewards[item.uid] = calcReward(item.percent, item.tick);
         }

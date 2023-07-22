@@ -68,7 +68,7 @@ export async function addSkillToCharacter(eth:string, character_id: string , ski
   if(diamonds >= price[0] )
   {
   const skills = await fetchSkills()
-  const skill = skills.find( c => c.uid == skill_id)
+  const skill = skills.find( (c:any) => c.uid == skill_id)
 
   let s = {
       uid: skill.uid,

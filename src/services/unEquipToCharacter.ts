@@ -25,7 +25,7 @@ const InventoryEquipment = mongoose.model('InventoryEquipment');
 export async function unEquipToCharacter(eth:string, character_id: string , equipment_uid: string , slot : number): Promise<any> {
   console.log("UnEquip " + equipment_uid + " to " + character_id)
 
-  let inventory = await InventoryEquipment.findOne(
+  let inventory:any = await InventoryEquipment.findOne(
     { eth: eth}
     );
 
@@ -45,7 +45,7 @@ export async function unEquipToCharacter(eth:string, character_id: string , equi
 
   const update = {};
   update[`equipments.slot_${slot}`] = "";
-  const character = await Character.findOneAndUpdate({ _id: character_id }, { $set: update }, { new: true });
+  const character:any = await Character.findOneAndUpdate({ _id: character_id }, { $set: update }, { new: true });
   if (!character) {
     throw new Error('Character not found');
   }

@@ -33,11 +33,11 @@ export async function buyEquipment(eth:string, equipment_uid: string , amount: n
 
   let diamonds = await fetchDiamond(eth)
   const equipments = await fetchEquipments()
-  const equipment = equipments.find(e => e.uid === equipment_uid) as Equipment
+  const equipment = equipments.find((e:any) => e.uid === equipment_uid) as Equipment
   const e = new Equipment_Inventory()
   e.uid = equipment.uid
   const price = equipment.price * amount
-  const result = []
+  const result:any = []
   if(diamonds >= price )
   {
     console.log(eth + " buy equipment " + equipment_uid)

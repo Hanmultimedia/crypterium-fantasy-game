@@ -75,7 +75,7 @@ async function addSkillToCharacter(eth, character_id, skill_id) {
     ];
     if (diamonds >= price[0]) {
         const skills = await (0, fetchSkills_1.fetchSkills)();
-        const skill = skills.find(c => c.uid == skill_id);
+        const skill = skills.find((c) => c.uid == skill_id);
         let s = {
             uid: skill.uid,
             level: 1,
