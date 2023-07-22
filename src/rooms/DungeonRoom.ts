@@ -24,6 +24,7 @@ export class DungeonRoom extends Room<DungeonState> {
     const characters = await fetchHeroes(options.ethAddress);
     const monsters = await fetchWaveMonsters(options.map, 1)
     console.log("FinishedfetchWaveMonsters")
+    console.log(monsters)
     const dungeonId = await createDungeonRecord(options.ethAddress, characters, options.map)
 
     this.state.wave = 1;
