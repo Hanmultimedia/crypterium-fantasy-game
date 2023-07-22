@@ -6,7 +6,7 @@ import { playground } from "@colyseus/playground";
  * Import your Room files
  */
 import { MyRoom } from "./rooms/MyRoom";
-
+import { MenuRoom } from "./rooms/MenuRoom";
 export default config({
 
     initializeGameServer: (gameServer) => {
@@ -14,8 +14,8 @@ export default config({
          * Define your room handlers:
          */
         gameServer.define('my_room', MyRoom);
-
-    },
+        gameServer.define('MenuRoom', MenuRoom);
+    },  
 
     initializeExpress: (app) => {
         /**
