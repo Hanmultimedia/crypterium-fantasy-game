@@ -21,7 +21,7 @@ export async function addCoin(eth: string, type: string) {
     }
 
     // Use the model to query for a user with a matching eth address
-    let user:any = await User.findOne<{ eth: string }>({ eth });
+    let user:any = await User.findOne({ eth });
     if (!user) {
       user = new User({
         eth,
