@@ -5,11 +5,16 @@ import { fetchWaveMonsters } from "../services/fetchWaveMonsters";
 import { usePotions } from "../services/usePotions";
 import { createDungeonRecord, finishDungeon, updateDungeonRecord } from "../services/makeDungeonRecord";
 import { DungeonState, RewardState } from "./DungeonState";
-
+import mongoose from 'mongoose';
 export class DungeonRoom extends Room<DungeonState> {
   maxClients = 1;
 
   async onCreate(options:any) {
+
+    await mongoose.connect('mongodb+srv://CPAY-CF-USER:Pul6GVdRV5C7j82f@cpay-cf.zcgbftb.mongodb.net/crypterium-fantasy-game?retryWrites=true&w=majority');
+    const db = mongoose.connection;
+    db.on('error', console.error.bind(console, 'connection error:'));
+
     this.roomId = options.ethAddress;
     console.log("Dungeon created!", options);
     this.setState(new DungeonState());
@@ -17,8 +22,8 @@ export class DungeonRoom extends Room<DungeonState> {
     this.setSeatReservationTime(100000) 
 
     const characters = await fetchHeroes(options.ethAddress);
-    console.log("fetchWaveMonsters")
     const monsters = await fetchWaveMonsters(options.map, 1)
+    console.log("FinishedfetchWaveMonsters")
     const dungeonId = await createDungeonRecord(options.ethAddress, characters, options.map)
 
     this.state.wave = 1;
