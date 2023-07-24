@@ -45,7 +45,7 @@ export class MenuRoom extends Room<MenuState> {
     
     this.setSeatReservationTime(100000) 
     const randomNum = Math.floor(Math.random() * 1001);
-    this.roomId = `MenuRoom-${options.ethAddress}-${randomNum}`;
+    this.roomId = `MenuRoom-${options.ethAddress}`;
     console.log("MenuRoom created!", options);
     this.ethAddress = options.ethAddress
 
