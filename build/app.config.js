@@ -10,12 +10,20 @@ const playground_1 = require("@colyseus/playground");
  * Import your Room files
  */
 const MyRoom_1 = require("./rooms/MyRoom");
+const MenuRoom_1 = require("./rooms/MenuRoom");
+const TreasureRoom_1 = require("./rooms/TreasureRoom");
+const ArenaRoom_1 = require("./rooms/ArenaRoom");
+const DungeonRoom_1 = require("./rooms/DungeonRoom");
 exports.default = (0, tools_1.default)({
     initializeGameServer: (gameServer) => {
         /**
          * Define your room handlers:
          */
         gameServer.define('my_room', MyRoom_1.MyRoom);
+        gameServer.define('MenuRoom', MenuRoom_1.MenuRoom);
+        gameServer.define('TreasureRoom', TreasureRoom_1.TreasureRoom);
+        gameServer.define('ArenaRoom', ArenaRoom_1.ArenaRoom);
+        gameServer.define('DungeonRoom', DungeonRoom_1.DungeonRoom);
     },
     initializeExpress: (app) => {
         /**

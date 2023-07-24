@@ -44,7 +44,8 @@ export class MenuRoom extends Room<MenuState> {
     db.on('error', console.error.bind(console, 'connection error:'));
     
     this.setSeatReservationTime(100000) 
-    this.roomId = "MenuRoom-"+ options.ethAddress;
+    const randomNum = Math.floor(Math.random() * 1001);
+    this.roomId = `MenuRoom-${options.ethAddress}-${randomNum}`;
     console.log("MenuRoom created!", options);
     this.ethAddress = options.ethAddress
 

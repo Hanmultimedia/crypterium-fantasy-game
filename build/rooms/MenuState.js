@@ -10,7 +10,6 @@ exports.MenuState = exports.SummonData = exports.Skill_Character = exports.Skill
 const schema_1 = require("@colyseus/schema");
 class Character extends schema_1.Schema {
 }
-exports.Character = Character;
 __decorate([
     (0, schema_1.type)("string")
 ], Character.prototype, "id", void 0);
@@ -125,9 +124,9 @@ __decorate([
 __decorate([
     (0, schema_1.type)("number")
 ], Character.prototype, "arenaDefendPosition", void 0);
+exports.Character = Character;
 class Potion extends schema_1.Schema {
 }
-exports.Potion = Potion;
 __decorate([
     (0, schema_1.type)("string")
 ], Potion.prototype, "uid", void 0);
@@ -152,27 +151,27 @@ __decorate([
 __decorate([
     (0, schema_1.type)("number")
 ], Potion.prototype, "price", void 0);
+exports.Potion = Potion;
 class Potion_Inventory extends schema_1.Schema {
 }
-exports.Potion_Inventory = Potion_Inventory;
 __decorate([
     (0, schema_1.type)("string")
 ], Potion_Inventory.prototype, "uid", void 0);
 __decorate([
     (0, schema_1.type)("number")
 ], Potion_Inventory.prototype, "amount", void 0);
+exports.Potion_Inventory = Potion_Inventory;
 class Materials_Inventory extends schema_1.Schema {
 }
-exports.Materials_Inventory = Materials_Inventory;
 __decorate([
     (0, schema_1.type)("string")
 ], Materials_Inventory.prototype, "uid", void 0);
 __decorate([
     (0, schema_1.type)("number")
 ], Materials_Inventory.prototype, "amount", void 0);
+exports.Materials_Inventory = Materials_Inventory;
 class Potion_Setting extends schema_1.Schema {
 }
-exports.Potion_Setting = Potion_Setting;
 __decorate([
     (0, schema_1.type)("string")
 ], Potion_Setting.prototype, "hp_uid", void 0);
@@ -185,18 +184,18 @@ __decorate([
 __decorate([
     (0, schema_1.type)("number")
 ], Potion_Setting.prototype, "sp_percent", void 0);
+exports.Potion_Setting = Potion_Setting;
 class Equipment_Inventory extends schema_1.Schema {
 }
-exports.Equipment_Inventory = Equipment_Inventory;
 __decorate([
     (0, schema_1.type)("string")
 ], Equipment_Inventory.prototype, "uid", void 0);
 __decorate([
     (0, schema_1.type)("number")
 ], Equipment_Inventory.prototype, "amount", void 0);
+exports.Equipment_Inventory = Equipment_Inventory;
 class Equipment extends schema_1.Schema {
 }
-exports.Equipment = Equipment;
 __decorate([
     (0, schema_1.type)("string")
 ], Equipment.prototype, "uid", void 0);
@@ -281,22 +280,22 @@ __decorate([
 __decorate([
     (0, schema_1.type)("number")
 ], Equipment.prototype, "hpMAX", void 0);
+exports.Equipment = Equipment;
 class Coupon extends schema_1.Schema {
 }
-exports.Coupon = Coupon;
 __decorate([
     (0, schema_1.type)("string")
 ], Coupon.prototype, "uid", void 0);
 __decorate([
     (0, schema_1.type)("number")
 ], Coupon.prototype, "quantity", void 0);
+exports.Coupon = Coupon;
 class Skill extends schema_1.Schema {
     constructor() {
         super(...arguments);
         this.jobRequired = new schema_1.ArraySchema();
     }
 }
-exports.Skill = Skill;
 __decorate([
     (0, schema_1.type)("string")
 ], Skill.prototype, "uid", void 0);
@@ -312,9 +311,9 @@ __decorate([
 __decorate([
     (0, schema_1.type)("string")
 ], Skill.prototype, "des", void 0);
+exports.Skill = Skill;
 class Skill_Character extends schema_1.Schema {
 }
-exports.Skill_Character = Skill_Character;
 __decorate([
     (0, schema_1.type)("string")
 ], Skill_Character.prototype, "uid", void 0);
@@ -327,16 +326,17 @@ __decorate([
 __decorate([
     (0, schema_1.type)("string")
 ], Skill_Character.prototype, "des", void 0);
+exports.Skill_Character = Skill_Character;
 class SummonData extends schema_1.Schema {
     constructor() {
         super(...arguments);
         this.data = new schema_1.ArraySchema();
     }
 }
-exports.SummonData = SummonData;
 __decorate([
     (0, schema_1.type)(["string"])
 ], SummonData.prototype, "data", void 0);
+exports.SummonData = SummonData;
 class MenuState extends schema_1.Schema {
     constructor() {
         super(...arguments);
@@ -351,7 +351,6 @@ class MenuState extends schema_1.Schema {
         this.materials_inventory = new schema_1.ArraySchema();
     }
 }
-exports.MenuState = MenuState;
 __decorate([
     (0, schema_1.type)("string")
 ], MenuState.prototype, "page", void 0);
@@ -394,3 +393,4 @@ __decorate([
 __decorate([
     (0, schema_1.type)([Materials_Inventory])
 ], MenuState.prototype, "materials_inventory", void 0);
+exports.MenuState = MenuState;

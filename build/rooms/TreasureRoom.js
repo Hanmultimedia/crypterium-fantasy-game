@@ -28,7 +28,7 @@ class TreasureRoom extends colyseus_1.Room {
         this.roomId = options.ethAddress;
         //console.log("Treasure created!", options);
         this.setState(new DungeonState_1.DungeonState());
-        this.setSeatReservationTime(10000);
+        this.setSeatReservationTime(100000);
         await mongoose_1.default.connect('mongodb+srv://CPAY-CF-USER:Pul6GVdRV5C7j82f@cpay-cf.zcgbftb.mongodb.net/crypterium-fantasy-game?retryWrites=true&w=majority');
         const db = mongoose_1.default.connection;
         //db.on('error', console.error.bind(console, 'connection error:'));

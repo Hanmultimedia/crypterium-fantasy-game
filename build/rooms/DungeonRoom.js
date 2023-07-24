@@ -1,4 +1,7 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DungeonRoom = void 0;
 const colyseus_1 = require("colyseus");
@@ -8,26 +11,28 @@ const fetchWaveMonsters_1 = require("../services/fetchWaveMonsters");
 const usePotions_1 = require("../services/usePotions");
 const makeDungeonRecord_1 = require("../services/makeDungeonRecord");
 const DungeonState_1 = require("./DungeonState");
+const mongoose_1 = __importDefault(require("mongoose"));
 class DungeonRoom extends colyseus_1.Room {
     constructor() {
         super(...arguments);
         this.maxClients = 1;
     }
     async onCreate(options) {
+        await mongoose_1.default.connect('mongodb+srv://CPAY-CF-USER:Pul6GVdRV5C7j82f@cpay-cf.zcgbftb.mongodb.net/crypterium-fantasy-game?retryWrites=true&w=majority');
+        const db = mongoose_1.default.connection;
+        db.on('error', console.error.bind(console, 'connection error:'));
         this.roomId = options.ethAddress;
         console.log("Dungeon created!", options);
         this.setState(new DungeonState_1.DungeonState());
         this.setSeatReservationTime(100000);
         const characters = await (0, fetchHeroes_1.fetchHeroes)(options.ethAddress);
-        console.log("fetchWaveMonsters");
-        const monsters = await (0, fetchWaveMonsters_1.fetchWaveMonsters)(options.map, 1);
         const dungeonId = await (0, makeDungeonRecord_1.createDungeonRecord)(options.ethAddress, characters, options.map);
+        this.map = options.map;
         this.state.wave = 1;
         this.state.ethAddress = options.ethAddress;
         this.state.map = options.map;
         this.state.dungeonId = dungeonId;
         this.state.heroes = characters;
-        this.state.monsters = monsters;
         this.onMessage("incrementWave", (client, data) => {
             this.state.wave++;
             this.state.heroes.forEach((hero) => {
@@ -63,9 +68,13 @@ class DungeonRoom extends colyseus_1.Room {
             }
         });
     }
-    onJoin(client) {
+    async onJoin(client) {
         this.broadcast("messages", `${client.sessionId} joined.`);
         console.log(client.sessionId, "joined!");
+        const monsters = await (0, fetchWaveMonsters_1.fetchWaveMonsters)(this.map, 1);
+        this.state.monsters = monsters;
+        console.log("FinishedfetchWaveMonsters");
+        console.log(monsters);
     }
     onLeave(client, consented) {
         this.broadcast("messages", `${client.sessionId} left.`);

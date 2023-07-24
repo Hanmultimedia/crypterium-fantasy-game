@@ -14,7 +14,6 @@ class Character extends schema_1.Schema {
         this.lastWave = 0;
     }
 }
-exports.Character = Character;
 __decorate([
     (0, schema_1.type)("string")
 ], Character.prototype, "id", void 0);
@@ -96,26 +95,27 @@ __decorate([
 __decorate([
     (0, schema_1.type)(["string"])
 ], Character.prototype, "skill_equip", void 0);
+exports.Character = Character;
 class Character_Array extends schema_1.Schema {
     constructor() {
         super(...arguments);
         this.character = new schema_1.ArraySchema();
     }
 }
-exports.Character_Array = Character_Array;
 __decorate([
     (0, schema_1.type)([Character])
 ], Character_Array.prototype, "character", void 0);
+exports.Character_Array = Character_Array;
 class RewardState extends schema_1.Schema {
     constructor() {
         super(...arguments);
         this.data = new schema_1.MapSchema();
     }
 }
-exports.RewardState = RewardState;
 __decorate([
     (0, schema_1.type)({ map: "number" })
 ], RewardState.prototype, "data", void 0);
+exports.RewardState = RewardState;
 class DungeonState extends schema_1.Schema {
     constructor() {
         super(...arguments);
@@ -127,7 +127,6 @@ class DungeonState extends schema_1.Schema {
         this.spawners_boss = new schema_1.ArraySchema();
     }
 }
-exports.DungeonState = DungeonState;
 __decorate([
     (0, schema_1.type)("uint16")
 ], DungeonState.prototype, "wave", void 0);
@@ -173,3 +172,4 @@ __decorate([
 __decorate([
     (0, schema_1.type)([Character_Array])
 ], DungeonState.prototype, "spawners_boss", void 0);
+exports.DungeonState = DungeonState;
