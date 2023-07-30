@@ -73,9 +73,7 @@ export class TreasureRoom extends Room<DungeonState> {
     this.onMessage("spawnChest", async (client, data) => {
       const chest = await fetchRandomChest(options.map, this.state.wave)
       this.state.spawners_chests[data.index].character.length = 0;
-      this.state.spawners_chests[data.index].character.push(chest)
-      //console.log("Spawn chest ")
-     // console.log(chest)
+      this.state.spawners_chests[data.index].character.push(chest);
     });
 
     this.onMessage("recieveExp", async (client, data) => {
@@ -97,7 +95,6 @@ export class TreasureRoom extends Room<DungeonState> {
 
     this.onMessage("recieveCoin", async (client, data) => {
       let coin = await addCoin(this.state.ethAddress,data.type)
-      console.log("drop state is " + coin)
       this.state.drop = coin;
       this.state.bit = await fetchCoin(options.ethAddress,1)
       this.state.doge = await fetchCoin(options.ethAddress,2)    
