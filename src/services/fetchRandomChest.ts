@@ -64,7 +64,7 @@ let possible_uid = [
 
 if(slug == "1")
 {
-  possible_uid = [{ uid: "chest002", probability: 1 }, // 50% probability];
+  possible_uid = [{ uid: "chest001", probability: 1 }, // 50% probability];
 }
 
 // Create the cumulative distribution function (CDF) array
