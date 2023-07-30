@@ -55,23 +55,12 @@ export async function fetchRandomChest(slug:string, wave:number): Promise<any> {
     }
     });
 
-// Define the items and their corresponding probabilities
-let possible_uid = [
+    // Define the items and their corresponding probabilities
+const possible_uid = [
   { uid: "chest001", probability: 0.5 }, // 50% probability
   { uid: "chest002", probability: 0.3 }, // 30% probability
   { uid: "chest003", probability: 0.2 }, // 20% probability
 ];
-
-console.log("Slug " + slug);
-
-if(slug == "1")
-{
-  possible_uid = [
-  { uid: "chest001", probability: 0.5 }, // 50% probability
-  { uid: "chest002", probability: 0.3 }, // 30% probability
-  { uid: "chest003", probability: 0.2 }, // 20% probability
-  ];
-}
 
 // Create the cumulative distribution function (CDF) array
 const cdf = [];
@@ -91,7 +80,7 @@ const selected = cdf.find((item) => item.cumulativeProbability >= randomValue);
 // Get the selected uid
 const uid = selected.uid;
 
-console.log("Uid " + uid);
+console.log(uid);
 
 
    /* const possible_uid = 
