@@ -66,8 +66,11 @@ console.log("Slug " + slug);
 
 if(slug == "1")
 {
-  possible_uid = [{ uid: "chest001", probability: 1 }, // 50% probability 
-    ];
+  possible_uid = [
+  { uid: "chest001", probability: 0.5 }, // 50% probability
+  { uid: "chest002", probability: 0.3 }, // 30% probability
+  { uid: "chest003", probability: 0.2 }, // 20% probability
+  ];
 }
 
 // Create the cumulative distribution function (CDF) array
@@ -88,7 +91,7 @@ const selected = cdf.find((item) => item.cumulativeProbability >= randomValue);
 // Get the selected uid
 const uid = selected.uid;
 
-console.log(uid);
+console.log("Uid " + uid);
 
 
    /* const possible_uid = 
