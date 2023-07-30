@@ -62,6 +62,8 @@ let possible_uid = [
   { uid: "chest003", probability: 0.2 }, // 20% probability
 ];
 
+console.log("Slug " + slug)
+
 if(slug == "1")
 {
   possible_uid = [
