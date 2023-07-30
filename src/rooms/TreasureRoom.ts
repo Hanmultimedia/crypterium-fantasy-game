@@ -59,19 +59,19 @@ export class TreasureRoom extends Room<DungeonState> {
     }
 
     this.onMessage("spawnMonster", async (client, data) => {
-      const monster = await fetchRandomMonster(options.map, this.state.wave)
+      const monster = await fetchRandomMonster(options.map, this.state.wave);
       this.state.spawners_monsters[data.index].character.length = 0;
-      this.state.spawners_monsters[data.index].character.push(monster)
+      this.state.spawners_monsters[data.index].character.push(monster);
     });
 
     this.onMessage("spawnBoss", async (client, data) => {
-      const monster = await fetchRandomBoss(options.map, this.state.wave)
+      const monster = await fetchRandomBoss(options.map, this.state.wave);
       this.state.spawners_boss[data.index].character.length = 0;
-      this.state.spawners_boss[data.index].character.push(monster)
+      this.state.spawners_boss[data.index].character.push(monster);
     });
 
     this.onMessage("spawnChest", async (client, data) => {
-      const chest = await fetchRandomChest(options.map, this.state.wave)
+      const chest = await fetchRandomChest(options.map, this.state.wave);
       this.state.spawners_chests[data.index].character.length = 0;
       this.state.spawners_chests[data.index].character.push(chest);
     });
