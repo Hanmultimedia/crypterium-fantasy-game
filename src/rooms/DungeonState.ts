@@ -63,5 +63,8 @@ export class DungeonState extends Schema {
   @type([Character_Array]) spawners_monsters = new ArraySchema<Character_Array>()
   @type([Character_Array]) spawners_chests = new ArraySchema<Character_Array>()
   @type([Character_Array]) spawners_boss = new ArraySchema<Character_Array>()
+
+  @type("boolean") characterBuff1: boolean = false;
+  @type("boolean") characterBuff2: boolean = false;
 }
 

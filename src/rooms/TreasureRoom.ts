@@ -37,6 +37,17 @@ export class TreasureRoom extends Room<DungeonState> {
     this.state.map = options.map
     this.state.dungeonId = options.ethAddress
     this.state.heroes = characters;
+
+    if(this.state.heroes.length >= 10)
+    {
+      this.state.characterBuff1 = true;
+    }
+
+    if(this.state.heroes.length >= 15)
+    {
+      this.state.characterBuff1 = true;
+    }
+
     this.state.drop = 0.0;
     this.state.diamond = await fetchDiamond(options.ethAddress) 
     this.state.bit = await fetchCoin(options.ethAddress,1)
@@ -96,7 +107,7 @@ export class TreasureRoom extends Room<DungeonState> {
     });
 
     this.onMessage("recieveCoin", async (client, data) => {
-      let coin = await addCoin(this.state.ethAddress,data.type)
+      let coin = await addCoin(this.state.ethAddress,data.type,this)
       console.log("drop state is " + coin)
       this.state.drop = coin;
       this.state.bit = await fetchCoin(options.ethAddress,1)

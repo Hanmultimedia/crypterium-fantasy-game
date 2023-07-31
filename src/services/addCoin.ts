@@ -1,4 +1,5 @@
 import mongoose, { Schema, Document }  from 'mongoose';
+import { TreasureRoom } from from "../rooms/TreasureRoom";
 
 export const userSchema = new mongoose.Schema({
       eth: String,
@@ -9,7 +10,7 @@ export const userSchema = new mongoose.Schema({
     });
 
 
-export async function addCoin(eth: string, type: string) {
+export async function addCoin(eth: string, type: string , scene : TreasureRoom) {
 
   let state = 0;
   try {
