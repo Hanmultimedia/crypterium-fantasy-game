@@ -1,5 +1,5 @@
 import mongoose, { Schema, Document }  from 'mongoose';
-import { TreasureRoom } from from "../rooms/TreasureRoom";
+import { TreasureRoom } from "../rooms/TreasureRoom";
 
 export const userSchema = new mongoose.Schema({
       eth: String,
