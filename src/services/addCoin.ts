@@ -26,12 +26,12 @@ export async function addCoin(eth: string, type: string , scene : TreasureRoom )
     ExtraBit += 0.01;
   }
 
-  if(scene.star == 2)
+  if(scene.state.star == 2)
   {
     ExtraDoge += 0.05;
   }
 
-  if(scene.star == 3)
+  if(scene.state.star == 3)
   {
     ExtraDoge += 0.05;
     ExtraBit += 0.01;
