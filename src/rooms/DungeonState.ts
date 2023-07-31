@@ -51,6 +51,8 @@ export class DungeonState extends Schema {
   @type("number") doge: number;
   @type("number") coin: number;
 
+  @type("number") star: number;
+
   @type("string") ethAddress: string;
   @type("string") map: string;
   @type("string") dungeonId: string;

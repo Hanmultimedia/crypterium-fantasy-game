@@ -108,7 +108,11 @@ export class TreasureRoom extends Room<DungeonState> {
 
     this.onMessage("recieveCoin", async (client, data) => {
       let coin = await addCoin(this.state.ethAddress,data.type,this)
-      console.log("drop state is " + coin)
+      //console.log("drop state is " + coin)
+      if(data.type == "boss")
+      {
+        this.state.star = 0;
+      }
       this.state.drop = coin;
       this.state.bit = await fetchCoin(options.ethAddress,1)
       this.state.doge = await fetchCoin(options.ethAddress,2)    
