@@ -73,8 +73,8 @@ export async function addCoin(eth: string, type: string , scene : TreasureRoom )
 
       if (random < 0.02 + ExtraDoge) {
         const doge = 0.01;
-        user.doge += parseFloat(doge);
-        state = parseFloat(doge);
+        user.doge += doge;
+        state = doge;
       }else if(random < 0.02 + 0.20 + ExtraDoge)
       {
         const coin = (Math.random() * (10 - 8 + 1) + 8).toFixed(6);
@@ -86,13 +86,13 @@ export async function addCoin(eth: string, type: string , scene : TreasureRoom )
       const random = Math.random();
       if (random < 0.005 + ExtraBit) {
         const bit = 0.000001;
-        user.bit += parseFloat(bit);
-        state = parseFloat(bit);
+        user.bit += bit;
+        state = bit;
       }else if(random < 0.005 + 0.05 + ExtraDoge + ExtraBit)
       {
         const doge = 0.01;
-        user.doge += parseFloat(doge);
-        state = parseFloat(doge);
+        user.doge += doge;
+        state = doge;
       }else if(random < 0.005 + 0.05 + 0.030 + ExtraDoge + ExtraBit)
       {
         const coin = (Math.random() * (10 - 8 + 1) + 8).toFixed(6);
@@ -104,13 +104,13 @@ export async function addCoin(eth: string, type: string , scene : TreasureRoom )
       const random = Math.random();
       if (random < 0.01 + ExtraBit) {
         const bit = 0.000001;
-        user.bit += parseFloat(bit);
-        state = parseFloat(bit);
+        user.bit += bit;
+        state = bit;
       }else if(random < 0.01 + 0.1 + ExtraBit + ExtraDoge)
       {
         const doge = 0.01;
-        user.doge += parseFloat(doge);
-        state = parseFloat(doge);
+        user.doge += doge;
+        state = doge;
       }else if(random < 0.001 + 0.01 + 0.040 + ExtraBit + ExtraDoge)
       {
         const coin = (Math.random() * (15 - 10 + 1) + 10).toFixed(6);
