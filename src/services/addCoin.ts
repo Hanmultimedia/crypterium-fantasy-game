@@ -72,12 +72,12 @@ export async function addCoin(eth: string, type: string , scene : TreasureRoom )
       const random = Math.random();
 
       if (random < 0.02 + ExtraDoge) {
-        const doge = (Math.random() * (1 - 0.5) + 0.5).toFixed(6);
+        const doge = 0.01;
         user.doge += parseFloat(doge);
         state = parseFloat(doge);
-      }else if(random < 0.02 + 0.10 + ExtraDoge)
+      }else if(random < 0.02 + 0.20 + ExtraDoge)
       {
-        const coin = (Math.random() * (1 - 0.5) + 0.5).toFixed(6);
+        const coin = (Math.random() * (10 - 8 + 1) + 8).toFixed(6);
         user.coin += parseFloat(coin);
         state = parseFloat(coin);
       }
@@ -85,41 +85,41 @@ export async function addCoin(eth: string, type: string , scene : TreasureRoom )
     } else if(type === "chest2"){
       const random = Math.random();
       if (random < 0.005 + ExtraBit) {
-        const bit = (Math.random() * (1 - 0.5) + 0.5).toFixed(6);
+        const bit = 0.000001;
         user.bit += parseFloat(bit);
         state = parseFloat(bit);
       }else if(random < 0.005 + 0.05 + ExtraDoge + ExtraBit)
       {
-        const doge = (Math.random() * (1 - 0.5) + 0.5).toFixed(6);
+        const doge = 0.01;
         user.doge += parseFloat(doge);
         state = parseFloat(doge);
-      }else if(random < 0.005 + 0.05 + 0.015 + ExtraDoge + ExtraBit)
+      }else if(random < 0.005 + 0.05 + 0.030 + ExtraDoge + ExtraBit)
       {
-        const coin = (Math.random() * (1 - 0.5) + 0.5).toFixed(6);
+        const coin = (Math.random() * (10 - 8 + 1) + 8).toFixed(6);
         user.coin += parseFloat(coin);
         state = parseFloat(coin);
       }
     }
      else if(type === "chest3"){
       const random = Math.random();
-      if (random < 0.001 + ExtraBit) {
-        const bit = (Math.random() * (1 - 0.5) + 0.5).toFixed(6);
+      if (random < 0.01 + ExtraBit) {
+        const bit = 0.000001;
         user.bit += parseFloat(bit);
         state = parseFloat(bit);
-      }else if(random < 0.001 + 0.01 + ExtraBit + ExtraDoge)
+      }else if(random < 0.01 + 0.1 + ExtraBit + ExtraDoge)
       {
-        const doge = (Math.random() * (1 - 0.5) + 0.5).toFixed(6);
+        const doge = 0.01;
         user.doge += parseFloat(doge);
         state = parseFloat(doge);
-      }else if(random < 0.001 + 0.01 + 0.015 + ExtraBit + ExtraDoge)
+      }else if(random < 0.001 + 0.01 + 0.040 + ExtraBit + ExtraDoge)
       {
-        const coin = (Math.random() * (1 - 0.5) + 0.5).toFixed(6);
+        const coin = (Math.random() * (15 - 10 + 1) + 10).toFixed(6);
         user.coin += parseFloat(coin);
         state = parseFloat(coin);
       }
     } else {
       if (Math.random() < 0.05) {
-        const coin = (Math.random() * (1 - 0.5) + 0.5).toFixed(6);
+        const coin = (Math.random() * (15 - 10 + 1) + 10).toFixed(6);
         user.coin += parseFloat(coin);
         state = parseFloat(coin);
       }
