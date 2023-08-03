@@ -65,7 +65,7 @@ export async function fetchHeroesTreasure(eth:string): Promise<any> {
         const character_forstat = new CharacterTemplate(data.attributes,data.job,data.uid,"",0,data.level,data.hp,data.sp,data.speed,data.range)
         const stat = makeStat(character_forstat)
         const characer = new Character()
-        characer.attributes = data.attributes
+        //characer.attributes = data.attributes
 
         //console.log("Heroes " + characters_data[i].job + " stats");
         //console.log(stat)
@@ -153,12 +153,12 @@ export async function fetchHeroesTreasure(eth:string): Promise<any> {
     characer.sp = stat.spMAX
 
     // Set character attributes from data.attributes
-    character.str = data.attributes.str;
-    character.agi = data.attributes.agi;
-    character.dex = data.attributes.dex;
-    character.luk = data.attributes.luk;
-    character.vit = data.attributes.vit;
-    character.int = data.attributes.int;
+    characer.str = data.attributes.str;
+    characer.agi = data.attributes.agi;
+    characer.dex = data.attributes.dex;
+    characer.luk = data.attributes.luk;
+    characer.vit = data.attributes.vit;
+    characer.int = data.attributes.int;
 
     //console.log("this is data skill equip")
     //console.log(data.skill_equip)
