@@ -98,67 +98,84 @@ export class TreasureRoom extends Room<DungeonState> {
     const monsters = await fetchWaveMonsters(options.map, 1)
     //const dungeonId = await createDungeonRecord(options.ethAddress, characters, options.map)
 
-    // Create a set to keep track of unique jobs in the player's team
-    const uniqueJobs = new Set();
+    //
+
+        const uniqueJobs = new Set();
     for (const character of characters) {
       uniqueJobs.add(character.job);
     }
 
-      // Check and apply 2-characters buff combinations
-  for (const combinationName in buffCombinations) {
-    const requiredJobs = buffCombinations[combinationName];
-    const hasCombination = requiredJobs.every((job) => uniqueJobs.has(job));
+    // Create a set to keep track of heroes used in 2-character combinations
+    const heroesUsedIn2Combo = new Set();
 
-    if (hasCombination) {
-      // Apply 2-characters buff combination with custom character stats
-      switch (combinationName) {
-        case "Swordman+Swordman":
-          characters.forEach((character) => {
-            character.def += 20
-          });
-          break;
-        case "Lancer+Lancer":
-          characters.forEach((character) => {
-            character.atk += 35
-          });
-          break;
-        case "Archer+Archer":
-          characters.forEach((character) => {
-            character.hit += 10
-          });
-          break;
-        case "Magician+Magician":
-          characters.forEach((character) => {
-            character.mAtk += 30
-          });
-          break;
-        case "Acolyte+Acolyte":
-          characters.forEach((character) => {
-            character.hpMAX += 80
-          });
-          break;
+    // Check and apply 2-characters buff combinations
+    for (const combinationName in buffCombinations) {
+      const requiredJobs = buffCombinations[combinationName];
+      const hasCombination = requiredJobs.every((job) => uniqueJobs.has(job));
 
-        // Add more cases for other 2-characters buffs here
-        // ...
+      if (hasCombination) {
+        // Apply 2-characters buff combination with custom character stats
+        switch (combinationName) {
+          case "Swordman+Swordman":
+            characters.forEach((character) => {
+              character.def += 20;
+            });
+            break;
+          case "Lancer+Lancer":
+            characters.forEach((character) => {
+              character.atk += 35;
+            });
+            break;
+          case "Archer+Archer":
+            characters.forEach((character) => {
+              character.hit += 10;
+            });
+            break;
+          case "Magician+Magician":
+            characters.forEach((character) => {
+              character.mAtk += 30;
+            });
+            break;
+          case "Acolyte+Acolyte":
+            characters.forEach((character) => {
+              character.hpMAX += 80;
+            });
+            break;
 
-        default:
-          break;
+          // Add more cases for other 2-characters buffs here
+          // ...
+
+          default:
+            break;
+        }
+
+        // Optionally, you can apply a generic buff for all 2-character combinations here
+        // For example:
+        // options.player.applyBuff(combinationName);
+        console.log(`Player received the ${combinationName} buff!`);
+
+        // Add the heroes used in this 2-character combination to the set
+        requiredJobs.forEach((job) => heroesUsedIn2Combo.add(job));
       }
-
-      // Optionally, you can apply a generic buff for all 2-character combinations here
-      // For example:
-      // options.player.applyBuff(combinationName);
-      console.log(`Player received the ${combinationName} buff!`);
     }
-  }
 
-  // Check and apply 3-characters buff combinations
-  for (const combinationName in buffCombinations3) {
-    const requiredJobs = buffCombinations3[combinationName];
-    const hasCombination = requiredJobs.every((job) => uniqueJobs.has(job));
+    // Check and apply 3-characters buff combinations
+    // Here, we use a separate set to keep track of heroes used in 3-character combinations
+    const heroesUsedIn3Combo = new Set();
+    for (const character of characters) {
+      for (const combinationName in buffCombinations3) {
+        const requiredJobs = buffCombinations3[combinationName];
+        const hasCombination = requiredJobs.every((job) => uniqueJobs.has(job));
 
-    if (hasCombination) {
-      // Apply 3-characters buff combination with custom character stats
+        // Check if the heroes used in this 3-character combination have not been used in 2-character combinations
+        if (hasCombination && !requiredJobs.some((job) => heroesUsedIn2Combo.has(job))) {
+          const comboHeroes = requiredJobs.join("+");
+
+          // Check if the heroes used in this 3-character combination have not been used before
+          if (!heroesUsedIn3Combo.has(comboHeroes)) {
+            heroesUsedIn3Combo.add(comboHeroes);
+
+            // Apply 3-characters buff combination with custom character stats
       switch (combinationName) {
         case "Swordman+Lancer+Archer":
           characters.forEach((character) => {
@@ -228,12 +245,14 @@ export class TreasureRoom extends Room<DungeonState> {
           break;
       }
 
-      // Optionally, you can apply a generic buff for all 3-character combinations here
-      // For example:
-      // options.player.applyBuff(combinationName);
-      console.log(`Player received the ${combinationName} buff!`);
+            // Optionally, you can apply a generic buff for all 3-character combinations here
+            // For example:
+            // options.player.applyBuff(combinationName);
+            console.log(`Player received the ${combinationName} buff!`);
+          }
+        }
+      }
     }
-  }
 
   // Check if the player has all five unique jobs for 5-characters buff
   const hasAllJobs = uniqueJobs.size === 5;
@@ -265,22 +284,19 @@ export class TreasureRoom extends Room<DungeonState> {
 
       // Apply custom stats for 5-characters buff
       // For example:
-    /*character.atk += 10
-    character.def += 10
-    character.mAtk += 10
-    character.mDef += 10
-    character.hpMAX += 10
-    character.spMAX += 10
-    character.hit += 10
-    character.flee += 10
-    character.cri += 10
-    character.aspd += 0.3
-    character.speed += 0.3*/
+    character.atk = characer.atk
+    character.def = characer.def
+    character.mAtk = characer.mAtk
+    character.mDef = characer.mDef
+    character.hpMAX = characer.hpMAX
+    character.spMAX = characer.spMAX
+    character.hit = characer.hit
+    character.flee = characer.flee
+    character.cri = characer.cri
+    character.aspd = characer.aspd
+    character.speed += 0.3
     });
 
-    // Optionally, you can apply a generic special buff here
-    // For example:
-    // options.player.applySpecialBuff();
     console.log("Player received the special buff!");
   }
 
@@ -324,11 +340,11 @@ export class TreasureRoom extends Room<DungeonState> {
     }
 
     this.onMessage("spawnMonster", async (client, data) => {
-      if(data.index){
+      //if(data.index){
       const monster = await fetchRandomMonster(options.map, this.state.wave)
       this.state.spawners_monsters[data.index].character.length = 0;
       this.state.spawners_monsters[data.index].character.push(monster)
-      }
+      //}
     });
 
     this.onMessage("spawnBoss", async (client, data) => {
@@ -338,11 +354,11 @@ export class TreasureRoom extends Room<DungeonState> {
     });
 
     this.onMessage("spawnChest", async (client, data) => {
-      if(data.index){
+      //if(data.index){
         const chest = await fetchRandomChest(data.map, this.state.wave)
         this.state.spawners_chests[data.index].character.length = 0;
         this.state.spawners_chests[data.index].character.push(chest)
-      }
+      //}
       //console.log("Spawn chest ")
      // console.log(chest)
     });
