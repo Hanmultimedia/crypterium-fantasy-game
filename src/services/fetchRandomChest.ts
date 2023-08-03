@@ -74,8 +74,16 @@ const cdf = [];
 let cumulativeProbability = 0;
 
 for (const item of possible_uid) {
-  cumulativeProbability += item.probability;
-  cdf.push({ uid: item.uid, cumulativeProbability });
+  if (item.hasOwnProperty("probability")) {
+    cumulativeProbability += item.probability;
+    cdf.push({ uid: item.uid, cumulativeProbability });
+  } else {
+    // Handle the special case when probability is not present (slug == "1")
+    // Here, you can set a default probability or ignore the item
+    // For example:
+     cumulativeProbability += 0.5; // Set a default probability of 0.5
+     cdf.push({ uid: item.uid, cumulativeProbability });
+  }
 }
 
 // Generate a random number between 0 and 1

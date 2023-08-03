@@ -357,9 +357,9 @@ export class TreasureRoom extends Room<DungeonState> {
       
       //if(data.index){
         const chest = await fetchRandomChest(data.map, this.state.wave)
-        console.log(chest)
-        //this.state.spawners_chests[data.index].character.length = 0;
-        //this.state.spawners_chests[data.index].character.push(chest)
+        //console.log(chest)
+        this.state.spawners_chests[data.index].character.length = 0;
+        this.state.spawners_chests[data.index].character.push(chest)
       //}
       //console.log("Spawn chest ")
      // console.log(chest)
