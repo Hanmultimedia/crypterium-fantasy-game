@@ -45,6 +45,15 @@ constructor(attributes: Attributes, job:string, uid:string, slug:string, positio
   }
 }
 
+interface Attributes {
+  vit: number;
+  agi: number;
+  int: number;
+  str: number;
+  luk: number;
+  dex: number;
+}
+
 const buffCombinations = {
   "Swordman+Swordman": ["Swordman", "Swordman"],
   "Lancer+Lancer": ["Lancer", "Lancer"],
