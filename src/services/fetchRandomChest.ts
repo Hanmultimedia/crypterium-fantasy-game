@@ -65,7 +65,7 @@ let possible_uid = [
 if(slug == "1")
 {
   possible_uid = [
-  { uid: "chest001", probability: 0.5 },
+  { uid: "chest001", probability: 1 },
   ];
 }
 
@@ -81,7 +81,7 @@ for (const item of possible_uid) {
     // Handle the special case when probability is not present (slug == "1")
     // Here, you can set a default probability or ignore the item
     // For example:
-     cumulativeProbability += 0.5; // Set a default probability of 0.5
+     cumulativeProbability += 1; // Set a default probability of 0.5
      cdf.push({ uid: item.uid, cumulativeProbability });
   }
 }
