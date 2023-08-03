@@ -62,35 +62,20 @@ let possible_uid = [
   { uid: "chest003", probability: 0.2 }, // 20% probability
 ];
 
-if(slug == "1")
-{
-  possible_uid = [
-  { uid: "chest001", probability: 1 },
-  ];
-}
-
 // Create the cumulative distribution function (CDF) array
 const cdf = [];
 let cumulativeProbability = 0;
 
 for (const item of possible_uid) {
-  if (item.hasOwnProperty("probability")) {
-    cumulativeProbability += item.probability;
-    cdf.push({ uid: item.uid, cumulativeProbability });
-  } else {
-    // Handle the special case when probability is not present (slug == "1")
-    // Here, you can set a default probability or ignore the item
-    // For example:
-     cumulativeProbability += 1; // Set a default probability of 0.5
-     cdf.push({ uid: item.uid, cumulativeProbability });
-  }
+  cumulativeProbability += item.probability;
+  cdf.push({ uid: item.uid, cumulativeProbability });
 }
 
 // Generate a random number between 0 and 1
 const randomValue = Math.random();
 
 // Find the item in the CDF whose cumulative probability is greater than the randomValue
-const selected = cdf.find((item) => item.cumulativeProbability > randomValue);
+const selected = cdf.find((item) => item.cumulativeProbability >= randomValue);
 
 // Get the selected uid
 const uid = selected.uid;
