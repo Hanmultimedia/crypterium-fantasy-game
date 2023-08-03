@@ -128,10 +128,11 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
   for (const combinationName in buffCombinations) {
     const requiredJobs = buffCombinations[combinationName];
 
-    //console.log(requiredJobs)
-    //console.log(teams[teamIndex].jobs)
-
-    if (requiredJobs.every((job) => teams[teamIndex].jobs.has(job))) {
+    // Check if all required jobs are present in the team and at least two characters of each job are present
+    if (
+      requiredJobs.every((job) => teams[teamIndex].jobs.has(job)) &&
+      requiredJobs.every((job) => teams[teamIndex].characters.filter((character) => character.job === job).length >= 2)
+    ) {
       // Apply 2-characters buff combination for the current team
       teams[teamIndex].characters.forEach((character) => {
         if (requiredJobs.includes(character.job)) {
@@ -167,6 +168,7 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
     }
   }
 }
+
 
     const uniqueJobs = new Set();
     for (const character of characters) {
