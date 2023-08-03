@@ -152,6 +152,14 @@ export async function fetchHeroesTreasure(eth:string): Promise<any> {
     characer.hp = stat.hpMAX
     characer.sp = stat.spMAX
 
+    // Set character attributes from data.attributes
+    character.str = data.attributes.str;
+    character.agi = data.attributes.agi;
+    character.dex = data.attributes.dex;
+    character.luk = data.attributes.luk;
+    character.vit = data.attributes.vit;
+    character.int = data.attributes.int;
+
     //console.log("this is data skill equip")
     //console.log(data.skill_equip)
 

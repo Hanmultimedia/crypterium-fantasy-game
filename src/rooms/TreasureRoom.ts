@@ -241,18 +241,27 @@ export class TreasureRoom extends Room<DungeonState> {
     // Apply 5-characters buff with custom character stats
     characters.forEach((character) => {
 
-     // character.attributes.int += 10
-     // character.attributes.vit += 10
-     // character.attributes.agi += 10
-     // character.attributes.dex += 10
-     // character.attributes.luk += 10
-     // character.attributes.str += 10
+     character.int += 10
+     character.vit += 10
+     character.agi += 10
+     character.dex += 10
+     character.luk += 10
+     character.str += 10
 
-      console.log(character.attributes)
+     //console.log(character.attributes)
 
-      //  const character_forstat = new CharacterTemplate(character.attributes,character.job,character.uid,"",0,character.level,character.hp,character.sp,character.speed,character.range)
-      //  const stat = makeStat(character_forstat)
-      //  const characer = new Character()
+     const modifiedAttributes = {
+      str: character.str,
+      int: character.int,
+      vit: character.vit,
+      dex: character.dex,
+      luk: character.luk,
+      agi: character.agi,
+    };
+
+      const character_forstat = new CharacterTemplate(modifiedAttributes,character.job,character.uid,"",0,character.level,character.hp,character.sp,character.speed,character.range)
+      const stat = makeStat(character_forstat)
+      const characer = new Character()
 
       // Apply custom stats for 5-characters buff
       // For example:
