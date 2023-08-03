@@ -248,6 +248,8 @@ export class TreasureRoom extends Room<DungeonState> {
      // character.attributes.luk += 10
      // character.attributes.str += 10
 
+      console.log(character.attributes)
+
       //  const character_forstat = new CharacterTemplate(character.attributes,character.job,character.uid,"",0,character.level,character.hp,character.sp,character.speed,character.range)
       //  const stat = makeStat(character_forstat)
       //  const characer = new Character()
