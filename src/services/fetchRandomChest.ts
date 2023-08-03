@@ -123,6 +123,7 @@ const uid = selected.uid;
           characer.aspd = m.aspd
           characer.speed = m.speed
           characer.range = m.range
+          characer.exp = m.exp
 
           characer.hp = m.hp
           characer.sp = 0
