@@ -126,48 +126,45 @@ export class TreasureRoom extends Room<DungeonState> {
 // Check and apply 2-characters buff combinations for all teams
 for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
   for (const combinationName in buffCombinations) {
-    const combinationInfo = buffCombinations[combinationName];
+    const requiredJobs = buffCombinations[combinationName];
 
-    // Check if the combinationInfo exists and is an object
-    if (combinationInfo && typeof combinationInfo === 'object') {
-      const { requiredJobs } = combinationInfo;
-
-      if (requiredJobs.every((job) => teams[teamIndex].jobs.has(job))) {
-        // Apply 2-characters buff combination for the current team
-        teams[teamIndex].characters.forEach((character) => {
-          if (requiredJobs.includes(character.job)) {
-            // Apply custom stats for the combination buff
-            switch (combinationName) {
-              case "Swordman+Swordman":
-                character.def += 20;
-                break;
-              case "Lancer+Lancer":
-                character.atk += 35;
-                break;
-              case "Archer+Archer":
-                character.hit += 10;
-                break;
-              case "Magician+Magician":
-                character.mAtk += 30;
-                break;
-              case "Acolyte+Acolyte":
-                character.hpMAX += 80;
-                break;
-              // Add more cases for other 2-characters buffs here
-              // ...
-              default:
-                break;
-            }
+    if (requiredJobs.every((job) => teams[teamIndex].jobs.has(job))) {
+      // Apply 2-characters buff combination for the current team
+      teams[teamIndex].characters.forEach((character) => {
+        if (requiredJobs.includes(character.job)) {
+          // Apply custom stats for the combination buff
+          switch (combinationName) {
+            case "Swordman+Swordman":
+              character.def += 20;
+              break;
+            case "Lancer+Lancer":
+              character.atk += 35;
+              break;
+            case "Archer+Archer":
+              character.hit += 10;
+              break;
+            case "Magician+Magician":
+              character.mAtk += 30;
+              break;
+            case "Acolyte+Acolyte":
+              character.hpMAX += 80;
+              break;
+            // Add more cases for other 2-characters buffs here
+            // ...
+            default:
+              break;
           }
-        });
+        }
+      });
 
-        // Add the heroes used in this combination to the set
-        requiredJobs.forEach((job) => heroesUsedIn2Combo[teamIndex].add(job));
-        console.log(`Player in Team ${teamIndex} received the ${combinationName} buff!`);
-      }
+      // Add the heroes used in this combination to the set
+      requiredJobs.forEach((job) => heroesUsedIn2Combo[teamIndex].add(job));
+      console.log(`Player in Team ${teamIndex} received the ${combinationName} buff!`);
     }
   }
 }
+
+
 
     this.state.wave = 1;
     this.state.ethAddress = options.ethAddress;
