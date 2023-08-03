@@ -128,8 +128,8 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
   for (const combinationName in buffCombinations) {
     const requiredJobs = buffCombinations[combinationName];
 
-    console.log(requiredJobs)
-    console.log(teams[teamIndex].jobs)
+    //console.log(requiredJobs)
+    //console.log(teams[teamIndex].jobs)
 
     if (requiredJobs.every((job) => teams[teamIndex].jobs.has(job))) {
       // Apply 2-characters buff combination for the current team
@@ -162,6 +162,94 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
 
       // Add the heroes used in this combination to the set
       requiredJobs.forEach((job) => heroesUsedIn2Combo[teamIndex].add(job));
+      console.log(`Player in Team ${teamIndex} received the ${combinationName} buff! ${options.ethAddress}`);
+    }
+  }
+}
+
+// Check and apply 3-characters buff combinations for all teams
+for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
+  for (const combinationName in buffCombinations3) {
+    const requiredJobs = buffCombinations3[combinationName];
+
+    if (requiredJobs.every((job) => teams[teamIndex].jobs.has(job))) {
+      // Apply 3-characters buff combination for the current team
+      teams[teamIndex].characters.forEach((character) => {
+        if (requiredJobs.includes(character.job)) {
+          // Apply custom stats for the combination buff
+      switch (combinationName) {
+        case "Swordman+Lancer+Archer":
+          characters.forEach((character) => {
+            character.aspd += 0.3
+            character.hit += 10
+          });
+          break;
+        case "Swordman+Lancer+Magician":
+          characters.forEach((character) => {
+            character.def += 25
+            character.mDef += 25
+          });
+          break;
+        case "Swordman+Lancer+Acolyte":
+          characters.forEach((character) => {
+            character.def += 40
+            character.hpMAX += 100
+          });
+          break;
+        case "Swordman+Archer+Magician":
+          characters.forEach((character) => {
+            character.atk += 45
+            character.hit += 10
+          });
+          break;
+        case "Swordman+Archer+Acolyte":
+          characters.forEach((character) => {
+            character.def += 40
+            character.flee += 5
+          });
+          break;
+        case "Swordman+Magician+Acolyte":
+          characters.forEach((character) => {
+            character.hpMAX += 150
+            character.spMAX += 100
+          });
+          break;
+        case "Lancer+Archer+Magician":
+          characters.forEach((character) => {
+            character.range += 50
+          });
+          break;
+        case "Lancer+Archer+Acolyte":
+          characters.forEach((character) => {
+            character.cri += 7
+            character.flee += 5
+          });
+          break;
+        case "Lancer+Magician+Acolyte":
+          characters.forEach((character) => {
+            character.mAtk += 30
+            character.spMAX += 100
+          });
+          break;
+        case "Archer+Magician+Acolyte":
+          characters.forEach((character) => {
+            character.mAtk += 40
+            character.hit += 10
+          });
+          break;
+
+
+        // Add more cases for other 3-characters buffs here
+        // ...
+
+        default:
+          break;
+      }
+        }
+      });
+
+      // Add the heroes used in this combination to the set
+      requiredJobs.forEach((job) => heroesUsedIn3ComboTeam[teamIndex].add(job));
       console.log(`Player in Team ${teamIndex} received the ${combinationName} buff!`);
     }
   }
