@@ -131,15 +131,43 @@ export class TreasureRoom extends Room<DungeonState> {
         // Apply 2-characters buff combination for the current team
         teams[teamIndex].characters.forEach((character) => {
           if (requiredJobs.includes(character.job)) {
+
             // Apply custom stats for the combination buff
             // For example:
-            if (combinationName === "Swordman+Swordman" && character.job === "Swordman") {
+          switch (combinationName) {
+          case "Swordman+Swordman":
+            characters.forEach((character) => {
               character.def += 20;
-            } else if (combinationName === "Lancer+Lancer" && character.job === "Lancer") {
+            });
+            break;
+          case "Lancer+Lancer":
+            characters.forEach((character) => {
               character.atk += 35;
-            } else if (combinationName === "Archer+Archer" && character.job === "Archer") {
+            });
+            break;
+          case "Archer+Archer":
+            characters.forEach((character) => {
               character.hit += 10;
-            }
+            });
+            break;
+          case "Magician+Magician":
+            characters.forEach((character) => {
+              character.mAtk += 30;
+            });
+            break;
+          case "Acolyte+Acolyte":
+            characters.forEach((character) => {
+              character.hpMAX += 80;
+            });
+            break;
+
+          // Add more cases for other 2-characters buffs here
+          // ...
+
+          default:
+            break;
+        }
+
           }
         });
 
@@ -166,15 +194,82 @@ export class TreasureRoom extends Room<DungeonState> {
           // Apply 3-characters buff combination for the current team
           teams[teamIndex].characters.forEach((character) => {
             if (requiredJobs.includes(character.job)) {
+
+
               // Apply custom stats for the combination buff
               // For example:
-              if (combinationName === "Swordman+Lancer+Archer") {
-                character.aspd += 0.3;
-                character.hit += 10;
-              } else if (combinationName === "Swordman+Lancer+Magician") {
-                character.def += 25;
-                character.mDef += 25;
-              }
+
+        switch (combinationName) {
+        case "Swordman+Lancer+Archer":
+          characters.forEach((character) => {
+            character.aspd += 0.3
+            character.hit += 10
+          });
+          break;
+        case "Swordman+Lancer+Magician":
+          characters.forEach((character) => {
+            character.def += 25
+            character.mDef += 25
+          });
+          break;
+        case "Swordman+Lancer+Acolyte":
+          characters.forEach((character) => {
+            character.def += 40
+            character.hpMAX += 100
+          });
+          break;
+        case "Swordman+Archer+Magician":
+          characters.forEach((character) => {
+            character.atk += 45
+            character.hit += 10
+          });
+          break;
+        case "Swordman+Archer+Acolyte":
+          characters.forEach((character) => {
+            character.def += 40
+            character.flee += 5
+          });
+          break;
+        case "Swordman+Magician+Acolyte":
+          characters.forEach((character) => {
+            character.hpMAX += 150
+            character.spMAX += 100
+          });
+          break;
+        case "Lancer+Archer+Magician":
+          characters.forEach((character) => {
+            character.range += 50
+          });
+          break;
+        case "Lancer+Archer+Acolyte":
+          characters.forEach((character) => {
+            character.cri += 7
+            character.flee += 5
+          });
+          break;
+        case "Lancer+Magician+Acolyte":
+          characters.forEach((character) => {
+            character.mAtk += 30
+            character.spMAX += 100
+          });
+          break;
+        case "Archer+Magician+Acolyte":
+          characters.forEach((character) => {
+            character.mAtk += 40
+            character.hit += 10
+          });
+          break;
+
+
+        // Add more cases for other 3-characters buffs here
+        // ...
+
+        default:
+          break;
+      }
+
+
+
             }
           });
 
