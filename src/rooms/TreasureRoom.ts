@@ -94,27 +94,29 @@ export class TreasureRoom extends Room<DungeonState> {
     const db = mongoose.connection;
     //db.on('error', console.error.bind(console, 'connection error:'));
 
+    let characters = await fetchHeroesTreasure(options.ethAddress);
+    const monsters = await fetchWaveMonsters(options.map, 1)
 
     const teams = {
-    1: { characters: [], jobs: new Set() },
-    2: { characters: [], jobs: new Set() },
-    3: { characters: [], jobs: new Set() },
-  };
+      1: { characters: [], jobs: new Set() },
+      2: { characters: [], jobs: new Set() },
+      3: { characters: [], jobs: new Set() },
+    };
 
-  for (const character of characters) {
-    if (character.treasure1 >= 0) {
-      teams[1].characters.push(character);
-      teams[1].jobs.add(character.job);
+    for (const character of characters) {
+      if (character.treasure1 >= 0) {
+        teams[1].characters.push(character);
+        teams[1].jobs.add(character.job);
+      }
+      if (character.treasure2 >= 0) {
+        teams[2].characters.push(character);
+        teams[2].jobs.add(character.job);
+      }
+      if (character.treasure3 >= 0) {
+        teams[3].characters.push(character);
+        teams[3].jobs.add(character.job);
+      }
     }
-    if (character.treasure2 >= 0) {
-      teams[2].characters.push(character);
-      teams[2].jobs.add(character.job);
-    }
-    if (character.treasure3 >= 0) {
-      teams[3].characters.push(character);
-      teams[3].jobs.add(character.job);
-    }
-  }
 
   // Create sets to keep track of heroes used in combinations for each team
   const heroesUsedIn2Combo = { 1: new Set(), 2: new Set(), 3: new Set() };
