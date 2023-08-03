@@ -16,6 +16,9 @@ import mongoose from 'mongoose';
 import { fetchDiamond } from "../services/fetchDiamond";
 import { fetchCoin } from "../services/fetchCoin";
 
+import { Character } from "./DungeonState";
+import { makeStat } from "../utils/initStats";
+
 const buffCombinations = {
   "Swordman+Swordman": ["Swordman", "Swordman"],
   "Lancer+Lancer": ["Lancer", "Lancer"],
@@ -76,24 +79,30 @@ export class TreasureRoom extends Room<DungeonState> {
       switch (combinationName) {
         case "Swordman+Swordman":
           characters.forEach((character) => {
-            if (character.job === "Swordman") {
-              // Apply custom stats for Swordman+Swordman buff
-              // For example:
-              character.attack += 10;
-              character.defense += 5;
-            }
+            character.def += 20
           });
           break;
         case "Lancer+Lancer":
           characters.forEach((character) => {
-            if (character.job === "Lancer") {
-              // Apply custom stats for Lancer+Lancer buff
-              // For example:
-              character.attack += 15;
-              character.speed += 8;
-            }
+            character.atk += 35
           });
           break;
+        case "Archer+Archer":
+          characters.forEach((character) => {
+            character.hit += 10
+          });
+          break;
+        case "Magician+Magician":
+          characters.forEach((character) => {
+            character.mAtk += 30
+          });
+          break;
+        case "Acolyte+Acolyte":
+          characters.forEach((character) => {
+            character.hpMAX += 80
+          });
+          break;
+
         // Add more cases for other 2-characters buffs here
         // ...
 
@@ -118,25 +127,65 @@ export class TreasureRoom extends Room<DungeonState> {
       switch (combinationName) {
         case "Swordman+Lancer+Archer":
           characters.forEach((character) => {
-            if (["Swordman", "Lancer", "Archer"].includes(character.job)) {
-              // Apply custom stats for Swordman+Lancer+Archer buff
-              // For example:
-              character.attack += 20;
-              character.defense += 10;
-              character.speed += 5;
-            }
+            character.aspd += 0.3
+            character.hit += 10
           });
           break;
         case "Swordman+Lancer+Magician":
           characters.forEach((character) => {
-            if (["Swordman", "Lancer", "Magician"].includes(character.job)) {
-              // Apply custom stats for Swordman+Lancer+Magician buff
-              // For example:
-              character.attack += 25;
-              character.magicAttack += 15;
-            }
+            character.def += 25
+            character.mDef += 25
           });
           break;
+        case "Swordman+Lancer+Acolyte":
+          characters.forEach((character) => {
+            character.def += 40
+            character.hpMAX += 100
+          });
+          break;
+        case "Swordman+Archer+Magician":
+          characters.forEach((character) => {
+            character.atk += 45
+            character.hit += 10
+          });
+          break;
+        case "Swordman+Archer+Acolyte":
+          characters.forEach((character) => {
+            character.def += 40
+            character.flee += 5
+          });
+          break;
+        case "Swordman+Magician+Acolyte":
+          characters.forEach((character) => {
+            character.hpMAX += 150
+            character.spMAX += 100
+          });
+          break;
+        case "Lancer+Archer+Magician":
+          characters.forEach((character) => {
+            character.range += 50
+          });
+          break;
+        case "Lancer+Archer+Acolyte":
+          characters.forEach((character) => {
+            character.cri += 7
+            character.flee += 5
+          });
+          break;
+        case "Lancer+Magician+Acolyte":
+          characters.forEach((character) => {
+            character.mAtk += 30
+            character.spMAX += 100
+          });
+          break;
+        case "Archer+Magician+Acolyte":
+          characters.forEach((character) => {
+            character.mAtk += 40
+            character.hit += 10
+          });
+          break;
+
+
         // Add more cases for other 3-characters buffs here
         // ...
 
@@ -158,11 +207,17 @@ export class TreasureRoom extends Room<DungeonState> {
     characters.forEach((character) => {
       // Apply custom stats for 5-characters buff
       // For example:
-      character.attack += 50;
-      character.defense += 30;
-      character.magicAttack += 25;
-      character.magicDefense += 20;
-      character.speed += 15;
+    /*character.atk += 10
+    character.def += 10
+    character.mAtk += 10
+    character.mDef += 10
+    character.hpMAX += 10
+    character.spMAX += 10
+    character.hit += 10
+    character.flee += 10
+    character.cri += 10
+    character.aspd += 0.3
+    character.speed += 0.3*/
     });
 
     // Optionally, you can apply a generic special buff here
