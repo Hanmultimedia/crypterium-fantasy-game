@@ -122,52 +122,42 @@ export class TreasureRoom extends Room<DungeonState> {
   const heroesUsedIn2Combo = { 1: new Set(), 2: new Set(), 3: new Set() };
   const heroesUsedIn3ComboTeam = { 1: new Set(), 2: new Set(), 3: new Set() };
 
-  // Check and apply 2-characters buff combinations for all teams
-  for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
-    for (const combinationName in buffCombinations) {
-      const { requiredJobs } = buffCombinations[combinationName];
+
+// Check and apply 2-characters buff combinations for all teams
+for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
+  for (const combinationName in buffCombinations) {
+    const combinationInfo = buffCombinations[combinationName];
+
+    // Check if the combinationInfo exists
+    if (combinationInfo) {
+      const { requiredJobs } = combinationInfo;
 
       if (requiredJobs.every((job) => teams[teamIndex].jobs.has(job))) {
         // Apply 2-characters buff combination for the current team
         teams[teamIndex].characters.forEach((character) => {
           if (requiredJobs.includes(character.job)) {
-
             // Apply custom stats for the combination buff
-            // For example:
-          switch (combinationName) {
-          case "Swordman+Swordman":
-            characters.forEach((character) => {
-              character.def += 20;
-            });
-            break;
-          case "Lancer+Lancer":
-            characters.forEach((character) => {
-              character.atk += 35;
-            });
-            break;
-          case "Archer+Archer":
-            characters.forEach((character) => {
-              character.hit += 10;
-            });
-            break;
-          case "Magician+Magician":
-            characters.forEach((character) => {
-              character.mAtk += 30;
-            });
-            break;
-          case "Acolyte+Acolyte":
-            characters.forEach((character) => {
-              character.hpMAX += 80;
-            });
-            break;
-
-          // Add more cases for other 2-characters buffs here
-          // ...
-
-          default:
-            break;
-        }
-
+            switch (combinationName) {
+              case "Swordman+Swordman":
+                character.def += 20;
+                break;
+              case "Lancer+Lancer":
+                character.atk += 35;
+                break;
+              case "Archer+Archer":
+                character.hit += 10;
+                break;
+              case "Magician+Magician":
+                character.mAtk += 30;
+                break;
+              case "Acolyte+Acolyte":
+                character.hpMAX += 80;
+                break;
+              // Add more cases for other 2-characters buffs here
+              // ...
+              default:
+                break;
+            }
           }
         });
 
@@ -177,8 +167,7 @@ export class TreasureRoom extends Room<DungeonState> {
       }
     }
   }
-
-
+}
     this.state.wave = 1;
     this.state.ethAddress = options.ethAddress;
     this.state.map = options.map
