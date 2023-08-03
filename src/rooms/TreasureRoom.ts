@@ -128,6 +128,9 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
   for (const combinationName in buffCombinations) {
     const requiredJobs = buffCombinations[combinationName];
 
+    console.log(requiredJobs)
+    console.log(teams[teamIndex].jobs)
+
     if (requiredJobs.every((job) => teams[teamIndex].jobs.has(job))) {
       // Apply 2-characters buff combination for the current team
       teams[teamIndex].characters.forEach((character) => {
