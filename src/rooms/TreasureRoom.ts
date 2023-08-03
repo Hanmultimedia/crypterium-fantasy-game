@@ -172,12 +172,16 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
   for (const combinationName in buffCombinations3) {
     const requiredJobs = buffCombinations3[combinationName];
 
-    if (requiredJobs.every((job) => teams[teamIndex].jobs.has(job))) {
+    // Check if all required jobs are present in the team and not already used in a 2-character combination
+    if (
+      requiredJobs.every((job) => teams[teamIndex].jobs.has(job)) &&
+      requiredJobs.every((job) => !heroesUsedIn2Combo[teamIndex].has(job))
+    ) {
       // Apply 3-characters buff combination for the current team
       teams[teamIndex].characters.forEach((character) => {
         if (requiredJobs.includes(character.job)) {
           // Apply custom stats for the combination buff
-      switch (combinationName) {
+        switch (combinationName) {
         case "Swordman+Lancer+Archer":
           characters.forEach((character) => {
             character.aspd += 0.3
