@@ -82,7 +82,7 @@ for (const item of possible_uid) {
 const randomValue = Math.random();
 
 // Find the item in the CDF whose cumulative probability is greater than the randomValue
-const selected = cdf.find((item) => item.cumulativeProbability >= randomValue);
+const selected = cdf.find((item) => item.cumulativeProbability > randomValue);
 
 // Get the selected uid
 const uid = selected.uid;
