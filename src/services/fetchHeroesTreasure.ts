@@ -65,6 +65,7 @@ export async function fetchHeroesTreasure(eth:string): Promise<any> {
         const character_forstat = new CharacterTemplate(data.attributes,data.job,data.uid,"",0,data.level,data.hp,data.sp,data.speed,data.range)
         const stat = makeStat(character_forstat)
         const characer = new Character()
+        characer.attributes = data.attributes
 
         //console.log("Heroes " + characters_data[i].job + " stats");
         //console.log(stat)
