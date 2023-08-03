@@ -168,6 +168,11 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
   }
 }
 
+    const uniqueJobs = new Set();
+    for (const character of characters) {
+      uniqueJobs.add(character.job);
+    }
+    
   // Check if the player has all five unique jobs for 5-characters buff
   const hasAllJobs = uniqueJobs.size === 5;
   if (hasAllJobs) {
