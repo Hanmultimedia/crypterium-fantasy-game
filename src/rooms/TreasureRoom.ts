@@ -163,9 +163,57 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
       // Add the heroes used in this combination to the set
       requiredJobs.forEach((job) => heroesUsedIn2Combo[teamIndex].add(job));
       console.log(`Player in Team ${teamIndex} received the ${combinationName} buff! ${options.ethAddress}`);
+      break;
     }
   }
 }
+
+  // Check if the player has all five unique jobs for 5-characters buff
+  const hasAllJobs = uniqueJobs.size === 5;
+  if (hasAllJobs) {
+    // Apply 5-characters buff with custom character stats
+    characters.forEach((character) => {
+
+     character.int += 10
+     character.vit += 10
+     character.agi += 10
+     character.dex += 10
+     character.luk += 10
+     character.str += 10
+
+     //console.log(character.attributes)
+
+     const modifiedAttributes = {
+      str: character.str,
+      int: character.int,
+      vit: character.vit,
+      dex: character.dex,
+      luk: character.luk,
+      agi: character.agi,
+    };
+
+      const character_forstat = new CharacterTemplate(modifiedAttributes,character.job,character.uid,"",0,character.level,character.hp,character.sp,character.speed,character.range)
+      const stat = makeStat(character_forstat)
+
+      // Apply custom stats for 5-characters buff
+      // For example:
+    character.atk = stat.atk
+    character.def = stat.def
+    character.mAtk = stat.mAtk
+    character.mDef = stat.mDef
+    character.hpMAX = stat.hpMAX
+    character.spMAX = stat.spMAX
+    character.hit = stat.hit
+    character.flee = stat.flee
+    character.cri = stat.cri
+    character.aspd = stat.aspd
+    character.speed += 0.3
+    });
+
+    console.log("Player received the special buff!");
+  }
+
+  if(!hasAllJobs){
 
 // Check and apply 3-characters buff combinations for all teams
 for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
@@ -257,6 +305,7 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
       console.log(`Player in Team ${teamIndex} received the ${combinationName} buff!`);
     }
   }
+}
 }
 
 
