@@ -19,6 +19,32 @@ import { fetchCoin } from "../services/fetchCoin";
 import { Character } from "./DungeonState";
 import { makeStat } from "../utils/initStats";
 
+class CharacterTemplate {
+  attributes: Attributes;
+  job: string;
+  uid: string;
+  slug: string;
+  position: number;
+  level: number;
+  hp: number;
+  sp: number;
+  speed: number;
+  range: number;
+
+constructor(attributes: Attributes, job:string, uid:string, slug:string, position:number, level:number, hp:number, sp:number, speed:number, range:number) {
+    this.attributes = attributes;
+    this.job = job;
+    this.uid = uid;
+    this.slug = slug;
+    this.position = position;
+    this.level = level;
+    this.hp = hp;
+    this.sp = sp;
+    this.speed = speed;
+    this.range = range;
+  }
+}
+
 const buffCombinations = {
   "Swordman+Swordman": ["Swordman", "Swordman"],
   "Lancer+Lancer": ["Lancer", "Lancer"],
@@ -212,7 +238,7 @@ export class TreasureRoom extends Room<DungeonState> {
       character.attributes.dex += 10
       character.attributes.luk += 10
       character.attributes.str += 10
-      
+
         const character_forstat = new CharacterTemplate(character.attributes,character.job,character.uid,"",0,character.level,character.hp,character.sp,character.speed,character.range)
         const stat = makeStat(character_forstat)
         const characer = new Character()
