@@ -174,7 +174,7 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
     for (const character of characters) {
       uniqueJobs.add(character.job);
     }
-    
+
   // Check if the player has all five unique jobs for 5-characters buff
   const hasAllJobs = uniqueJobs.size === 5;
   if (hasAllJobs) {
@@ -217,7 +217,7 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
     character.speed += 0.3
     });
 
-    console.log("Player received the special buff!");
+    console.log(`Player received the special buff! ${options.ethAddress}`);
   }
 
   if(!hasAllJobs){
@@ -309,7 +309,7 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
 
       // Add the heroes used in this combination to the set
       requiredJobs.forEach((job) => heroesUsedIn3ComboTeam[teamIndex].add(job));
-      console.log(`Player in Team ${teamIndex} received the ${combinationName} buff!`);
+      console.log(`Player in Team ${teamIndex} received the ${combinationName} buff! ${options.ethAddress}`);
     }
   }
 }
