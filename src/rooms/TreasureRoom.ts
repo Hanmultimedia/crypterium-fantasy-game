@@ -15,6 +15,34 @@ import { TreasureState_T } from "./TreasureState";
 import mongoose from 'mongoose';
 import { fetchDiamond } from "../services/fetchDiamond";
 import { fetchCoin } from "../services/fetchCoin";
+
+const buffCombinations = {
+  "Swordman+Swordman": ["Swordman", "Swordman"],
+  "Lancer+Lancer": ["Lancer", "Lancer"],
+  "Archer+Archer": ["Archer", "Archer"],
+  "Magician+Magician": ["Magician", "Magician"],
+  "Acolyte+Acolyte": ["Acolyte", "Acolyte"],
+  // Add more 2-character combinations as needed
+  // ...
+};
+
+// Buff combinations configuration for 3-characters
+const buffCombinations3 = {
+  "Swordman+Lancer+Archer": ["Swordman", "Lancer", "Archer"],
+  "Swordman+Lancer+Magician": ["Swordman", "Lancer", "Magician"],
+  "Swordman+Lancer+Acolyte": ["Swordman", "Lancer", "Acolyte"],
+  "Swordman+Archer+Magician": ["Swordman", "Archer", "Magician"],
+  "Swordman+Archer+Acolyte": ["Swordman", "Archer", "Acolyte"],
+  "Swordman+Magician+Acolyte": ["Swordman", "Magician", "Acolyte"],
+  "Lancer+Archer+Magician": ["Lancer", "Archer", "Magician"],
+  "Lancer+Archer+Acolyte": ["Lancer", "Archer", "Acolyte"],
+  "Lancer+Magician+Archer": ["Lancer", "Magician", "Archer"],
+  "Archer+Magician+Acolyte": ["Archer", "Magician", "Acolyte"],
+  // Add more 3-character combinations as needed
+  // ...
+};
+
+
 export class TreasureRoom extends Room<DungeonState> {
   maxClients = 1;
 
@@ -31,6 +59,119 @@ export class TreasureRoom extends Room<DungeonState> {
     let characters = await fetchHeroesTreasure(options.ethAddress);
     const monsters = await fetchWaveMonsters(options.map, 1)
     //const dungeonId = await createDungeonRecord(options.ethAddress, characters, options.map)
+
+    // Create a set to keep track of unique jobs in the player's team
+    const uniqueJobs = new Set();
+    for (const character of characters) {
+      uniqueJobs.add(character.job);
+    }
+
+      // Check and apply 2-characters buff combinations
+  for (const combinationName in buffCombinations) {
+    const requiredJobs = buffCombinations[combinationName];
+    const hasCombination = requiredJobs.every((job) => uniqueJobs.has(job));
+
+    if (hasCombination) {
+      // Apply 2-characters buff combination with custom character stats
+      switch (combinationName) {
+        case "Swordman+Swordman":
+          characters.forEach((character) => {
+            if (character.job === "Swordman") {
+              // Apply custom stats for Swordman+Swordman buff
+              // For example:
+              character.attack += 10;
+              character.defense += 5;
+            }
+          });
+          break;
+        case "Lancer+Lancer":
+          characters.forEach((character) => {
+            if (character.job === "Lancer") {
+              // Apply custom stats for Lancer+Lancer buff
+              // For example:
+              character.attack += 15;
+              character.speed += 8;
+            }
+          });
+          break;
+        // Add more cases for other 2-characters buffs here
+        // ...
+
+        default:
+          break;
+      }
+
+      // Optionally, you can apply a generic buff for all 2-character combinations here
+      // For example:
+      // options.player.applyBuff(combinationName);
+      console.log(`Player received the ${combinationName} buff!`);
+    }
+  }
+
+  // Check and apply 3-characters buff combinations
+  for (const combinationName in buffCombinations3) {
+    const requiredJobs = buffCombinations3[combinationName];
+    const hasCombination = requiredJobs.every((job) => uniqueJobs.has(job));
+
+    if (hasCombination) {
+      // Apply 3-characters buff combination with custom character stats
+      switch (combinationName) {
+        case "Swordman+Lancer+Archer":
+          characters.forEach((character) => {
+            if (["Swordman", "Lancer", "Archer"].includes(character.job)) {
+              // Apply custom stats for Swordman+Lancer+Archer buff
+              // For example:
+              character.attack += 20;
+              character.defense += 10;
+              character.speed += 5;
+            }
+          });
+          break;
+        case "Swordman+Lancer+Magician":
+          characters.forEach((character) => {
+            if (["Swordman", "Lancer", "Magician"].includes(character.job)) {
+              // Apply custom stats for Swordman+Lancer+Magician buff
+              // For example:
+              character.attack += 25;
+              character.magicAttack += 15;
+            }
+          });
+          break;
+        // Add more cases for other 3-characters buffs here
+        // ...
+
+        default:
+          break;
+      }
+
+      // Optionally, you can apply a generic buff for all 3-character combinations here
+      // For example:
+      // options.player.applyBuff(combinationName);
+      console.log(`Player received the ${combinationName} buff!`);
+    }
+  }
+
+  // Check if the player has all five unique jobs for 5-characters buff
+  const hasAllJobs = uniqueJobs.size === 5;
+  if (hasAllJobs) {
+    // Apply 5-characters buff with custom character stats
+    characters.forEach((character) => {
+      // Apply custom stats for 5-characters buff
+      // For example:
+      character.attack += 50;
+      character.defense += 30;
+      character.magicAttack += 25;
+      character.magicDefense += 20;
+      character.speed += 15;
+    });
+
+    // Optionally, you can apply a generic special buff here
+    // For example:
+    // options.player.applySpecialBuff();
+    console.log("Player received the special buff!");
+  }
+
+
 
     this.state.wave = 1;
     this.state.ethAddress = options.ethAddress;
