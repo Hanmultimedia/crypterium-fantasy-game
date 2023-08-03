@@ -128,9 +128,8 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
   for (const combinationName in buffCombinations) {
     const combinationInfo = buffCombinations[combinationName];
 
-    // Check if the combinationInfo exists
-    if (combinationInfo) {
-      console.log("have info")
+    // Check if the combinationInfo exists and is an object
+    if (combinationInfo && typeof combinationInfo === 'object') {
       const { requiredJobs } = combinationInfo;
 
       if (requiredJobs.every((job) => teams[teamIndex].jobs.has(job))) {
@@ -169,6 +168,7 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
     }
   }
 }
+
     this.state.wave = 1;
     this.state.ethAddress = options.ethAddress;
     this.state.map = options.map
