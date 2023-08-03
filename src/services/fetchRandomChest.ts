@@ -87,7 +87,7 @@ const selected = cdf.find((item) => item.cumulativeProbability >= randomValue);
 // Get the selected uid
 const uid = selected.uid;
 
-console.log(uid);
+//console.log(uid);
 
 
    /* const possible_uid = 
