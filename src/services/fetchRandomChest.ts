@@ -62,6 +62,15 @@ let possible_uid = [
   { uid: "chest003", probability: 0.2 }, // 20% probability
 ];
 
+if(slug == "1")
+{
+  possible_uid = [
+  { uid: "chest001", probability: 1 }, // 50% probability
+  { uid: "chest002", probability: 0 }, // 30% probability
+  { uid: "chest003", probability: 0 }, // 20% probability
+];
+}
+
 // Create the cumulative distribution function (CDF) array
 const cdf = [];
 let cumulativeProbability = 0;

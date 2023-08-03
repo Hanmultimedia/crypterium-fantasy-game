@@ -280,20 +280,19 @@ export class TreasureRoom extends Room<DungeonState> {
 
       const character_forstat = new CharacterTemplate(modifiedAttributes,character.job,character.uid,"",0,character.level,character.hp,character.sp,character.speed,character.range)
       const stat = makeStat(character_forstat)
-      const characer = new Character()
 
       // Apply custom stats for 5-characters buff
       // For example:
-    character.atk = characer.atk
-    character.def = characer.def
-    character.mAtk = characer.mAtk
-    character.mDef = characer.mDef
-    character.hpMAX = characer.hpMAX
-    character.spMAX = characer.spMAX
-    character.hit = characer.hit
-    character.flee = characer.flee
-    character.cri = characer.cri
-    character.aspd = characer.aspd
+    character.atk = stat.atk
+    character.def = stat.def
+    character.mAtk = stat.mAtk
+    character.mDef = stat.mDef
+    character.hpMAX = stat.hpMAX
+    character.spMAX = stat.spMAX
+    character.hit = stat.hit
+    character.flee = stat.flee
+    character.cri = stat.cri
+    character.aspd = stat.aspd
     character.speed += 0.3
     });
 
