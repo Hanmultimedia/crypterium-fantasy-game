@@ -36,12 +36,6 @@ export class Character extends Schema {
   @type("number") arenaAttackPosition: number;
   @type("number") arenaDefendPosition: number;
 
-  @type("uint8") str: number;
-  @type("uint8") agi: number;
-  @type("uint8") dex: number;
-  @type("uint8") luk: number;
-  @type("uint8") vit: number;
-  @type("uint8") int: number;
 }
 
 export class ArenaState extends Schema {

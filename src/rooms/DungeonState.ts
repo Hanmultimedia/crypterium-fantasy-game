@@ -32,6 +32,13 @@ export class Character extends Schema {
   @type("uint16") lastWave: number = 0;
   @type("number") exp: number;
   @type(["string"]) skill_equip: string[];
+
+  @type("uint8") str: number;
+  @type("uint8") agi: number;
+  @type("uint8") dex: number;
+  @type("uint8") luk: number;
+  @type("uint8") vit: number;
+  @type("uint8") int: number;
 }
 
 export class Character_Array extends Schema {
