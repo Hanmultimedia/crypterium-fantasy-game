@@ -130,6 +130,7 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
 
     // Check if the combinationInfo exists
     if (combinationInfo) {
+      console.log("have info")
       const { requiredJobs } = combinationInfo;
 
       if (requiredJobs.every((job) => teams[teamIndex].jobs.has(job))) {
