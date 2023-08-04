@@ -355,6 +355,7 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
     }
 
     this.onMessage("spawnMonster", async (client, data) => {
+      console.log("spawnMonster"+data.index)
       //if(data.index){
       const monster = await fetchRandomMonster(options.map, this.state.wave)
       this.state.spawners_monsters[data.index].character.length = 0;
@@ -369,7 +370,7 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
     });
 
     this.onMessage("spawnChest", async (client, data) => {
-      
+      console.log("spawnChest"+data.index)
       //if(data.index){
         const chest = await fetchRandomChest(data.map, this.state.wave)
         //console.log(chest)
