@@ -362,7 +362,8 @@ this.onMessage("spawnMonster", async (client, data) => {
   // Ensure the data.index is within the bounds of the spawners_monsters array
   if (data.index >= 0 && data.index < this.state.spawners_monsters.length) {
     // Use setAt method to update the element at the specified index
-    this.state.spawners_monsters[data.index].push(monster)
+    this.state.spawners_monsters[data.index].character.length = 0;
+    this.state.spawners_monsters[data.index].character.push(monster);
   }
 });
 
