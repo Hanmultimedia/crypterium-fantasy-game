@@ -15,7 +15,7 @@ import { TreasureState_T } from "./TreasureState";
 import mongoose from 'mongoose';
 import { fetchDiamond } from "../services/fetchDiamond";
 import { fetchCoin } from "../services/fetchCoin";
-import { ArraySchema } from '@colyseus/schema';
+
 import { Character } from "./DungeonState";
 import { makeStat } from "../utils/initStats";
 
@@ -361,12 +361,8 @@ this.onMessage("spawnMonster", async (client, data) => {
 
   // Ensure the data.index is within the bounds of the spawners_monsters array
   if (data.index >= 0 && data.index < this.state.spawners_monsters.length) {
-    // Create an ArraySchema instance for the new value
-    const newArraySchema = new Character_Array();
-    newArraySchema.push(monster);
-
     // Use setAt method to update the element at the specified index
-    this.state.spawners_monsters.setAt(data.index, newArraySchema);
+    this.state.spawners_monsters[data.index].push(monster)
   }
 });
 
