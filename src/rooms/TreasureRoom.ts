@@ -354,14 +354,18 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
       this.state.spawners_boss.push(new Character_Array())
     }
 
-    this.onMessage("spawnMonster", async (client, data) => {
-      console.log("spawnMonster"+data.index)
-      //if(data.index){
-      const monster = await fetchRandomMonster(options.map, this.state.wave)
-      this.state.spawners_monsters[data.index].character.length = 0;
-      this.state.spawners_monsters[data.index].character.push(monster)
-      //}
-    });
+this.onMessage("spawnMonster", async (client, data) => {
+  console.log("spawnMonster" + data.index);
+  // Fetch the random monster
+  const monster = await fetchRandomMonster(options.map, this.state.wave);
+
+  // Ensure the data.index is within the bounds of the spawners_monsters array
+  if (data.index >= 0 && data.index < this.state.spawners_monsters.length) {
+    // Use setAt method to update the element at the specified index
+    this.state.spawners_monsters.setAt(data.index, { character: [monster] });
+  }
+});
+
 
     this.onMessage("spawnBoss", async (client, data) => {
       const monster = await fetchRandomBoss(options.map, this.state.wave)
