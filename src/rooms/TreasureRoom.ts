@@ -15,7 +15,7 @@ import { TreasureState_T } from "./TreasureState";
 import mongoose from 'mongoose';
 import { fetchDiamond } from "../services/fetchDiamond";
 import { fetchCoin } from "../services/fetchCoin";
-
+import { ArraySchema } from '@colyseus/schema';
 import { Character } from "./DungeonState";
 import { makeStat } from "../utils/initStats";
 
