@@ -362,8 +362,8 @@ this.onMessage("spawnMonster", async (client, data) => {
   // Ensure the data.index is within the bounds of the spawners_monsters array
   if (data.index >= 0 && data.index < this.state.spawners_monsters.length) {
     // Create an ArraySchema instance for the new value
-    const newArraySchema = new ArraySchema<Character>();
-    newArraySchema.push(...[{ character: [monster] }]);
+    const newArraySchema = new Character_Array();
+    newArraySchema.push(monster);
 
     // Use setAt method to update the element at the specified index
     this.state.spawners_monsters.setAt(data.index, newArraySchema);
