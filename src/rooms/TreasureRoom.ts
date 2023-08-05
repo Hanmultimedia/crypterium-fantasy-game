@@ -190,18 +190,45 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
   }
 }
 
+/////
 
-    const uniqueJobs = new Set();
-    for (const character of characters) {
-      uniqueJobs.add(character.job);
-    }
+// Create a set to keep track of unique jobs in each player's team
+const uniqueJobsByTeam = { 1: new Set(), 2: new Set(), 3: new Set() };
 
-  // Check if the player has all five unique jobs for 5-characters buff
-  const hasAllJobs = uniqueJobs.size === 5;
+// Iterate through the characters and add their jobs to the corresponding team's uniqueJobs set
+for (const character of characters) {
+  if (character.treasure1 >= 0) {
+    uniqueJobsByTeam[1].add(character.job);
+  }
+  if (character.treasure2 >= 0) {
+    uniqueJobsByTeam[2].add(character.job);
+  }
+  if (character.treasure3 >= 0) {
+    uniqueJobsByTeam[3].add(character.job);
+  }
+}
+
+// Check if any team has all five unique jobs for 5-characters buff
+for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
+  const hasAllJobs = uniqueJobsByTeam[teamIndex].size === 5;
   if (hasAllJobs) {
-    // Apply 5-characters buff with custom character stats
-    characters.forEach((character) => {
 
+      if(teamIndex == 1)
+      {
+        this.state.buffs1[2] = true;
+      }
+      if(teamIndex == 2)
+      {
+        this.state.buffs2[2] = true;
+      }
+      if(teamIndex == 3)
+      {
+        this.state.buffs3[2] = true;
+      }
+
+    // Apply 5-characters buff for the current team
+    teams[teamIndex].characters.forEach((character) => {
+      // Apply custom stats for the 5-characters buff
      character.int += 10
      character.vit += 10
      character.agi += 10
@@ -236,14 +263,14 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
     character.cri = stat.cri
     character.aspd = stat.aspd
     character.speed += 0.3
+
     });
 
-    console.log(`Player received the special buff! ${options.ethAddress}`);
-
-        this.state.buffs1[2] = true;
-        this.state.buffs2[2] = true;
-        this.state.buffs3[2] = true;
+    console.log(`Player in Team ${teamIndex} received the 5-characters buff! ${options.ethAddress}`);
   }
+}
+
+////
 
   if(!hasAllJobs){
 
