@@ -276,9 +276,9 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
 for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
   for (const combinationName in buffCombinations3) {
     const requiredJobs = buffCombinations3[combinationName];
-
+     const hasAllJobs = uniqueJobsByTeam[teamIndex].size === 5;
     // Check if all required jobs are present in the team and not already used in a 2-character combination
-    if (!hasAllJobs[teamIndex]&&
+    if (!hasAllJobs&&
       requiredJobs.every((job) => teams[teamIndex].jobs.has(job)) &&
       requiredJobs.every((job) => !heroesUsedIn2Combo[teamIndex].has(job))
     ) {
