@@ -97,16 +97,12 @@ export class TreasureRoom extends Room<DungeonState> {
     let characters = await fetchHeroesTreasure(options.ethAddress);
     const monsters = await fetchWaveMonsters(options.map, 1)
 
-    // Constructor to initialize the characterBuff2 array with false values
-
-    // Initialize the 3x3 boolean array with false values
-    for (let i = 0; i < 3; i++) {
-      const row = new ArraySchema<boolean>();
       for (let j = 0; j < 3; j++) {
-        row.push(false);
+          this.state.buffs1.push(false);
+          this.state.buffs2.push(false);
+          this.state.buffs3.push(false);
       }
-      this.state.buffs.push(row);
-    }
+    
   
     const teams = {
       1: { characters: [], jobs: new Set() },
