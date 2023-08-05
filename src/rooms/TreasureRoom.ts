@@ -239,6 +239,10 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
     });
 
     console.log(`Player received the special buff! ${options.ethAddress}`);
+
+        this.state.buffs1[2] = true;
+        this.state.buffs2[2] = true;
+        this.state.buffs3[2] = true;
   }
 
   if(!hasAllJobs){
