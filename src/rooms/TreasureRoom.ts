@@ -140,6 +140,20 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
       requiredJobs.every((job) => teams[teamIndex].jobs.has(job)) &&
       requiredJobs.every((job) => teams[teamIndex].characters.filter((character) => character.job === job).length >= 2)
     ) {
+
+      if(teamIndex == 1)
+      {
+        this.state.buffs1[0] = true;
+      }
+      if(teamIndex == 2)
+      {
+        this.state.buffs2[0] = true;
+      }
+      if(teamIndex == 3)
+      {
+        this.state.buffs3[0] = true;
+      }
+
       // Apply 2-characters buff combination for the current team
       teams[teamIndex].characters.forEach((character) => {
         if (requiredJobs.includes(character.job)) {
@@ -239,6 +253,20 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
       requiredJobs.every((job) => teams[teamIndex].jobs.has(job)) &&
       requiredJobs.every((job) => !heroesUsedIn2Combo[teamIndex].has(job))
     ) {
+
+      if(teamIndex == 1)
+      {
+        this.state.buffs1[1] = true;
+      }
+      if(teamIndex == 2)
+      {
+        this.state.buffs2[1] = true;
+      }
+      if(teamIndex == 3)
+      {
+        this.state.buffs3[1] = true;
+      }
+
       // Apply 3-characters buff combination for the current team
       teams[teamIndex].characters.forEach((character) => {
         if (requiredJobs.includes(character.job)) {
