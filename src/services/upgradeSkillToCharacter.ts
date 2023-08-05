@@ -53,16 +53,16 @@ export async function upgradeSkillToCharacter(eth:string,character_id: string , 
   let diamonds = await fetchDiamond(eth)
   const price = 
   [
-    100,
-    140,
-    180,
-    220,
-    260,
-    300,
-    340,
-    380,
-    420,
-    460
+    150,
+    250,
+    350,
+    500,
+    700,
+    1000,
+    1000,
+    1000,
+    1000,
+    1000
   ]
 
   if(diamonds >= price[level] )
