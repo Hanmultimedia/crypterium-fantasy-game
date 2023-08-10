@@ -33,6 +33,7 @@ import { CopyCollection } from "../services/copyCollection";
 import { setArenaTeamPosition } from '../services/setArenaTeamPosition';
 import { fetchCoin } from "../services/fetchCoin";
 import { fetchProfile } from "../services/fetchProfile";
+import { setProfilepic } from "../services/setProfilepic";
 import mongoose from 'mongoose';
 export class MenuRoom extends Room<MenuState> {
   maxClients = 1;
@@ -144,6 +145,10 @@ export class MenuRoom extends Room<MenuState> {
         }
       }
 
+    })
+
+    this.onMessage("setprofilepic", async (client, data) => {
+      const result = await setProfilepic(options.ethAddress,data.profilepic);
     })
 
     this.onMessage("settingTeamsTreasure1", async (client, data) => {
