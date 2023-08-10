@@ -145,7 +145,7 @@ export class SummonData extends Schema {
 export class MenuState extends Schema {
   @type("string") page: string = "mainMenu";
   @type("string") ethAddress: string;
-  @type("string") profilepic: string;
+  @type("number") profilepic: number;
   @type("string") profilename: string;
   @type("number") diamonds: number;
 

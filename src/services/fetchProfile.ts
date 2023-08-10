@@ -11,7 +11,7 @@ export const userSchema = new mongoose.Schema({
     });
 
 
-export async function fetchProfile(eth:string,type:string): Promise<any> {
+export async function fetchProfile(eth:string,type:number): Promise<any> {
 
     try {
     // Connect to MongoDB using your srv string
