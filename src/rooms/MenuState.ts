@@ -165,6 +165,10 @@ export class MenuState extends Schema {
   @type([Skill]) skills = new ArraySchema<Skill>();
 
   @type([Materials_Inventory]) materials_inventory = new ArraySchema<Materials_Inventory>();
+
+  @type("number") bit: number;
+  @type("number") doge: number;
+  @type("number") coin: number;
   
 }
 

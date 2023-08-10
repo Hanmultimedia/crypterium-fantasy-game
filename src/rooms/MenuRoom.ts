@@ -31,6 +31,7 @@ import { updateStats } from "../services/updateStats";
 import { Schema, type, ArraySchema} from "@colyseus/schema"
 import { CopyCollection } from "../services/copyCollection";
 import { setArenaTeamPosition } from '../services/setArenaTeamPosition';
+import { fetchCoin } from "../services/fetchCoin";
 import mongoose from 'mongoose';
 export class MenuRoom extends Room<MenuState> {
   maxClients = 1;
@@ -63,6 +64,10 @@ export class MenuRoom extends Room<MenuState> {
 
     await initialize(options.ethAddress);
      // Connect to MongoDB using your srv string
+
+    this.state.bit = await fetchCoin(options.ethAddress,1)
+    this.state.doge = await fetchCoin(options.ethAddress,2)    
+    this.state.coin = await fetchCoin(options.ethAddress,3) 
 
     //await fetchCharactersOld(options.ethAddress)
     //await createEquipment()
