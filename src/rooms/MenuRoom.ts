@@ -32,6 +32,7 @@ import { Schema, type, ArraySchema} from "@colyseus/schema"
 import { CopyCollection } from "../services/copyCollection";
 import { setArenaTeamPosition } from '../services/setArenaTeamPosition';
 import { fetchCoin } from "../services/fetchCoin";
+import { fetchProfile } from "../services/fetchProfile";
 import mongoose from 'mongoose';
 export class MenuRoom extends Room<MenuState> {
   maxClients = 1;
@@ -67,7 +68,10 @@ export class MenuRoom extends Room<MenuState> {
 
     this.state.bit = await fetchCoin(options.ethAddress,1)
     this.state.doge = await fetchCoin(options.ethAddress,2)    
-    this.state.coin = await fetchCoin(options.ethAddress,3) 
+    this.state.coin = await fetchCoin(options.ethAddress,3)
+
+    this.state.profilename = await fetchProfile(options.ethAddress,1) 
+    this.state.profilepic = await fetchProfile(options.ethAddress,2) 
 
     //await fetchCharactersOld(options.ethAddress)
     //await createEquipment()
