@@ -11,7 +11,7 @@ export const userSchema = new mongoose.Schema({
     });
 
 
-export async function setProfilepic(eth:string,type:number): Promise<any> {
+export async function setProfilepic(eth:string,profilepic:number): Promise<any> {
 
     try {
     // Connect to MongoDB using your srv string
