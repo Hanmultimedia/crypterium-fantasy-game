@@ -6,6 +6,8 @@ const userSchema = new mongoose.Schema({
   eth: String,
   diamond: Number,
   coupon: Number,
+  profilename: String,
+  profilepic:Number
   // other fields as required
 });
 
