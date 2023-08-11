@@ -130,11 +130,13 @@ export class TreasureRoom extends Room<DungeonState> {
   const heroesUsedIn3ComboTeam = { 1: new Set(), 2: new Set(), 3: new Set() };
 
 //const buffDescriptions: { [teamIndex: number]: string[] } = {};
-
+for(let i = 0 ; i < 3 ; i++){
+  this.state.buffDescriptions.push("");
+}
 // Check and apply 2-characters buff combinations for all teams
 for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
 
-  this.state.buffDescriptions.push("");
+  this.state.buffDescriptions[i] = ""
 
 
   for (const combinationName in buffCombinations) {
@@ -196,13 +198,10 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
       // Add the heroes used in this combination to the set
       requiredJobs.forEach((job) => heroesUsedIn2Combo[teamIndex].add(job));
       console.log(`Player in Team ${teamIndex} received the ${combinationName} buff! ${options.ethAddress}`);
+      console.log(this.state.buffDescriptions[teamIndex-1])
       break;
     }
 
-    if(heroesUsedIn2Combo[teamIndex].length >= 1)
-    {
-      break;
-    }
   }
 }
 
@@ -412,11 +411,6 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
       // Add the heroes used in this combination to the set
       requiredJobs.forEach((job) => heroesUsedIn3ComboTeam[teamIndex].add(job));
       console.log(`Player in Team ${teamIndex} received the ${combinationName} buff! ${options.ethAddress}`);
-      break;
-    }
-
-    if(heroesUsedIn3ComboTeam[teamIndex].length >= 1)
-    {
       break;
     }
   }
