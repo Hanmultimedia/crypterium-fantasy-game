@@ -327,7 +327,7 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
             character.def += 25
             character.mDef += 25
             this.state.buffDescriptions[teamIndex-1] += ("Def +25\n")
-            this.state.buffDescriptions[teamIndex-1] += ("mDef +25\n"
+            this.state.buffDescriptions[teamIndex-1] += ("mDef +25\n")
           });
           break;
         case "Swordman+Lancer+Acolyte":
@@ -335,7 +335,7 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
             character.def += 40
             character.hpMAX += 100
             this.state.buffDescriptions[teamIndex-1] += ("Def +40\n")
-            this.state.buffDescriptions[teamIndex-1] += ("Max HP +100\n"
+            this.state.buffDescriptions[teamIndex-1] += ("Max HP +100\n")
           });
           break;
         case "Swordman+Archer+Magician":
@@ -343,7 +343,7 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
             character.atk += 45
             character.hit += 10
             this.state.buffDescriptions[teamIndex-1] += ("Atk +45\n")
-            this.state.buffDescriptions[teamIndex-1] += ("Hit +10\n"
+            this.state.buffDescriptions[teamIndex-1] += ("Hit +10\n")
           });
           break;
         case "Swordman+Archer+Acolyte":
@@ -351,7 +351,7 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
             character.def += 40
             character.flee += 5
             this.state.buffDescriptions[teamIndex-1] += ("Def +40\n")
-            this.state.buffDescriptions[teamIndex-1] += ("Flee +5\n"
+            this.state.buffDescriptions[teamIndex-1] += ("Flee +5\n")
           });
           break;
         case "Swordman+Magician+Acolyte":
@@ -359,7 +359,7 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
             character.hpMAX += 150
             character.spMAX += 100
             this.state.buffDescriptions[teamIndex-1] += ("HP Max +150\n")
-            this.state.buffDescriptions[teamIndex-1] += ("SP Max +100\n"
+            this.state.buffDescriptions[teamIndex-1] += ("SP Max +100\n")
           });
           break;
         case "Lancer+Archer+Magician":
@@ -373,7 +373,7 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
             character.cri += 7
             character.flee += 5
             this.state.buffDescriptions[teamIndex-1] += ("Cri +7\n")
-            this.state.buffDescriptions[teamIndex-1] += ("Flee +5\n"
+            this.state.buffDescriptions[teamIndex-1] += ("Flee +5\n")
           });
           break;
         case "Lancer+Magician+Acolyte":
@@ -381,7 +381,7 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
             character.mAtk += 30
             character.spMAX += 100
             this.state.buffDescriptions[teamIndex-1] += ("mAtk +30\n")
-            this.state.buffDescriptions[teamIndex-1] += ("Max SP +100\n"
+            this.state.buffDescriptions[teamIndex-1] += ("Max SP +100\n")
           });
           break;
         case "Archer+Magician+Acolyte":
@@ -389,7 +389,7 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
             character.mAtk += 40
             character.hit += 10
             this.state.buffDescriptions[teamIndex-1] += ("mAtk +40\n")
-            this.state.buffDescriptions[teamIndex-1] += ("Hit +10\n"
+            this.state.buffDescriptions[teamIndex-1] += ("Hit +10\n")
           });
           break;
 
