@@ -394,7 +394,7 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
 
     if(this.state.heroes.length >= 15)
     {
-      this.state.characterBuff1 = true;
+      this.state.characterBuff2 = true;
     }
 
     this.state.drop = 0.0;
