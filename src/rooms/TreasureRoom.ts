@@ -303,6 +303,7 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
       requiredJobs.every((job) => teams[teamIndex].jobs.has(job)) &&
       requiredJobs.every((job) => !heroesUsedIn2Combo[teamIndex].has(job))
       && requiredJobs.every((job) => !heroesUsedIn3ComboTeam[teamIndex].has(job))
+      && requiredJobs.every((job) => teams[teamIndex].characters.filter((character) => character.job === job).length === 3)
     ) {
 
       if(teamIndex == 1)
