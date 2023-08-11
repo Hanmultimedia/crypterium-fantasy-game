@@ -415,7 +415,7 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
       break;
     }
 
-    if(heroesUsedIn3Combo[teamIndex].length >= 1)
+    if(heroesUsedIn3ComboTeam[teamIndex].length >= 1)
     {
       break;
     }
