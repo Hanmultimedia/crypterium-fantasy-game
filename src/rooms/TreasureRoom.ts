@@ -144,7 +144,7 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
     if (
       requiredJobs.every((job) => teams[teamIndex].jobs.has(job)) &&
       requiredJobs.every((job) => teams[teamIndex].characters.filter((character) => character.job === job).length === 2)
-      && requiredJobs.every((job) => !charactersUsedInCombos[teamIndex].has(job))
+      && requiredJobs.every((job) => !heroesUsedIn2Combo[teamIndex].has(job))
     ) {
 
       if(teamIndex == 1)
