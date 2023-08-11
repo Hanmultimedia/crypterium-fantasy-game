@@ -193,7 +193,6 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
             default:
               break;
           }
-          break;
         }
       });
 
