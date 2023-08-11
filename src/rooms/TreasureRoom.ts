@@ -166,23 +166,23 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
           switch (combinationName) {
             case "Swordman+Swordman":
               character.def += 20;
-              this.state.buffDescriptions[teamIndex] += ("Def +20\n")
+              this.state.buffDescriptions[teamIndex-1] += ("Def +20\n")
               break;
             case "Lancer+Lancer":
               character.atk += 35;
-              this.state.buffDescriptions[teamIndex] += ("Atk +35\n")
+              this.state.buffDescriptions[teamIndex-1] += ("Atk +35\n")
               break;
             case "Archer+Archer":
               character.hit += 10;
-              this.state.buffDescriptions[teamIndex] += ("Hit +10\n")
+              this.state.buffDescriptions[teamIndex-1] += ("Hit +10\n")
               break;
             case "Magician+Magician":
               character.mAtk += 30;
-              this.state.buffDescriptions[teamIndex] += ("mAtk +30\n")
+              this.state.buffDescriptions[teamIndex-1] += ("mAtk +30\n")
               break;
             case "Acolyte+Acolyte":
               character.hpMAX += 80;
-              this.state.buffDescriptions[teamIndex] += ("Max HP +80\n")
+              this.state.buffDescriptions[teamIndex-1] += ("Max HP +80\n")
               break;
             // Add more cases for other 2-characters buffs here
             // ...
