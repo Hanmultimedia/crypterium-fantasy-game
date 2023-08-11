@@ -382,6 +382,7 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
             character.flee += 5
             this.state.buffDescriptions[teamIndex-1] += ("Cri +7\n")
             this.state.buffDescriptions[teamIndex-1] += ("Flee +5\n")
+            console.log("Cri +7")
           });
           break;
         case "Lancer+Magician+Acolyte":
