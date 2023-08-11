@@ -76,6 +76,8 @@ export class DungeonState extends Schema {
   @type("boolean") characterBuff1: boolean = false;
   @type("boolean") characterBuff2: boolean = false;
 
+  @type(["string"]) buffDescriptions: ArraySchema<string> = new ArraySchema<string>();
+
   @type(["boolean"]) buffs1: ArraySchema<boolean> = new ArraySchema<boolean>();
   @type(["boolean"]) buffs2: ArraySchema<boolean> = new ArraySchema<boolean>();
   @type(["boolean"]) buffs3: ArraySchema<boolean> = new ArraySchema<boolean>();

@@ -129,9 +129,14 @@ export class TreasureRoom extends Room<DungeonState> {
   const heroesUsedIn2Combo = { 1: new Set(), 2: new Set(), 3: new Set() };
   const heroesUsedIn3ComboTeam = { 1: new Set(), 2: new Set(), 3: new Set() };
 
+//const buffDescriptions: { [teamIndex: number]: string[] } = {};
 
 // Check and apply 2-characters buff combinations for all teams
 for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
+
+  this.state.buffDescriptions[teamIndex] = [];
+
+
   for (const combinationName in buffCombinations) {
     const requiredJobs = buffCombinations[combinationName];
 
@@ -161,18 +166,23 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
           switch (combinationName) {
             case "Swordman+Swordman":
               character.def += 20;
+              this.state.buffDescriptions[teamIndex].push("Def +20\n")
               break;
             case "Lancer+Lancer":
               character.atk += 35;
+              this.state.buffDescriptions[teamIndex].push("Atk +35\n")
               break;
             case "Archer+Archer":
               character.hit += 10;
+              this.state.buffDescriptions[teamIndex].push("Hit +10\n")
               break;
             case "Magician+Magician":
               character.mAtk += 30;
+              this.state.buffDescriptions[teamIndex].push("mAtk +30\n")
               break;
             case "Acolyte+Acolyte":
               character.hpMAX += 80;
+              this.state.buffDescriptions[teamIndex].push("Max HP +80\n")
               break;
             // Add more cases for other 2-characters buffs here
             // ...
