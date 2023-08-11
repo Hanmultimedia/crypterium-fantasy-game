@@ -137,7 +137,7 @@ for(let i = 0 ; i < 3 ; i++){
 for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
 
   this.state.buffDescriptions[teamIndex] = ""
-
+  let found : boolean = false
 
   for (const combinationName in buffCombinations) {
     const requiredJobs = buffCombinations[combinationName];
@@ -161,7 +161,7 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
       {
         this.state.buffs3[0] = true;
       }
-      let found : boolean = false
+      
       // Apply 2-characters buff combination for the current team
       teams[teamIndex].characters.forEach((character) => {
         if (!found && requiredJobs.includes(character.job)) {
@@ -293,13 +293,15 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
 
 // Check and apply 3-characters buff combinations for all teams
 for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
+
+  let found : boolean = false
   for (const combinationName in buffCombinations3) {
     const requiredJobs = buffCombinations3[combinationName];
      const hasAllJobs = uniqueJobsByTeam[teamIndex].size === 5;
     // Check if all required jobs are present in the team and not already used in a 2-character combination
     if (!hasAllJobs&&
       requiredJobs.every((job) => teams[teamIndex].jobs.has(job)) &&
-      requiredJobs.every((job) => !heroesUsedIn2Combo[teamIndex].has(job))
+      requiredJobs.every((job) => !heroesUsedIn2Combo[teamIndex].has(job)) &&
       && requiredJobs.every((job) => !heroesUsedIn3ComboTeam[teamIndex].has(job))
     ) {
 
@@ -315,7 +317,6 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
       {
         this.state.buffs3[1] = true;
       }
-      let found : boolean = false
       // Apply 3-characters buff combination for the current team
       teams[teamIndex].characters.forEach((character) => {
         if (!found && requiredJobs.includes(character.job)) {
