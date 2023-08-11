@@ -301,7 +301,7 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
     // Check if all required jobs are present in the team and not already used in a 2-character combination
     if (!hasAllJobs&&
       requiredJobs.every((job) => teams[teamIndex].jobs.has(job)) &&
-      requiredJobs.every((job) => !heroesUsedIn2Combo[teamIndex].has(job)) &&
+      requiredJobs.every((job) => !heroesUsedIn2Combo[teamIndex].has(job))
       && requiredJobs.every((job) => !heroesUsedIn3ComboTeam[teamIndex].has(job))
     ) {
 
