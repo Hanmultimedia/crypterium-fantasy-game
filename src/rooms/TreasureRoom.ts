@@ -136,7 +136,7 @@ for(let i = 0 ; i < 3 ; i++){
 // Check and apply 2-characters buff combinations for all teams
 for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
 
-  this.state.buffDescriptions[i] = ""
+  this.state.buffDescriptions[teamIndex] = ""
 
 
   for (const combinationName in buffCombinations) {
