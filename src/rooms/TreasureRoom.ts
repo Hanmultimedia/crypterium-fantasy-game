@@ -229,6 +229,9 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
   const hasAllJobs = uniqueJobsByTeam[teamIndex].size === 5;
   if (hasAllJobs) {
 
+     this.state.buffDescriptions[teamIndex-1] += ("All Stats +10\n")
+     this.state.buffDescriptions[teamIndex-1] += ("Speed +0.3\n")
+
       if(teamIndex == 1)
       {
         this.state.buffs1[2] = true;
@@ -251,9 +254,6 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
      character.dex += 10
      character.luk += 10
      character.str += 10
-
-     this.state.buffDescriptions[teamIndex-1] += ("All Stats +10\n")
-     this.state.buffDescriptions[teamIndex-1] += ("Speed +0.3\n")
 
      //console.log(character.attributes)
 
@@ -300,7 +300,6 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
     if (!hasAllJobs&&
       requiredJobs.every((job) => teams[teamIndex].jobs.has(job)) &&
       requiredJobs.every((job) => !heroesUsedIn2Combo[teamIndex].has(job)) &&
-      requiredJobs.every((job) => teams[teamIndex].characters.filter((character) => character.job === job).length === 3)
       && requiredJobs.every((job) => !heroesUsedIn3ComboTeam[teamIndex].has(job))
     ) {
 
