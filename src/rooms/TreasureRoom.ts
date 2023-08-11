@@ -198,6 +198,11 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
       console.log(`Player in Team ${teamIndex} received the ${combinationName} buff! ${options.ethAddress}`);
       break;
     }
+
+    if(heroesUsedIn2Combo[teamIndex].length >= 1)
+    {
+      break;
+    }
   }
 }
 
@@ -248,6 +253,7 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
      character.str += 10
 
      this.state.buffDescriptions[teamIndex-1] += ("All Stats +10\n")
+     this.state.buffDescriptions[teamIndex-1] += ("Speed +0.3\n")
 
      //console.log(character.attributes)
 
@@ -406,6 +412,12 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
       // Add the heroes used in this combination to the set
       requiredJobs.forEach((job) => heroesUsedIn3ComboTeam[teamIndex].add(job));
       console.log(`Player in Team ${teamIndex} received the ${combinationName} buff! ${options.ethAddress}`);
+      break;
+    }
+
+    if(heroesUsedIn3Combo[teamIndex].length >= 1)
+    {
+      break;
     }
   }
 }
