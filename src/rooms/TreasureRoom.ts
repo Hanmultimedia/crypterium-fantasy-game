@@ -321,7 +321,6 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
       teams[teamIndex].characters.forEach((character) => {
         if (!found && requiredJobs.includes(character.job)) {
           // Apply custom stats for the combination buff
-          found = true
         switch (combinationName) {
         case "Swordman+Lancer+Archer":
           characters.forEach((character) => {
@@ -409,6 +408,8 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
         default:
           break;
       }
+
+      found = true;
 
         }
       });
