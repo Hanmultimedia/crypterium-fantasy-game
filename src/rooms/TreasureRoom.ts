@@ -143,7 +143,7 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
     // Check if all required jobs are present in the team and at least two characters of each job are present
     if (
       requiredJobs.every((job) => teams[teamIndex].jobs.has(job)) &&
-      requiredJobs.every((job) => teams[teamIndex].characters.filter((character) => character.job === job).length >= 2)
+      requiredJobs.every((job) => teams[teamIndex].characters.filter((character) => character.job === job).length === 2)
     ) {
 
       if(teamIndex == 1)
