@@ -161,10 +161,11 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
       {
         this.state.buffs3[0] = true;
       }
-
+      let found : boolean = false
       // Apply 2-characters buff combination for the current team
       teams[teamIndex].characters.forEach((character) => {
-        if (requiredJobs.includes(character.job)) {
+        if (!found && requiredJobs.includes(character.job)) {
+          found = true
           // Apply custom stats for the combination buff
           switch (combinationName) {
             case "Swordman+Swordman":
@@ -314,11 +315,12 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
       {
         this.state.buffs3[1] = true;
       }
-
+      let found : boolean = false
       // Apply 3-characters buff combination for the current team
       teams[teamIndex].characters.forEach((character) => {
-        if (requiredJobs.includes(character.job)) {
+        if (!found && requiredJobs.includes(character.job)) {
           // Apply custom stats for the combination buff
+          found = true
         switch (combinationName) {
         case "Swordman+Lancer+Archer":
           characters.forEach((character) => {
@@ -406,7 +408,7 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
         default:
           break;
       }
-      break;
+
         }
       });
 
