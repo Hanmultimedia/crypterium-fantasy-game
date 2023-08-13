@@ -57,9 +57,9 @@ export async function fetchRandomChest(slug:string, wave:number): Promise<any> {
 
 // Define the items and their corresponding probabilities
 let possible_uid = [
-  { uid: "chest001", probability: 0.5 }, // 50% probability
-  { uid: "chest002", probability: 0.3 }, // 30% probability
-  { uid: "chest003", probability: 0.2 }, // 20% probability
+  { uid: "chest001", probability: 0.4 }, // 40% probability
+  { uid: "chest002", probability: 0.35 }, // 35% probability
+  { uid: "chest003", probability: 0.25 }, // 25% probability
 ];
 
 if(slug == "1")

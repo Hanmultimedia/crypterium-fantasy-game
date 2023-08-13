@@ -320,7 +320,7 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
       // Apply 3-characters buff combination for the current team
       teams[teamIndex].characters.forEach((character) => {
         if (!found && requiredJobs.includes(character.job)) {
-          console.log("Not Found")
+          //console.log("Not Found")
           // Apply custom stats for the combination buff
         switch (combinationName) {
         case "Swordman+Lancer+Archer":
@@ -328,7 +328,7 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
             character.aspd += 0.3
             character.hit += 10
           });
-          
+
             this.state.buffDescriptions[teamIndex-1] += ("Aspd +0.3\n")
             this.state.buffDescriptions[teamIndex-1] += ("Hit +10\n")
           break;
