@@ -376,11 +376,11 @@ export const fetchCharacterPool = () => {
       "hp": 200,
       "sp": 50,
       "bonus": {
-        "str": 3,
+        "str": 0,
         "dex": 5,
         "int": 0,
         "vit": 0,
-        "agi": 1,
+        "agi": 4,
         "luk": 0
       }
     },
@@ -400,11 +400,11 @@ export const fetchCharacterPool = () => {
       "hp": 300,
       "sp": 75,
       "bonus": {
-        "str": 3,
+        "str": 0,
         "dex": 5,
         "int": 0,
         "vit": 0,
-        "agi": 1,
+        "agi": 4,
         "luk": 0
       }
     },
@@ -424,11 +424,11 @@ export const fetchCharacterPool = () => {
       "hp": 400,
       "sp": 100,
       "bonus": {
-        "str": 3,
+        "str": 0,
         "dex": 5,
         "int": 0,
         "vit": 0,
-        "agi": 1,
+        "agi": 4,
         "luk": 0
       }
     },
@@ -448,11 +448,11 @@ export const fetchCharacterPool = () => {
       "hp": 500,
       "sp": 125,
       "bonus": {
-        "str": 3,
+        "str": 0,
         "dex": 5,
         "int": 0,
         "vit": 0,
-        "agi": 1,
+        "agi": 4,
         "luk": 0
       }
     },
@@ -472,11 +472,11 @@ export const fetchCharacterPool = () => {
       "hp": 600,
       "sp": 150,
       "bonus": {
-        "str": 3,
+        "str": 0,
         "dex": 5,
         "int": 0,
         "vit": 0,
-        "agi": 1,
+        "agi": 4,
         "luk": 0
       }
     },

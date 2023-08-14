@@ -46,6 +46,7 @@ function calcHeroAtk(character: Character) {
   ) {
     bonus += level;
   }
+  let agi = character.attributes.agi;
   let str = character.attributes.str;
   let luk = character.attributes.luk;
   let dex = character.attributes.dex;
@@ -53,13 +54,13 @@ function calcHeroAtk(character: Character) {
   let weapon = 0;
   if (character.job !== "Archer") {
     return Math.floor(
-      str * 1.25 +
-        (level * 1.75) / (str + level) +
-        str * 10 +
+      agi * 1.25 +
+        (level * 1.75) / (agi + level) +
+        agi * 10 +
         bonus +
         (luk / 2) * 0.2 +
         (dex / 2) * 0.2 +
-        (str / 5) * 3
+        (agi / 5) * 3
     );
   } else {
     return Math.floor(
