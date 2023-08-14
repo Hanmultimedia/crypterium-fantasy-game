@@ -42,7 +42,8 @@ export class Character extends Schema {
   @type("string") slot_3:string;
   @type("string") slot_4:string;
   @type("string") slot_5:string;
-
+  @type("string") slot_6:string;
+  @type("string") slot_7:string;
   @type("number") arenaAttackPosition: number;
   @type("number") arenaDefendPosition: number;
 
