@@ -112,6 +112,8 @@ export async function fetchCharacters(eth:string): Promise<any> {
     characer.slot_3 = data.equipments.slot_3
     characer.slot_4 = data.equipments.slot_4
     characer.slot_5 = data.equipments.slot_5
+    characer.slot_6 = data.equipments.slot_6
+    characer.slot_7 = data.equipments.slot_7
 
     if(typeof data.team1 !== 'undefined')
     {
