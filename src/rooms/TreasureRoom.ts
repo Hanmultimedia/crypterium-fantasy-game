@@ -258,12 +258,12 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
      //console.log(character.attributes)
 
      const modifiedAttributes = {
-      str: character.str,
-      int: character.int,
-      vit: character.vit,
-      dex: character.dex,
-      luk: character.luk,
-      agi: character.agi,
+      str: 10,
+      int: 10,
+      vit: 10,
+      dex: 10,
+      luk: 10,
+      agi: 10,
     };
 
       const character_forstat = new CharacterTemplate(modifiedAttributes,character.job,character.uid,"",0,character.level,character.hp,character.sp,character.speed,character.range)
@@ -271,16 +271,16 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
 
       // Apply custom stats for 5-characters buff
       // For example:
-    character.atk = stat.atk
-    character.def = stat.def
-    character.mAtk = stat.mAtk
-    character.mDef = stat.mDef
-    character.hpMAX = stat.hpMAX
-    character.spMAX = stat.spMAX
-    character.hit = stat.hit
-    character.flee = stat.flee
-    character.cri = stat.cri
-    character.aspd = stat.aspd
+    character.atk += stat.atk
+    character.def += stat.def
+    character.mAtk += stat.mAtk
+    character.mDef += stat.mDef
+    character.hpMAX += stat.hpMAX
+    character.spMAX += stat.spMAX
+    character.hit += stat.hit
+    character.flee += stat.flee
+    character.cri += stat.cri
+    character.aspd += stat.aspd
     character.speed += 0.3
 
     });
