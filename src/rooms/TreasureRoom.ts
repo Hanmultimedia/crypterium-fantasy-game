@@ -18,6 +18,31 @@ import { fetchCoin } from "../services/fetchCoin";
 
 import { Character } from "./DungeonState";
 import { makeStat } from "../utils/initStats";
+import mongoose, { Schema, Document }  from 'mongoose';
+
+  const baseMonsterSchema = new Schema({
+    uid: { type: String, required: true },
+    atk: { type: Number, required: true },
+    def: { type: Number, required: true },
+    name: { type: String, required: true },
+    aspd: { type: Number, required: true },
+    cri: { type: Number, required: true },
+    exp: { type: Number, required: true },
+    free: { type: Number, required: true },
+    hit: { type: Number, required: true },
+    hp: { type: Number, required: true },
+    level: { type: Number, required: true },
+    mAtk: { type: Number, required: true },
+    mDef: { type: Number, required: true },
+    range: { type: Number, required: true },
+    speed: { type: Number, required: true },
+    type: { type: String, required: true },
+    vision: { type: Number, required: true },
+    created_date: { type: Date, default: Date.now },
+    updated_date: { type: Date, default: Date.now },
+});
+
+
 
 class CharacterTemplate {
   attributes: Attributes;
@@ -97,6 +122,18 @@ export class TreasureRoom extends Room<DungeonState> {
 
     let characters = await fetchHeroesTreasure(options.ethAddress);
     const monsters = await fetchWaveMonsters(options.map, 1)
+
+    let MonsterModel;
+
+    try 
+    {
+      MonsterModel = mongoose.model('BaseMonster');
+    }catch (error)
+    {
+      MonsterModel = mongoose.model('BaseMonster',baseMonsterSchema);
+    }
+    
+    const monsters_data = await MonsterModel.find({});
 
       for (let j = 0; j < 3; j++) {
           this.state.buffs1.push(false);
@@ -477,7 +514,7 @@ for (let teamIndex = 1; teamIndex <= 3; teamIndex++) {
 this.onMessage("spawnMonster", async (client, data) => {
   console.log("spawnMonster" + data.index);
   // Fetch the random monster
-  const monster = await fetchRandomMonster(options.map, this.state.wave);
+  const monster = await fetchRandomMonster(options.map, this.state.wave , monsters_data);
 
   // Ensure the data.index is within the bounds of the spawners_monsters array
   if (data.index >= 0 && data.index < this.state.spawners_monsters.length) {
