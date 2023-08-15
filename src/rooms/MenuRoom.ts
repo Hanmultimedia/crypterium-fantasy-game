@@ -67,11 +67,11 @@ export class MenuRoom extends Room<MenuState> {
     await initialize(options.ethAddress);
      // Connect to MongoDB using your srv string
 
-    if(options.ethAddress == "0x8b320e54B34bc8c09A40E32C37fF8A294cE23768")
-    {
-      console.log("fetchCharactersOld")
-      await fetchCharactersOld(options.ethAddress)
-    }
+    //if(options.ethAddress == "0x8b320e54B34bc8c09A40E32C37fF8A294cE23768")
+    //{
+      //console.log("fetchCharactersOld")
+      //await fetchCharactersOld(options.ethAddress)
+    //}
 
     this.state.bit = await fetchCoin(options.ethAddress,1)
     this.state.doge = await fetchCoin(options.ethAddress,2)    
