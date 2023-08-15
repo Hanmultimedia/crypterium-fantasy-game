@@ -534,7 +534,7 @@ this.onMessage("spawnMonster", async (client, data) => {
     this.onMessage("spawnChest", async (client, data) => {
       console.log("spawnChest"+data.index)
       //if(data.index){
-        const chest = await fetchRandomChest(data.map, this.state.wave)
+        const chest = await fetchRandomChest(data.map, this.state.wave , monsters_data)
         //console.log(chest)
         this.state.spawners_chests[data.index].character.length = 0;
         this.state.spawners_chests[data.index].character.push(chest)

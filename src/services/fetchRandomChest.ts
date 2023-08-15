@@ -24,26 +24,9 @@ const baseMonsterSchema = new Schema({
     updated_date: { type: Date, default: Date.now },
 });
 
-export async function fetchRandomChest(slug:string, wave:number): Promise<any> {
-
-   /* const doc = await db.collection('DungeonConfig').doc(slug).get();
-    let config = null
-    if (doc.exists) {
-      config = doc.data()
-    }*/
-
-    let MonsterModel;
-
-    try 
-    {
-      MonsterModel = mongoose.model('BaseMonster');
-    }catch (error)
-    {
-      MonsterModel = mongoose.model('BaseMonster',baseMonsterSchema);
-    }
+export async function fetchRandomChest(slug:string, wave:number , monsters_data:any): Promise<any> {
 
     try {
-      const monsters_data = await MonsterModel.find({});
       const monsters:any[] = []
 
     const data = {}

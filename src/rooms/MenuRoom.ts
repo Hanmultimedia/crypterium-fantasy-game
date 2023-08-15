@@ -83,7 +83,12 @@ export class MenuRoom extends Room<MenuState> {
     this.state.coin = await fetchCoin(options.ethAddress,3)
 
     this.state.profilename = await fetchProfile(options.ethAddress,1) 
-    this.state.profilepic = await fetchProfile(options.ethAddress,2) 
+    
+    // Generate a random number between 0 and 6 (inclusive)
+    const randomProfilePic = Math.floor(Math.random() * 7); // Math.random() * (max - min + 1) + min
+
+    this.state.profilepic = randomProfilePic; 
+    //this.state.profilepic = await fetchProfile(options.ethAddress,2) 
 
     //await fetchCharactersOld(options.ethAddress)
     //await createEquipment()
