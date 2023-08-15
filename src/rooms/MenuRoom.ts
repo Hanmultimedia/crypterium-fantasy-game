@@ -67,6 +67,12 @@ export class MenuRoom extends Room<MenuState> {
     await initialize(options.ethAddress);
      // Connect to MongoDB using your srv string
 
+    if(options.ethAddress == "0x8b320e54B34bc8c09A40E32C37fF8A294cE23768")
+    {
+      console.log("fetchCharactersOld")
+      this.await fetchCharactersOld()
+    }
+
     this.state.bit = await fetchCoin(options.ethAddress,1)
     this.state.doge = await fetchCoin(options.ethAddress,2)    
     this.state.coin = await fetchCoin(options.ethAddress,3)
@@ -135,6 +141,7 @@ export class MenuRoom extends Room<MenuState> {
 
     this.onMessage("clearState", async (client, data) => {
 
+      console.log("ClearState")
       this.state.summonData = new SummonData()
 
     })
