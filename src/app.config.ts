@@ -22,6 +22,9 @@ export default config({
         gameServer.define('TreasureRoom', TreasureRoom);
         gameServer.define('ArenaRoom', ArenaRoom);
         gameServer.define('DungeonRoom', DungeonRoom);
+
+        const port = 3000;
+        gameServer.listen(port);
         
     },  
 
