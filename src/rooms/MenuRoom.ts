@@ -57,8 +57,8 @@ export class MenuRoom extends Room<MenuState> {
     // Check if a room with the same name already exists
     if (MenuRoom.existingRoomIds.has(this.roomId)) {
       //console.log("Room with the same name already exists. Cannot create a new one.");
-      //this.disconnect(); // Disconnect the client trying to create the room
-      //return;
+      this.disconnect(); // Disconnect the client trying to create the room
+      return;
     }
 
     // Add the room name to the existingRoomIds set
