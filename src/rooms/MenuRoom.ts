@@ -44,7 +44,7 @@ export class MenuRoom extends Room<MenuState> {
 
     await mongoose.connect('mongodb+srv://CPAY-CF-USER:Pul6GVdRV5C7j82f@cpay-cf.zcgbftb.mongodb.net/crypterium-fantasy-game?retryWrites=true&w=majority');
     const db = mongoose.connection;
-    db.on('error', console.error.bind(console, 'connection error:'));
+    //db.on('error', console.error.bind(console, 'connection error:'));
 
     options.ethAddress = options.ethAddress.toLowerCase();
     
