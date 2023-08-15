@@ -128,6 +128,7 @@ export class MenuRoom extends Room<MenuState> {
       this.state.coupons = coupons;
 
       setTimeout(() => {
+        this.state.summonData = new SummonData()
         this.reloadCharacter()
       }, 1000)
 
