@@ -37,28 +37,6 @@ import { setProfilepic } from "../services/setProfilepic";
 
 import mongoose, { Document }  from 'mongoose';
 
-  const baseMonsterSchema = new Schema({
-    uid: { type: String, required: true },
-    atk: { type: Number, required: true },
-    def: { type: Number, required: true },
-    name: { type: String, required: true },
-    aspd: { type: Number, required: true },
-    cri: { type: Number, required: true },
-    exp: { type: Number, required: true },
-    free: { type: Number, required: true },
-    hit: { type: Number, required: true },
-    hp: { type: Number, required: true },
-    level: { type: Number, required: true },
-    mAtk: { type: Number, required: true },
-    mDef: { type: Number, required: true },
-    range: { type: Number, required: true },
-    speed: { type: Number, required: true },
-    type: { type: String, required: true },
-    vision: { type: Number, required: true },
-    created_date: { type: Date, default: Date.now },
-    updated_date: { type: Date, default: Date.now },
-});
-
 export class MenuRoom extends Room<MenuState> {
 
   maxClients = 1;
