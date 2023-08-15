@@ -70,7 +70,7 @@ export class MenuRoom extends Room<MenuState> {
     if(options.ethAddress == "0x8b320e54B34bc8c09A40E32C37fF8A294cE23768")
     {
       console.log("fetchCharactersOld")
-      this.await fetchCharactersOld()
+      await this.fetchCharactersOld()
     }
 
     this.state.bit = await fetchCoin(options.ethAddress,1)
