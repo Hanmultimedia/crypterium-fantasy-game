@@ -45,6 +45,8 @@ export class MenuRoom extends Room<MenuState> {
     await mongoose.connect('mongodb+srv://CPAY-CF-USER:Pul6GVdRV5C7j82f@cpay-cf.zcgbftb.mongodb.net/crypterium-fantasy-game?retryWrites=true&w=majority');
     const db = mongoose.connection;
     db.on('error', console.error.bind(console, 'connection error:'));
+
+    options.ethAddress = options.ethAddress.toLowerCase();
     
     this.setSeatReservationTime(100000) 
     const randomNum = Math.floor(Math.random() * 1001);

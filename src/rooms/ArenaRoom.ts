@@ -14,6 +14,7 @@ export class ArenaRoom extends Room<ArenaState> {
   maxClients = 1;
 
   async onCreate(options:any) {
+    options.ethAddress = options.ethAddress.toLowerCase();
     this.roomId = options.ethAddress;
     console.log("Arena created!", options);
     this.setState(new ArenaState());

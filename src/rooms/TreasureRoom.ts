@@ -85,6 +85,7 @@ export class TreasureRoom extends Room<DungeonState> {
   maxClients = 1;
 
   async onCreate(options:any) {
+    options.ethAddress = options.ethAddress.toLowerCase();
     this.roomId = options.ethAddress;
     //console.log("Treasure created!", options);
     this.setState(new DungeonState());
