@@ -38,13 +38,13 @@ export async function fetchProfile(eth:string,type:number): Promise<any> {
     {
       //console.log("user not found " + eth)
       //mongoose.connection.close();
-      return "";
+      return "profile";
     }
 
   } catch (error) {
     mongoose.connection.close();
     console.log(error);
-    return "";
+    return "profile";
   }
   
 
