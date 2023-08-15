@@ -35,8 +35,7 @@ import { fetchCoin } from "../services/fetchCoin";
 import { fetchProfile } from "../services/fetchProfile";
 import { setProfilepic } from "../services/setProfilepic";
 
-import mongoose, { Schema, Document }  from 'mongoose';
-export class MenuRoom extends Room<MenuState> {
+import mongoose, { Document }  from 'mongoose';
 
   const baseMonsterSchema = new Schema({
     uid: { type: String, required: true },
@@ -59,6 +58,8 @@ export class MenuRoom extends Room<MenuState> {
     created_date: { type: Date, default: Date.now },
     updated_date: { type: Date, default: Date.now },
 });
+
+export class MenuRoom extends Room<MenuState> {
 
   maxClients = 1;
 

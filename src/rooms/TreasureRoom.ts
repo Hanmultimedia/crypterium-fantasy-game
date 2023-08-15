@@ -18,7 +18,7 @@ import { fetchCoin } from "../services/fetchCoin";
 
 import { Character } from "./DungeonState";
 import { makeStat } from "../utils/initStats";
-import mongoose, { Schema, Document }  from 'mongoose';
+import { Schema, Document }  from 'mongoose';
 
   const baseMonsterSchema = new Schema({
     uid: { type: String, required: true },
