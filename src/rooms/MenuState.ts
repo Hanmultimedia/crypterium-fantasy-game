@@ -156,7 +156,7 @@ export class MenuState extends Schema {
 
   @type([Character]) characters = new ArraySchema<Character>();
   @type([Coupon]) coupons = new ArraySchema<Coupon>();
-
+  @type([Coupon]) coupons2 = new ArraySchema<Coupon>();
   @type([Potion_Inventory]) potions_inventory = new ArraySchema<Potion_Inventory>();
   @type([Potion]) potions = new ArraySchema<Potion>();
 

@@ -2,6 +2,7 @@ import { Room, Client } from "colyseus";
 import { fetchCharacters } from "../services/fetchCharacters";
 import { fetchCharactersOld } from "../services/fetchCharactersOld";
 import { fetchCoupons } from "../services/fetchCoupons";
+import { fetchCoupons2 } from "../services/fetchCoupons2";
 import { fetchPotions } from "../services/fetchPotions";
 import { fetchPotionsInventory } from "../services/fetchPotionsInventory";
 import { fetchMaterialsInventory } from "../services/fetchMaterialsInventory";
@@ -98,6 +99,7 @@ export class MenuRoom extends Room<MenuState> {
     const exist = await checkUserExist(options.ethAddress)
     await userAuth(options.ethAddress)
     const coupons = await fetchCoupons(options.ethAddress)
+    const coupons2 = await fetchCoupons2(options.ethAddress)
     /*const potions_inventory_uid = await fetchPotionsInventory(options.ethAddress)
     let potions_inventory = new ArraySchema<Potion_Inventory>()
 
@@ -122,6 +124,7 @@ export class MenuRoom extends Room<MenuState> {
     this.state.potions = potions;
     //this.state.potions_inventory = potions_inventory;
     this.state.coupons = coupons;
+    this.state.coupons2 = coupons2;
     this.state.characters = characters;
     this.state.ethAddress = options.ethAddress;
 
