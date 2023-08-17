@@ -35,7 +35,7 @@ export async function fetchCoupons2(eth:string): Promise<any> {
     let user = await User.findOne({ eth:eth });
     // If a user was found, return coupon
     if (user) {
-    let coupon = user.coupon
+    let coupon = user.coupon2
 
     if(!coupon)
     {
