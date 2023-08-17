@@ -34,7 +34,7 @@ export default config({
          * Read more: https://expressjs.com/en/starter/basic-routing.html
          */
         app.get("/hello_world", (req, res) => {
-            res.send("It's time to kick ass and chew bubblegum!");
+            res.send("It's time to kick ass and chew bubblegum!!");
         });
 
         /**
