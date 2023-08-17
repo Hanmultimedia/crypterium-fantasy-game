@@ -549,8 +549,8 @@ this.onMessage("spawnMonster", async (client, data) => {
       if(hero){
         //console.log("found hero " + hero.id)
         let result = await addExpToHero(this.state.ethAddress,hero,data.exp)
-        characters = await fetchHeroesTreasure(options.ethAddress);
-        this.state.heroes = characters;
+        //characters = await fetchHeroesTreasure(options.ethAddress);
+        //this.state.heroes = characters;
       }
     });
 
