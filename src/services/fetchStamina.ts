@@ -1,7 +1,7 @@
 import { Coupon } from "../rooms/MenuState";
 import mongoose from 'mongoose';
 import axios from 'axios';
-import { UserModel , userSchema } from './user.model';
+import { UserModel } from './user.model';
 
 export async function fetchStamina(eth:string): Promise<any> {
   
