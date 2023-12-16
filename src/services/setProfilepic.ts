@@ -41,7 +41,6 @@ export async function setProfilepic(eth:string,profilepic:number): Promise<any> 
     }
 
   } catch (error) {
-    mongoose.connection.close();
     console.log(error);
     return 0;
   }

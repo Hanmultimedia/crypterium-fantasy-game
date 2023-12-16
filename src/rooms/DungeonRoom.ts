@@ -20,7 +20,6 @@ export class DungeonRoom extends Room<DungeonState> {
     this.setState(new DungeonState());
 
     this.setSeatReservationTime(100000) 
-
     const characters = await fetchHeroes(options.ethAddress);
     
  
@@ -82,7 +81,7 @@ export class DungeonRoom extends Room<DungeonState> {
     const monsters = await fetchWaveMonsters(this.map, 1)
     this.state.monsters = monsters;
     console.log("FinishedfetchWaveMonsters")
-    console.log(monsters)
+    //console.log(monsters)
   }
 
   onLeave(client: Client, consented: boolean) {

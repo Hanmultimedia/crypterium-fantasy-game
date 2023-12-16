@@ -22,7 +22,7 @@ export async function fetchCoupons2(eth:string): Promise<any> {
     // Connect to MongoDB using your srv string
     //await mongoose.connect('mongodb+srv://CPAY-CF-USER:Pul6GVdRV5C7j82f@cpay-cf.zcgbftb.mongodb.net/crypterium-fantasy-game?retryWrites=true&w=majority');
     // Define your user schema
-    console.log("Fetch Coupon")
+    //console.log("Fetch Coupon")
     // Create a model from the schema
 
     let User: any;
@@ -46,11 +46,11 @@ export async function fetchCoupons2(eth:string): Promise<any> {
     //mongoose.connection.close();
     c.quantity = coupon
     array.push(c)
-    console.log("Coupon2 user have " + coupon + " coupon")
+    //console.log("Coupon2 user have " + coupon + " coupon")
     return array;
     }else
     {
-      console.log("user not found")
+      //console.log("user not found")
      // mongoose.connection.close();
       array.push(c)
       return array;

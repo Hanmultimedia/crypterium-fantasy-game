@@ -7,7 +7,17 @@ export class Character extends Schema {
   @type("uint16") level: number;
   @type("string") job:string;
   @type("string") name:string;
-  
+
+  @type("string") slot_0: string;
+  @type("string") slot_1: string;
+  @type("string") slot_2: string;
+  @type("string") slot_3: string;
+  @type("string") slot_4: string;
+  @type("string") slot_5: string;
+  @type("string") slot_6: string;
+  @type("string") slot_7: string;
+  @type("string") slot_8: string;
+
   @type("uint16") atk: number;
   @type("uint16") def: number;
   @type("uint16") mAtk: number;

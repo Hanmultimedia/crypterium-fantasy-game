@@ -68,7 +68,7 @@ export async function addPotion(eth:string , amount:number) {
     );
 
     if (updatedInventory) {
-    console.log("Update in inventory")
+    //console.log("Update in inventory")
     if (!updatedInventory.potions) {
       updatedInventory.potions = new Map();
     }
@@ -79,7 +79,7 @@ export async function addPotion(eth:string , amount:number) {
     await updatedInventory.save();
     }else
     {
-      console.log("Create New Potion")
+      //console.log("Create New Potion")
       let PotionModel: any;
       try {
         PotionModel = mongoose.model("Potion");
@@ -94,7 +94,7 @@ export async function addPotion(eth:string , amount:number) {
       });
     }
     
-    console.log("Finish add potion reward")
+    //console.log("Finish add potion reward")
     //mongoose.connection.close();
     return result
 

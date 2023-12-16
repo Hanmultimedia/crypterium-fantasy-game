@@ -18,15 +18,20 @@ export async function userAuth(eth: string) {
     }
 
     // Use the model to query for a user with a matching eth address
-    let user:any = await User.findOne({ eth });
-    if (!user) {
-      user = new User({
-        eth,
-        status: true,
-      });
-    }
-
+try {
+  let user = await User.findOne({ eth });
+  if (!user) {
+    user = new User({
+      eth,
+      status: true,
+    });
     await user.save();
+  }
+  // Rest of your code
+} catch (error) {
+  console.error("Error while querying the database:", error);
+  // Handle the error as needed
+}
 
   } catch (error) {
     console.log(error);

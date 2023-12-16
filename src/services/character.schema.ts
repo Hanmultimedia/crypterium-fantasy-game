@@ -22,6 +22,7 @@ export const CharacterSchema: Schema = new Schema({
   treasure1: { type: Number, required: true },
   treasure2: { type: Number, required: true },
   treasure3: { type: Number, required: true },
+  star: { type: Number, required: true, default: 0 },
   created_date: { type: Date, default: Date.now },
   updated_date: { type: Date, default: Date.now }
 });

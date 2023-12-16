@@ -42,7 +42,6 @@ export async function fetchCoin(eth:string,type:number): Promise<any> {
     }
 
   } catch (error) {
-    mongoose.connection.close();
     console.log(error);
     return 0;
   }

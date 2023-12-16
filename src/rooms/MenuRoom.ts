@@ -8,7 +8,10 @@ import { fetchPotionsInventory } from "../services/fetchPotionsInventory";
 import { fetchMaterialsInventory } from "../services/fetchMaterialsInventory";
 import { fetchEquipments } from "../services/fetchEquipments";
 import { fetchEquipmentsInventory } from "../services/fetchEquipmentsInventory";
-//import { fetchEquipments } from "../services/fetchEquipments";
+import { setStamina } from "../services/setStamina";
+import { setArenaStamina } from "../services/setArenaStamina";
+import { fetchArenaStamina } from "../services/fetchArenaStamina";
+import { fetchStamina } from "../services/fetchStamina";
 import { fetchDiamond } from "../services/fetchDiamond";
 import { fetchSkills } from "../services/fetchSkills";
 import { initialize } from "../services/initialize";
@@ -21,6 +24,7 @@ import { upgradeSkillToCharacter } from "../services/upgradeSkillToCharacter";
 import { equipSkill } from "../services/equipSkill";
 import { equipToCharacter } from "../services/equipToCharacter";
 import { unEquipToCharacter } from "../services/unEquipToCharacter";
+import { unEquipAllToCharacter } from "../services/unEquipAllToCharacter";
 import { MenuState, SummonData , Skill ,Potion , Potion_Inventory , Equipment , Equipment_Inventory} from "./MenuState";
 import { settingTeams } from "../services/settingTeams";
 import { settingTeamsTreasure } from "../services/settingTeams";
@@ -32,19 +36,27 @@ import { checkUserExist } from "../services/checkUserExist";
 import { updateStats } from "../services/updateStats";
 import { Schema, type, ArraySchema} from "@colyseus/schema"
 import { CopyCollection } from "../services/copyCollection";
+import { enhanceCharacterStar } from "../services/enhanceCharacterStar";
 import { setArenaTeamPosition } from '../services/setArenaTeamPosition';
 import { fetchCoin } from "../services/fetchCoin";
+import { refine } from "../services/refine";
 import { fetchProfile } from "../services/fetchProfile";
 import { setProfilepic } from "../services/setProfilepic";
+import BannedUser, { IBannedUser } from "../services/BannedUser";
+import { fetchArenaEnemiesList } from "../services/fetchArenaEnemiesList";
+import { fetchBattlePoint } from "../services/fetchBattlePoint";
+import { fetchBattleRank } from "../services/fetchBattleRank";
+import { getTopPlayers } from "../services/getTopPlayers";
 
 import mongoose, { Document }  from 'mongoose';
 
 export class MenuRoom extends Room<MenuState> {
 
   maxClients = 1;
-
+  dbQueriesCount = 0; // Counter variable for database queries
   ethAddress : string
   static existingRoomIds: Set<string> = new Set();
+  banList: string[] = []; // Initialize the ban list array
   async onCreate(options:any) {
 
     await mongoose.connect('mongodb+srv://CPAY-CF-USER:CPh76oCwQsLELHBg@cpay-cf.zcgbftb.mongodb.net/crypterium-fantasy-game?retryWrites=true&w=majority');
@@ -66,8 +78,21 @@ export class MenuRoom extends Room<MenuState> {
       return;
     }
 
+    const bannedAddresses = await this.fetchBannedAddressesFromMongoDB();
+    console.log(bannedAddresses)
+    // Populate the ban list with the retrieved banned addresses
+    this.banList = bannedAddresses;
+
+    // Check if the user's Ethereum address is in the ban list
+    if (this.banList.includes(options.ethAddress)) {
+      console.log("User is banned. Disconnecting...");
+      this.disconnect();
+      return;
+    }
+
     // Add the room name to the existingRoomIds set
     MenuRoom.existingRoomIds.add(this.roomId);
+    console.log("Have online " + MenuRoom.existingRoomIds.size)
     
     this.setState(new MenuState());
 
@@ -83,6 +108,8 @@ export class MenuRoom extends Room<MenuState> {
     this.state.bit = await fetchCoin(options.ethAddress,1)
     this.state.doge = await fetchCoin(options.ethAddress,2)    
     this.state.coin = await fetchCoin(options.ethAddress,3)
+    this.state.stamina = await fetchStamina(options.ethAddress)
+    this.state.arenastamina = await fetchArenaStamina(options.ethAddress)
 
     this.state.profilename = await fetchProfile(options.ethAddress,1) 
     
@@ -94,6 +121,8 @@ export class MenuRoom extends Room<MenuState> {
 
     //await fetchCharactersOld(options.ethAddress)
     //await createEquipment()
+    //const characters_pre = await fetchCharacters(options.ethAddress)
+    //await enhanceCharacterStar(options.ethAddress,characters_pre[0].id,characters_pre[1].id)
     const characters = await fetchCharacters(options.ethAddress)
     const potions = await fetchPotions()
 
@@ -101,23 +130,6 @@ export class MenuRoom extends Room<MenuState> {
     await userAuth(options.ethAddress)
     const coupons = await fetchCoupons(options.ethAddress)
     const coupons2 = await fetchCoupons2(options.ethAddress)
-    /*const potions_inventory_uid = await fetchPotionsInventory(options.ethAddress)
-    let potions_inventory = new ArraySchema<Potion_Inventory>()
-
-    for(let i = 0 ; i < potions.length ; i++)
-    {
-      for(let j = 0 ; j < potions_inventory_uid.length ; j++)
-      {
-         if((potions_inventory_uid[j])["uid"] === potions[i].uid)
-          {
-            const p = new Potion_Inventory()
-            p.uid = potions[i].uid
-            p.amount = (potions_inventory_uid[j])["amount"]
-            potions_inventory.push(p)
-          }
-      }
-     
-    }*/
 
     const diamonds = await fetchDiamond(options.ethAddress)
     const skills = await fetchSkills()
@@ -133,7 +145,9 @@ export class MenuRoom extends Room<MenuState> {
     this.state.current_selected_character = 0;
     this.state.skills = skills;
 
+    this.state.refine_state = -1;
 
+    await this.reloadArena(options);
     //await createMonster()
     //await createSkill()
     //this.calculateEquipment()
@@ -169,7 +183,7 @@ export class MenuRoom extends Room<MenuState> {
 
     this.onMessage("clearState", async (client, data) => {
 
-      console.log("ClearState")
+      //console.log("ClearState")
       this.state.summonData = new SummonData()
 
     })
@@ -190,6 +204,17 @@ export class MenuRoom extends Room<MenuState> {
 
     this.onMessage("setprofilepic", async (client, data) => {
       const result = await setProfilepic(options.ethAddress,data.profilepic);
+    })
+
+   this.onMessage("setStamina", async (client, data) => {
+      const result = await setStamina(options.ethAddress);
+      //this.state.stamina--
+    })
+
+  this.onMessage("setArenaStamina", async (client, data) => {
+      const result = await setArenaStamina(options.ethAddress);
+      this.reloadArena(options);
+      //this.state.stamina--
     })
 
     this.onMessage("settingTeamsTreasure1", async (client, data) => {
@@ -290,6 +315,16 @@ export class MenuRoom extends Room<MenuState> {
 
     })
 
+    this.onMessage("refine", async (client, data) => {
+    this.state.refine_state = -1;
+    this.state.refine_state = await refine(this.state.ethAddress,data.uid,data.from,data.to,data.mat,data.mat_amount);
+    console.log("Refine state" + this.state.refine_state)
+    this.reload()
+
+ 
+
+    })
+
     this.onMessage("refresh", async () => {
       const diamonds = await fetchDiamond(options.ethAddress)
       this.state.diamonds = diamonds;
@@ -324,6 +359,75 @@ export class MenuRoom extends Room<MenuState> {
     this.onMessage("setUpgradeReady", async (client, data) => {
       this.state.upgrade_ready = data.ready
     })
+
+    this.onMessage("enhanceCharacterStar", async (client, data) => {
+      //console.log("Before " + this.state.characters.length)
+      await enhanceCharacterStar(options.ethAddress,data.id1,data.id2,data.mode)
+      const characters = await fetchCharacters(options.ethAddress)
+      this.state.characters = characters
+      //console.log("After " + this.state.characters.length)
+    })
+
+  }
+
+  async reloadArena(options:any)
+  {
+    this.state.mypoint = await fetchBattlePoint(options.ethAddress);
+    this.state.myrank = await fetchBattleRank(options.ethAddress);
+
+let enemies_list = await fetchArenaEnemiesList(options.ethAddress,this.state.mypoint);
+if (enemies_list !== null && enemies_list !== undefined) {
+  
+  //console.log(enemies_list)
+  this.state.enemies1 = enemies_list.find((_, index) => index === 0);
+  this.state.enemies2 = enemies_list.find((_, index) => index === 1);
+  this.state.enemies3 = enemies_list.find((_, index) => index === 2);
+  this.state.enemies4 = enemies_list.find((_, index) => index === 3);
+  this.state.enemies5 = enemies_list.find((_, index) => index === 4);
+
+  if(this.state.enemies1)
+  {
+    this.state.battlepoint1 = await fetchBattlePoint(this.state.enemies1[0].ethAddress);
+    //console.log("BattlePoint 1 =" + this.state.battlepoint1);
+  }
+
+  if(this.state.enemies2)
+  {
+    this.state.battlepoint2 = await fetchBattlePoint(this.state.enemies2[0].ethAddress);
+    //console.log("BattlePoint 2 =" + this.state.battlepoint2);
+  }
+
+  if(this.state.enemies3)
+  {
+    this.state.battlepoint3 = await fetchBattlePoint(this.state.enemies3[0].ethAddress);
+    //console.log("BattlePoint 3 =" + this.state.battlepoint3);
+  }
+
+  if(this.state.enemies4)
+  {
+    this.state.battlepoint4 = await fetchBattlePoint(this.state.enemies4[0].ethAddress);
+    //console.log("BattlePoint 4 =" + this.state.battlepoint4);
+  }
+
+  if(this.state.enemies5)
+  {
+    this.state.battlepoint5 = await fetchBattlePoint(this.state.enemies5[0].ethAddress);
+    //console.log("BattlePoint 5 =" + this.state.battlepoint5);
+  }
+
+} else {
+  // Handle the case where enemies_list is null
+  // For example, set a default value or handle the absence of enemies_list
+}
+
+let topPlayer = await getTopPlayers();
+this.state.battlepoints = [];
+this.state.eths = [];
+for(let i = 0 ; i < 5 ; i++)
+{
+  this.state.battlepoints.push(topPlayer[i].battlepoint);
+  this.state.eths.push(topPlayer[i].eth);
+}
   }
 
   async reload()
@@ -355,6 +459,7 @@ export class MenuRoom extends Room<MenuState> {
             const e = new Equipment_Inventory()
             e.uid = equipments[i].uid
             e.amount = (equipments_inventory_uid[j])["amount"]
+            e.enchantmentLevel = (equipments_inventory_uid[j])["enchantmentLevel"]
             equipments_inventory.push(e)
           }
       }
@@ -365,17 +470,25 @@ export class MenuRoom extends Room<MenuState> {
     this.state.equipments = equipments;
   }
 
+  async fetchBannedAddressesFromMongoDB(): Promise<string[]> {
+    // Implement the logic to fetch banned Ethereum addresses from MongoDB
+    const bannedAddressesQueryResult = await BannedUser.find();
+    const bannedAddresses = bannedAddressesQueryResult.map(item => item.eth);
+    return bannedAddresses;
+  }
+
   async onLeave(client: Client, consented: boolean) {
     //this.broadcast("messages", `${ client.sessionId } left.`);
     console.log(client.sessionId, "left!");
     //this.state.characters.delete(client.sessionId);
     await userNonAuth(this.ethAddress)
     MenuRoom.existingRoomIds.delete(this.roomId);
+    console.log("Have online " + MenuRoom.existingRoomIds.size)
 
   }
 
   onDispose() {
-    mongoose.connection.close()
+    //mongoose.connection.close()
     console.log("Dispose MenuRoom");
   }
 }

@@ -6,6 +6,7 @@ export class Character extends Schema {
   @type("uint16") level: number;
   @type("string") job:string;
   @type("string") name:string;
+  @type("string") ethAddress:string;
 
   @type("uint16") str: number;
   @type("uint16") vit: number;
@@ -13,6 +14,13 @@ export class Character extends Schema {
   @type("uint16") dex: number;
   @type("uint16") agi: number;
   @type("uint16") luk: number;
+
+  @type("uint16") oristr: number;
+  @type("uint16") orivit: number;
+  @type("uint16") oriint: number;
+  @type("uint16") oridex: number;
+  @type("uint16") oriagi: number;
+  @type("uint16") oriluk: number;
 
   @type("uint16") exp: number;
 
@@ -44,8 +52,15 @@ export class Character extends Schema {
   @type("string") slot_5:string;
   @type("string") slot_6:string;
   @type("string") slot_7:string;
+  @type("string") slot_8:string;
   @type("number") arenaAttackPosition: number;
   @type("number") arenaDefendPosition: number;
+
+  @type("uint16") hp: number;
+  @type("uint16") sp: number;
+  @type("uint16") position: number;
+
+  @type("number") star: number;
 
 }
 
@@ -80,6 +95,7 @@ export class Potion_Setting extends Schema {
 export class Equipment_Inventory extends Schema {
   @type("string") uid: string;
   @type("number") amount: number;
+  @type("number") enchantmentLevel: number;
 }
 
 export class Equipment extends Schema 
@@ -117,6 +133,8 @@ export class Equipment extends Schema
   @type("number") spMAX: number;
   @type("number") hpMAX: number;
 
+  @type("string") rarity: number;
+
 }
 
 export class Coupon extends Schema {
@@ -149,6 +167,7 @@ export class MenuState extends Schema {
   @type("number") profilepic: number;
   @type("string") profilename: string;
   @type("number") diamonds: number;
+  @type("number") battlepoint: number;
 
   @type("boolean") upgrade_ready: boolean;
 
@@ -172,6 +191,29 @@ export class MenuState extends Schema {
   @type("number") bit: number;
   @type("number") doge: number;
   @type("number") coin: number;
+
+  @type("number") stamina: number;
+  @type("number") arenastamina: number;
+
+  @type("number") refine_state: number;
+
+  @type([Character]) enemies1 = new ArraySchema<Character>()
+  @type([Character]) enemies2 = new ArraySchema<Character>()
+  @type([Character]) enemies3 = new ArraySchema<Character>()
+  @type([Character]) enemies4 = new ArraySchema<Character>()
+  @type([Character]) enemies5 = new ArraySchema<Character>()
+
+  @type("number") battlepoint1: number;
+  @type("number") battlepoint2: number;
+  @type("number") battlepoint3: number;
+  @type("number") battlepoint4: number;
+  @type("number") battlepoint5: number;
+
+  @type(["number"]) battlepoints: number[];
+  @type(["string"]) eths: string[];
+
+  @type("number") mypoint: number;
+  @type("number") myrank: number;
   
 }
 

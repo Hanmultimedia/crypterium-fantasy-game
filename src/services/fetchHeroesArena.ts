@@ -4,6 +4,7 @@ import { Equipment } from "../rooms/MenuState";
 import { fetchEquipments } from "../services/fetchEquipments";
 import mongoose, { Schema, Document }  from 'mongoose';
 import { CharacterSchema } from './character.schema';
+import { calcNFTBonus,calcNFTBonus2 } from "../utils/equipmentUtils";
 
 class CharacterTemplate {
   attributes: Attributes;
@@ -81,8 +82,8 @@ export async function fetchHeroesArena(eth:string): Promise<any> {
       //console.log( characters_data )
       for(let i = 0 ; i < characters_data.length ; i++)
       {
-        const data = characters_data[i]
-
+        let data = characters_data[i]
+        data = await calcNFTBonus2(data)
         const arenaData = await ArenaCharacterModel.findOne({ id: data.id });
         const arenaAttackPosition = arenaData?.arenaAttackPosition ?? -1;
         const arenaDefendPosition = arenaData?.arenaDefendPosition ?? -1;
@@ -90,7 +91,7 @@ export async function fetchHeroesArena(eth:string): Promise<any> {
 
         const character_forstat = new CharacterTemplate(data.attributes,data.job,data.uid,"",0,data.level,data.hp,data.sp,data.speed,data.range)
         const stat = makeStat(character_forstat)
-        const characer = new Character()
+        let characer = new Character()
 
         //console.log("Heroes " + characters_data[i].job + " stats");
         //console.log(stat)
@@ -128,8 +129,21 @@ export async function fetchHeroesArena(eth:string): Promise<any> {
     characer.hp = stat.hpMAX
     characer.sp = stat.spMAX
 
+    characer.hpMAX += (5*data.level)
+    characer.spMAX += (2*data.level)
+
     //console.log("this is data skill equip")
     //console.log(data.skill_equip)
+
+    characer.slot_0 = data.equipments.slot_0
+    characer.slot_1 = data.equipments.slot_1
+    characer.slot_2 = data.equipments.slot_2
+    characer.slot_3 = data.equipments.slot_3
+    characer.slot_4 = data.equipments.slot_4
+    characer.slot_5 = data.equipments.slot_5
+    characer.slot_6 = data.equipments.slot_6
+    characer.slot_7 = data.equipments.slot_7
+    characer.slot_8 = data.equipments.slot_8
 
     if(data.skill_equip)
     {
@@ -140,113 +154,36 @@ export async function fetchHeroesArena(eth:string): Promise<any> {
       characer.skill_equip = []
     }
 
-    if(data.equipments.slot_0)
-    {
-        const equipment = equipments.find( c => c.uid === data.equipments.slot_0)
-        characer.atk += equipment.atk
-        characer.def += equipment.def
-        characer.mAtk += equipment.mAtk
-        characer.mDef += equipment.mDef
-        characer.hpMAX += equipment.hpMAX
-        characer.spMAX += equipment.spMAX
-        characer.hit += equipment.hit
-        characer.flee += equipment.flee
-        characer.cri += equipment.cri
-        characer.aspd += equipment.aspd
-        characer.speed += equipment.speed
-        characer.range += equipment.range
+for (let i = 0; i <= 8; i++) {
+    const slotKey = `slot_${i}`;
+    if (data.equipments[slotKey]) {
+        // Remove the + and numbers following it
+        const uidWithoutSuffix = data.equipments[slotKey].replace(/\+\d+$/, '');
+        
+        const equipment = equipments.find(c => c.uid === uidWithoutSuffix);
+        if (equipment) {
+            characer.atk += equipment.atk;
+            characer.def += equipment.def;
+            characer.mAtk += equipment.mAtk;
+            characer.mDef += equipment.mDef;
+            characer.hpMAX += equipment.hpMAX;
+            characer.spMAX += equipment.spMAX;
+            characer.hit += equipment.hit;
+            characer.flee += equipment.flee;
+            characer.cri += equipment.cri;
+            characer.aspd += equipment.aspd;
+            characer.speed += equipment.speed;
+            characer.range += equipment.range;
+        }
     }
+}
 
-    if(data.equipments.slot_1)
-    {
-        const equipment = equipments.find( c => c.uid === data.equipments.slot_1)
-        characer.atk += equipment.atk
-        characer.def += equipment.def
-        characer.mAtk += equipment.mAtk
-        characer.mDef += equipment.mDef
-        characer.hpMAX += equipment.hpMAX
-        characer.spMAX += equipment.spMAX
-        characer.hit += equipment.hit
-        characer.flee += equipment.flee
-        characer.cri += equipment.cri
-        characer.aspd += equipment.aspd
-        characer.speed += equipment.speed
-        characer.range += equipment.range
-    }
-
-    if(data.equipments.slot_2)
-    {
-       const equipment = equipments.find( c => c.uid === data.equipments.slot_2)
-        characer.atk += equipment.atk
-        characer.def += equipment.def
-        characer.mAtk += equipment.mAtk
-        characer.mDef += equipment.mDef
-        characer.hpMAX += equipment.hpMAX
-        characer.spMAX += equipment.spMAX
-        characer.hit += equipment.hit
-        characer.flee += equipment.flee
-        characer.cri += equipment.cri
-        characer.aspd += equipment.aspd
-        characer.speed += equipment.speed
-        characer.range += equipment.range
-    }
-
-    if(data.equipments.slot_3)
-    {
-      const equipment = equipments.find( c => c.uid === data.equipments.slot_3)
-        characer.atk += equipment.atk
-        characer.def += equipment.def
-        characer.mAtk += equipment.mAtk
-        characer.mDef += equipment.mDef
-        characer.hpMAX += equipment.hpMAX
-        characer.spMAX += equipment.spMAX
-        characer.hit += equipment.hit
-        characer.flee += equipment.flee
-        characer.cri += equipment.cri
-        characer.aspd += equipment.aspd
-        characer.speed += equipment.speed
-        characer.range += equipment.range
-    }
-
-    if(data.equipments.slot_4)
-    {
-      const equipment = equipments.find( c => c.uid === data.equipments.slot_4)
-        characer.atk += equipment.atk
-        characer.def += equipment.def
-        characer.mAtk += equipment.mAtk
-        characer.mDef += equipment.mDef
-        characer.hpMAX += equipment.hpMAX
-        characer.spMAX += equipment.spMAX
-        characer.hit += equipment.hit
-        characer.flee += equipment.flee
-        characer.cri += equipment.cri
-        characer.aspd += equipment.aspd
-        characer.speed += equipment.speed
-        characer.range += equipment.range
-    }
-
-    if(data.equipments.slot_5)
-    {
-      const equipment = equipments.find( c => c.uid === data.equipments.slot_5)
-        characer.atk += equipment.atk
-        characer.def += equipment.def
-        characer.mAtk += equipment.mAtk
-        characer.mDef += equipment.mDef
-        characer.hpMAX += equipment.hpMAX
-        characer.spMAX += equipment.spMAX
-        characer.hit += equipment.hit
-        characer.flee += equipment.flee
-        characer.cri += equipment.cri
-        characer.aspd += equipment.aspd
-        characer.speed += equipment.speed
-        characer.range += equipment.range
-    }
 
     characer.exp = data.exp ? data.exp: 0
 
     characer.arenaAttackPosition = arenaAttackPosition;
     characer.arenaDefendPosition = arenaDefendPosition;
-
+    characer = await calcNFTBonus(characer,data)
         //
     if(arenaAttackPosition != -1 && data.ethAddress == eth)
     {

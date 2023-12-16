@@ -25,7 +25,7 @@ export async function checkUserExist(eth: string): Promise<any> {
     console.log(eth + " Not Exist" )
 
     const formattedEth = eth.slice(0, 4) + "..." + eth.slice(-4);
-    user = new UserModel({ eth:eth,diamond:0,coupon:0,profilepic:6,profilename:formattedEth,coupon2:0 });
+    user = new UserModel({ eth:eth,diamond:0,coupon:0,profilepic:6,profilename:formattedEth,coupon2:0,stamina:10 });
     await user.save();
 
     const totalUsers = await UserModel.countDocuments();

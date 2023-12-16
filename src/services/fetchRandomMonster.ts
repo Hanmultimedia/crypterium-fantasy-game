@@ -93,7 +93,7 @@ export async function fetchRandomMonster(slug:string, wave:number , monsters_dat
           characer.aspd = m.aspd
           characer.speed = m.speed
           characer.range = m.range
-
+          characer.exp = m.exp
           characer.hp = m.hp
           characer.sp = 0
           //monsters.push(characer)

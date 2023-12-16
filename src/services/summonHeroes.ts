@@ -119,6 +119,7 @@ export async function summonHeroes(eth:string, summon: number): Promise<any> {
       bonus,
       free: true,
       ethAddress: eth,
+      star:0,
       statPoint: 0,
       exp:0,
     }

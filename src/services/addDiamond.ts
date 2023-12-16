@@ -13,7 +13,7 @@ export async function addDiamond(eth:string , diamond:number) {
   if (!diamond) return;
 
   try {
-    console.log("Fetch User To update Diamond")
+    //console.log("Fetch User To update Diamond")
 
     let User: any;
     try {

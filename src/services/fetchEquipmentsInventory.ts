@@ -23,7 +23,11 @@ export const InventoryEquipmentSchema: Schema = new Schema({
     type: Map,
     of: {
         uid: { type: String, required: true },
-        quantity: { type: Number, required: true }
+        quantity: { type: Number, required: true },
+        enchantmentLevel: {
+        type: Number,
+        default: 0
+    }
     }
     }
 });
@@ -36,7 +40,8 @@ export async function fetchEquipmentsInventory(eth:string): Promise<any> {
     inventory[0].equipments.forEach((value, key) => {
         equipments.push({
             uid: key,
-            amount: value.quantity
+            amount: value.quantity,
+            enchantmentLevel: value.enchantmentLevel
         })
     })
 

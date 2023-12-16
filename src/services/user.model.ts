@@ -8,7 +8,10 @@ const userSchema = new mongoose.Schema({
   coupon: Number,
   coupon2: Number,
   profilename: String,
-  profilepic:Number
+  profilepic:Number,
+  stamina:Number,
+  battlepoint: { type: Number, default: 0 },
+  arenastamina:Number
   // other fields as required
 });
 

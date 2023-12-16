@@ -1,10 +1,11 @@
 import { makeStat } from "../utils/initStats";
-import { Character } from "../rooms/ArenaState";
+import { Character } from "../rooms/MenuState";
 import mongoose, { Schema, Document }  from 'mongoose';
 import { CharacterSchema } from './character.schema';
 import { UserModel } from './user.model';
 import { fetchEquipments } from "../services/fetchEquipments";
 import { calcNFTBonus,calcNFTBonus2 } from "../utils/equipmentUtils";
+import { type, ArraySchema, MapSchema} from "@colyseus/schema"
 
 class CharacterTemplate {
   attributes: Attributes;
@@ -41,37 +42,78 @@ interface Attributes {
   dex: number;
 }
 
+
+
+export async function fetchArenaEnemiesList(eth: string,battlepoint:number): Promise<ArraySchema<ArraySchema<Character>>> {
+  const CharacterModel = mongoose.model('Character', CharacterSchema);
+
+  let users = await UserModel.find({
+    $and: [
+      { eth: { $ne: eth } },
+      {
+        $or: [
+          { battlepoint: { $gte: battlepoint - 10, $lte: battlepoint + 10 } },
+          { battlepoint: { $exists: false } }, // Include documents where battlepoint field doesn't exist
+          { battlepoint: null } // Include documents where battlepoint is null
+        ]
+      }
+    ]
+  }).limit(5);
+
+  if (users.length < 5) {
+    const additionalUsersCount = 5 - users.length;
+    const additionalUsers = await UserModel.aggregate([
+      { $sample: { size: additionalUsersCount } }
+    ]);
+
+    users.push(...additionalUsers);
+  }
+
+  const fetchedEnemiesList = new ArraySchema<ArraySchema<Character>>();
+
+  const equipments = await fetchEquipments();
+
+  const maxFetchedCount = 5;
+
+  const getRandomIndices = (arrayLength: number, maxItems: number): number[] => {
+    const indices = Array.from({ length: arrayLength }, (_, i) => i);
+    const shuffled = indices.sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, maxItems);
+  };
+
+  // Function to shuffle users
+const shuffleUsers = (usersArray: any[], maxItems: number): any[] => {
+  const indices = getRandomIndices(usersArray.length, maxItems);
+  const shuffledUsers = indices.map((index) => usersArray[index]);
+  return shuffledUsers;
+};
+
 const extractUID = (uid: string): string => {
   const parts = uid.split('+'); // Split the UID by '+'
   return parts[0]; // Return the first part, which is the number
 };
 
-export async function fetchArenaEnemies(eth: string,ethEnemies:string): Promise<any> {
-  const CharacterModel = mongoose.model('Character', CharacterSchema);
-  console.log("ethEnemies"+ethEnemies);
-  const users = await UserModel.find({ eth:ethEnemies});
-  const enemyCharacters: any[] = [];
-  const equipments = await fetchEquipments()
+// Get shuffled users
+const shuffledUsers = shuffleUsers(users, maxFetchedCount);
 
-  for (let i = 0; i < users.length; i++) {
-    const user = users[i];
+  for (const user of users) {
+    //console.log(`Fetching characters for user with eth: ${user.eth}`);
+    const excludedEthAddresses = [eth]; // add other eth addresses to exclude, if any
 
-    if (user.eth === eth) {
-      continue; // exclude characters belonging to the player
-    }
+  const characters = await CharacterModel.find({
+    ethAddress: user.eth // Fetch characters based on the current user's eth address
+  }).limit(5);
 
-    //const excludedEthAddresses = [eth]; // add other eth addresses to exclude, if any
+    if (characters.length >= 5) {
+      //console.log(`Found ${characters.length} characters for user ${user.eth}`);
 
-    const characters = await CharacterModel.find({
-      ethAddress: user.eth
-    }).limit(5);
+      const enemyCharacters: ArraySchema<Character> = new ArraySchema<Character>();
+      //console.log("uid")
+      for (let j = 0; j < 5; j++) {
+        //console.log(`Loop  characters ${j} for user ${user.eth}`);
+        let data = characters[j];
+        // Additional processing and character creation steps...
 
-    if (characters.length < 5) {
-      continue; // exclude users with less than 5 characters
-    }
-
-    for (let j = 0; j < 5; j++) {
-        let data = characters[j]
         data = calcNFTBonus2(data)
         const character_forstat = new CharacterTemplate(data.attributes,data.job,data.uid,"",0,data.level,data.hp,data.sp,data.speed,data.range)
         const stat = makeStat(character_forstat)
@@ -80,6 +122,10 @@ export async function fetchArenaEnemies(eth: string,ethEnemies:string): Promise<
         //
         characer.id = data.id
         characer.uid = data.uid
+        characer.ethAddress = user.eth
+        //console.log(characer.id + " " +user.eth + " " + data.level)
+
+
         characer.level = data.level
         characer.job = data.job
         characer.name = data.name
@@ -303,21 +349,51 @@ export async function fetchArenaEnemies(eth: string,ethEnemies:string): Promise<
         characer.range += equipment.range
       }
     }
+
     characer.exp = data.exp ? data.exp: 0
-    enemyCharacters.push(characer);      
+
+// Inside the loop where enemyCharacters is populated
+
+
+        // Push the character into the enemyCharacters array
+        enemyCharacters.push(characer);
+
+if(j == 4){
+  //console.log(`Characters for user ${user.eth}:`);
+  //console.log(enemyCharacters);
+}
+      }
+
+      // Add the set of enemy characters into the fetchedEnemiesList
+      fetchedEnemiesList.push(enemyCharacters);
+    } else {
+      //console.log(`User ${user.eth} does not have sufficient characters`);
     }
 
-    if(enemyCharacters.length >= 5)
-    {
+    if (fetchedEnemiesList.length >= maxFetchedCount) {
+      //console.log(`Reached maximum count of fetched enemies (${maxFetchedCount})`);
       break;
     }
-
   }
 
-  if (enemyCharacters.length === 0) {
+  // Pad the fetchedEnemiesList with null values if necessary
+
+/*console.log("******");
+console.log("fetchedEnemiesList:");
+console.log(fetchedEnemiesList);
+console.log("******");
+*/
+
+  if (fetchedEnemiesList.length === 0) {
+    console.log("No fetched enemies found.");
     return null;
   }
 
-  return enemyCharacters;
+
+  //console.log("First ArraySchema in fetchedEnemiesList:");
+  //const firstEnemyTeam = fetchedEnemiesList.find((_, index) => index === 0);
+  //console.log(firstEnemyTeam);
+
+  return fetchedEnemiesList;
 }
 

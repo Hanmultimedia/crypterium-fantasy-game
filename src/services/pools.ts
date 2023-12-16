@@ -492,7 +492,7 @@ export const fetchCharacterPool = () => {
       "agi": 5,
       "luk": 2,
       "spd": 1,
-      "range": 150,
+      "range": 50,
       "hp": 200,
       "sp": 50,
       "bonus": {
@@ -516,7 +516,7 @@ export const fetchCharacterPool = () => {
       "agi": 8,
       "luk": 3,
       "spd": 1.4,
-      "range": 150,
+      "range": 50,
       "hp": 300,
       "sp": 75,
       "bonus": {
@@ -540,7 +540,7 @@ export const fetchCharacterPool = () => {
       "agi": 10,
       "luk": 4,
       "spd": 1.8,
-      "range": 150,
+      "range": 50,
       "hp": 400,
       "sp": 100,
       "bonus": {
@@ -564,7 +564,7 @@ export const fetchCharacterPool = () => {
       "agi": 13,
       "luk": 5,
       "spd": 2.2,
-      "range": 150,
+      "range": 50,
       "hp": 500,
       "sp": 125,
       "bonus": {
@@ -588,7 +588,7 @@ export const fetchCharacterPool = () => {
       "agi": 15,
       "luk": 6,
       "spd": 3,
-      "range": 150,
+      "range": 50,
       "hp": 600,
       "sp": 150,
       "bonus": {

@@ -23,14 +23,14 @@ export const InventoryEquipmentSchema: Schema = new Schema({
 const InventoryEquipment = mongoose.model('InventoryEquipment');
 
 export async function equipToCharacter(eth:string, character_id: string , equipment_uid: string , slot : number): Promise<any> {
-  console.log("Equip " + equipment_uid + " to " + character_id)
+  //console.log("Equip " + equipment_uid + " to " + character_id)
 
   let inventory = await InventoryEquipment.findOne(
     { eth: eth}
     );
 
     if (inventory) {
-      console.log("Update in inventory")
+      //console.log("Update in inventory")
       if (!inventory.equipments) {
         inventory.equipments = new Map();
       }

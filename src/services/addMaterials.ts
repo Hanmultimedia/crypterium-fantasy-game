@@ -31,8 +31,9 @@ export async function addMaterials(eth:string, mat_uid: string , amount: number)
 
   const result = []
 
+    console.log(mat_uid + " " + amount)
     //Add Material section
-    console.log("Check Material inventory")
+    //console.log("Check Material inventory")
     let Inventory: any;
     try {
       Inventory = mongoose.model("InventoryMaterial");
@@ -45,7 +46,7 @@ export async function addMaterials(eth:string, mat_uid: string , amount: number)
     );
 
     if (updatedInventory) {
-    console.log("Update Material in inventory")
+    //console.log("Update Material in inventory")
     if (!updatedInventory.materials) {
       updatedInventory.materials = new Map();
     }
@@ -56,7 +57,7 @@ export async function addMaterials(eth:string, mat_uid: string , amount: number)
     await updatedInventory.save();
     }else
     {
-      console.log("Create New Materials")
+      //console.log("Create New Materials")
       let MaterialsModel: any;
       try {
         MaterialsModel = mongoose.model("Materials");
@@ -71,7 +72,7 @@ export async function addMaterials(eth:string, mat_uid: string , amount: number)
       });
     }
     
-    console.log("Finish add materials")
+    //console.log("Finish add materials")
     //mongoose.connection.close();
     return true
 }

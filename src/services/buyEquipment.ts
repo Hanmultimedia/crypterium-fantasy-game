@@ -40,13 +40,13 @@ export async function buyEquipment(eth:string, equipment_uid: string , amount: n
   const result:any = []
   if(diamonds >= price )
   {
-    console.log(eth + " buy equipment " + equipment_uid)
+    //console.log(eth + " buy equipment " + equipment_uid)
 
 //
 try {
    
     // Define your user schema
-    console.log("Fetch User To update Diamond")
+    //console.log("Fetch User To update Diamond")
     // Create a model from the schema
 
     let User: any;
@@ -72,7 +72,7 @@ try {
     result["amount"] = amount
 
 //
-    console.log("Check equipment inventory")
+    //console.log("Check equipment inventory")
 
     let InventoryEquipment: any;
     try {
@@ -86,7 +86,7 @@ try {
     );
 
     if (updatedInventory) {
-    console.log("Update in inventory")
+    //console.log("Update in inventory")
     if (!updatedInventory.equipments) {
       updatedInventory.equipments = new Map();
     }
@@ -97,7 +97,7 @@ try {
     await updatedInventory.save();
     }else
     {
-      console.log("Create New Equipment")
+      //console.log("Create New Equipment")
       const newEquipment = new EquipmentModel({ uid:equipment.uid,quantity:amount });
 
       updatedInventory = await InventoryEquipment.create({
@@ -106,7 +106,7 @@ try {
       });
     }
     
-    console.log("Finish buy equipment")
+    console.log("Finish buy equipment " + eth + " " + equipment_uid)
     //mongoose.connection.close();
     return result
 //

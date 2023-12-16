@@ -2,6 +2,7 @@ import { makeStat } from "../utils/initStats";
 import { Character } from "../rooms/MenuState";
 import mongoose, { Schema, Document }  from 'mongoose';
 import { CharacterSchema } from './character.schema';
+import { calcNFTBonus,calcNFTBonus2 } from "../utils/equipmentUtils";
 
 class CharacterTemplate {
   attributes: Attributes;
@@ -53,7 +54,7 @@ export async function fetchCharacters(eth:string): Promise<any> {
   //db.on('error', console.error.bind(console, 'connection error:'));
    
     // we're connected!
-    console.log("Connected with mongo to get characters " + eth)
+    //console.log("Connected with mongo to get characters " + eth)
     const CharacterModel = mongoose.model('Character', CharacterSchema);
 
     const modelName = 'ArenaCharacter';
@@ -75,7 +76,18 @@ export async function fetchCharacters(eth:string): Promise<any> {
       //console.log( characters_data )
       for(let i = 0 ; i < characters_data.length ; i++)
       {
-        const data = characters_data[i]
+        let characer = new Character()
+
+        let data = characters_data[i]
+        
+    characer.oristr = data.attributes.str
+    characer.orivit = data.attributes.vit
+    characer.oriint = data.attributes.int
+    characer.oriagi = data.attributes.agi
+    characer.oridex = data.attributes.dex
+    characer.oriluk = data.attributes.luk
+
+        data = await calcNFTBonus2(data)
 
         const arenaData = await ArenaCharacterModel.findOne({ id: data.id });
         const arenaAttackPosition = arenaData?.arenaAttackPosition ?? -1;
@@ -83,7 +95,7 @@ export async function fetchCharacters(eth:string): Promise<any> {
 
         const character_forstat = new CharacterTemplate(data.attributes,data.job,data.uid,"",0,data.level,data.hp,data.sp,data.speed,data.range)
         const stat = makeStat(character_forstat)
-        const characer = new Character()
+       
         characer.id = data.id
 
     characer.uid = data.uid
@@ -97,6 +109,7 @@ export async function fetchCharacters(eth:string): Promise<any> {
     characer.dex = data.attributes.dex
     characer.luk = data.attributes.luk
     characer.exp = data.exp
+    characer.star = data.star;
 
     if(typeof data.skill_equip === 'undefined')
     {
@@ -114,6 +127,7 @@ export async function fetchCharacters(eth:string): Promise<any> {
     characer.slot_5 = data.equipments.slot_5
     characer.slot_6 = data.equipments.slot_6
     characer.slot_7 = data.equipments.slot_7
+    characer.slot_8 = data.equipments.slot_8
 
     if(typeof data.team1 !== 'undefined')
     {
@@ -159,6 +173,10 @@ export async function fetchCharacters(eth:string): Promise<any> {
     characer.mDef = stat.mDef
     characer.hpMAX = stat.hpMAX
     characer.spMAX = stat.spMAX
+
+    characer.hpMAX += (5*data.level)
+    characer.spMAX += (2*data.level)
+
     characer.hit = stat.hit
     characer.flee = stat.flee
     characer.cri = stat.cri
@@ -168,7 +186,7 @@ export async function fetchCharacters(eth:string): Promise<any> {
 
     characer.arenaAttackPosition = arenaAttackPosition;
     characer.arenaDefendPosition = arenaDefendPosition;
-
+    characer = await calcNFTBonus(characer,data)
     characters.push(characer)
     }
 

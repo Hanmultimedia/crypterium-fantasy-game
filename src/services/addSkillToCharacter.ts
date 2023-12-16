@@ -55,15 +55,15 @@ export async function addSkillToCharacter(eth:string, character_id: string , ski
   let diamonds = await fetchDiamond(eth)
   const price = 
   [
-    100,
-    140,
-    180,
-    220,
-    260,
-    300,
-    340,
-    380,
-    420
+    150,
+    250,
+    350,
+    500,
+    700,
+    1000,
+    1000,
+    1000,
+    1000
   ]
   if(diamonds >= price[0] )
   {
@@ -86,7 +86,7 @@ export async function addSkillToCharacter(eth:string, character_id: string , ski
 
 
     //Add potion section
-    console.log("Check skill inventory")
+    //console.log("Check skill inventory")
     let Inventory: any;
     try {
       Inventory = mongoose.model("Character_Skill");
@@ -99,19 +99,19 @@ export async function addSkillToCharacter(eth:string, character_id: string , ski
     );
 
     if (updatedInventory) {
-    console.log("Update skill in inventory")
+    //console.log("Update skill in inventory")
     if (!updatedInventory.skills) {
-      console.log("No Skill Field")
+      //console.log("No Skill Field")
       updatedInventory.skills = new Map();
     }
     if (!updatedInventory.skills.has(skill.uid)) {
-      console.log("Skill Field but no skill")
+      //console.log("Skill Field but no skill")
       updatedInventory.skills.set(skill.uid, { uid: skill.uid, level: 1,name:skill.name ,jobRequired: skill.jobRequired  });
     }
     await updatedInventory.save();
     }else
     {
-      console.log("Create New Skill")
+      //console.log("Create New Skill")
       let BaseSkillModel: any;
       try {
         BaseSkillModel = mongoose.model("SkillInventory");
@@ -126,14 +126,14 @@ export async function addSkillToCharacter(eth:string, character_id: string , ski
       });
     }
     
-    console.log("Finish buy skill")
+    console.log("Finish buy skill " + eth + " " + character_id)
 
   /////////////////////////
 
   try {
     // Connect to MongoDB using your srv string
     // Define your user schema
-    console.log("Fetch User To update Diamond")
+    //console.log("Fetch User To update Diamond")
     // Create a model from the schema
 
     let User: any;

@@ -56,7 +56,7 @@ try {
     // Connect to MongoDB using your srv string
     //await mongoose.connect('mongodb+srv://CPAY-CF-USER:Pul6GVdRV5C7j82f@cpay-cf.zcgbftb.mongodb.net/crypterium-fantasy-game?retryWrites=true&w=majority');
     // Define your user schema
-    console.log("Fetch User To update Diamond")
+    //console.log("Fetch User To update Diamond")
     // Create a model from the schema
 
     let User: any;
@@ -87,7 +87,7 @@ try {
     result["amount"] = amount
 
     //Add potion section
-    console.log("Check potion inventory")
+    //console.log("Check potion inventory")
     let Inventory: any;
     try {
       Inventory = mongoose.model("Inventory");
@@ -100,7 +100,7 @@ try {
     );
 
     if (updatedInventory) {
-    console.log("Update in inventory")
+    //console.log("Update in inventory")
     if (!updatedInventory.potions) {
       updatedInventory.potions = new Map();
     }
@@ -111,7 +111,7 @@ try {
     await updatedInventory.save();
     }else
     {
-      console.log("Create New Potion")
+      //console.log("Create New Potion")
       let PotionModel: any;
       try {
         PotionModel = mongoose.model("Potion");
@@ -126,13 +126,13 @@ try {
       });
     }
     
-    console.log("Finish buy potion")
+    console.log("Finish buy potion " + eth + " " + potion_uid + " " + amount)
     //mongoose.connection.close();
     return result
   }
   else
   {
-    console.log("Check potion inventory Error")
+    //console.log("Check potion inventory Error")
     result["diamond"] = diamonds
     result["potion"] = potion
     result["amount"] = 0
