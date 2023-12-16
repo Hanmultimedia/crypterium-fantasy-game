@@ -133,7 +133,7 @@ export class Equipment extends Schema
   @type("number") spMAX: number;
   @type("number") hpMAX: number;
 
-  @type("string") rarity: number;
+  @type("string") rarity: string;
 
 }
 
