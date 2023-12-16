@@ -14,7 +14,7 @@ export const userSchema = new mongoose.Schema({
       // other fields as required
     });
 
-export async function summonHeroes(eth:string, summon: number): Promise<any> {
+export async function summonHeroes2(eth:string, summon: number): Promise<any> {
 
   if (summon <= 0) {
     throw new Error("invalid amount of summons")
