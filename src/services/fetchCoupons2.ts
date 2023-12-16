@@ -6,6 +6,7 @@ export const userSchema = new mongoose.Schema({
       eth: String,
       diamond: Number,
       coupon: Number,
+      coupon2: Number
       // other fields as required
     });
 
@@ -14,7 +15,7 @@ export async function fetchCoupons2(eth:string): Promise<any> {
   
     let array = []
     let c = new Coupon()
-    c.uid = "100001"
+    c.uid = "200001"
     c.quantity = 0
 
     try {
@@ -45,7 +46,7 @@ export async function fetchCoupons2(eth:string): Promise<any> {
     //mongoose.connection.close();
     c.quantity = coupon
     array.push(c)
-    console.log("user have " + coupon + " coupon")
+    console.log("Coupon2 user have " + coupon + " coupon")
     return array;
     }else
     {

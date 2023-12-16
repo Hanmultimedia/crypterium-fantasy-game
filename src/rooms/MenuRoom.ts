@@ -13,6 +13,7 @@ import { fetchDiamond } from "../services/fetchDiamond";
 import { fetchSkills } from "../services/fetchSkills";
 import { initialize } from "../services/initialize";
 import { summonHeroes } from "../services/summonHeroes";
+import { summonHeroes2 } from "../services/summonHeroes2";
 import { buyPotion } from "../services/buyPotion";
 import { buyEquipment } from "../services/buyEquipment";
 import { addSkillToCharacter } from "../services/addSkillToCharacter";
@@ -46,7 +47,7 @@ export class MenuRoom extends Room<MenuState> {
   static existingRoomIds: Set<string> = new Set();
   async onCreate(options:any) {
 
-    await mongoose.connect('mongodb+srv://CPAY-CF-USER:Pul6GVdRV5C7j82f@cpay-cf.zcgbftb.mongodb.net/crypterium-fantasy-game?retryWrites=true&w=majority');
+    await mongoose.connect('mongodb+srv://CPAY-CF-USER:CPh76oCwQsLELHBg@cpay-cf.zcgbftb.mongodb.net/crypterium-fantasy-game?retryWrites=true&w=majority');
     const db = mongoose.connection;
     //db.on('error', console.error.bind(console, 'connection error:'));
 
@@ -145,6 +146,20 @@ export class MenuRoom extends Room<MenuState> {
       this.state.summonData = summonData
       const coupons = await fetchCoupons(options.ethAddress)
       this.state.coupons = coupons;
+
+      setTimeout(() => {
+        this.reloadCharacter()
+      }, 1000)
+
+    })
+
+    this.onMessage("summonHeroes2", async (client, data) => {
+      const summonList = await summonHeroes2(this.state.ethAddress, data.summon)
+      const summonData = new SummonData()
+      summonData.data = summonList.map((s:any) => s.uid)
+      this.state.summonData = summonData
+      const coupons2 = await fetchCoupons2(options.ethAddress)
+      this.state.coupons2 = coupons2;
 
       setTimeout(() => {
         this.reloadCharacter()

@@ -2,7 +2,7 @@
 import { fetchCharacterPool } from "./pools";
 import { fetchCharacterRatings } from "./fetchCharacterRatings";
 import { fetchRarityRatings } from "./fetchRarityRatings";
-import { fetchCoupons } from "./fetchCoupons";
+import { fetchCoupons2 } from "./fetchCoupons2";
 import { calcBonus, calcHeroHPMax, calcHeroSPMax, calcStatBonus, createDistribution, randomIndex } from "../utils/summonUtils";
 import mongoose, { Schema, Document }  from 'mongoose';
 import { CharacterSchema } from './character.schema';
@@ -20,7 +20,7 @@ export async function summonHeroes(eth:string, summon: number): Promise<any> {
     throw new Error("invalid amount of summons")
   }
 
-  const coupon = await fetchCoupons(eth)
+  const coupon = await fetchCoupons2(eth)
   console.log(coupon)
   //const coupon = await fetchCouponsByUID(eth, '100001')
   if (coupon.quantity < summon) {
@@ -29,7 +29,7 @@ export async function summonHeroes(eth:string, summon: number): Promise<any> {
 
   const characterPools = fetchCharacterPool()
   const characterRatings = await fetchCharacterRatings('standard')
-  const rarityRatings = await fetchRarityRatings('free-standard')
+  const rarityRatings = await fetchRarityRatings('premium-standard')
 
   if (!characterPools || !characterRatings || !rarityRatings) {
     throw new Error("Not found character pool!")
@@ -181,7 +181,7 @@ export async function summonHeroes(eth:string, summon: number): Promise<any> {
     let user = await User.findOne({ eth });
     // If a user was found, return coupon
     if (user) {
-    user.coupon -= summon
+    user.coupon2 -= summon
     await user.save();
     return summonList
     // Close the Mongoose connection
