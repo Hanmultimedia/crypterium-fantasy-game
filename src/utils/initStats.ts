@@ -46,7 +46,6 @@ function calcHeroAtk(character: Character) {
   ) {
     bonus += level;
   }
-  let agi = character.attributes.agi;
   let str = character.attributes.str;
   let luk = character.attributes.luk;
   let dex = character.attributes.dex;
@@ -54,13 +53,13 @@ function calcHeroAtk(character: Character) {
   let weapon = 0;
   if (character.job !== "Archer") {
     return Math.floor(
-      agi * 1.25 +
-        (level * 1.75) / (agi + level) +
-        agi * 10 +
+      str * 1.25 +
+        (level * 1.75) / (str + level) +
+        str * 10 +
         bonus +
         (luk / 2) * 0.2 +
         (dex / 2) * 0.2 +
-        (agi / 5) * 3
+        (str / 5) * 3
     );
   } else {
     return Math.floor(
@@ -75,7 +74,7 @@ function calcHeroAtk(character: Character) {
   }
 }
 
-function calcHeroMatk(character: Character) {
+function calcHeroMatk(character) {
   let bonus = 0;
   let level = character.level;
   if (
@@ -97,20 +96,20 @@ function calcHeroMatk(character: Character) {
   );
 }
 
-function calcHeroDef(character: Character) {
+function calcHeroDef(character) {
   let vit = character.attributes.vit;
   let armor = 0;
   return Math.floor(vit / 2 + vit * 5);
 }
 
-function calcHeroMdef(character: Character) {
+function calcHeroMdef(character) {
   let vit = character.attributes.vit;
   let int = character.attributes.int;
   let armor = 0;
   return Math.floor((vit / 2) * 0.5 + vit * 2.5 + int);
 }
 
-function calcHeroHPMax(character: Character) {
+function calcHeroHPMax(character) {
   let bonus = 0;
   if (character.job === "Swordman") {
     bonus += character.level * 10;
@@ -120,7 +119,7 @@ function calcHeroHPMax(character: Character) {
   return Math.floor(character.hp + vit * 25);
 }
 
-function calcHeroSPMax(character: Character) {
+function calcHeroSPMax(character) {
   let bonus = 0;
   if (
     character.job === "Acolyte" ||
@@ -133,7 +132,7 @@ function calcHeroSPMax(character: Character) {
   return Math.floor(character.sp + (int / 2) * 10);
 }
 
-function calcHeroHit(character: Character) {
+function calcHeroHit(character) {
   let bonus = 0;
   if (character.job === "Archer") {
     bonus += character.level;
@@ -144,14 +143,14 @@ function calcHeroHit(character: Character) {
   return Math.floor(dex * 2 + agi + bonus + dex * 10);
 }
 
-function calcHeroFlee(character: Character) {
+function calcHeroFlee(character) {
   let luk = character.attributes.luk;
   let agi = character.attributes.agi;
 
   return Math.floor(luk + (agi / 2) * 2 + luk * 5);
 }
 
-function calcHeroCri(character: Character) {
+function calcHeroCri(character) {
   let bonus = 0;
   if (character.job === "Lancer") {
     bonus += character.level * 0.1;
@@ -161,11 +160,11 @@ function calcHeroCri(character: Character) {
   return (luk / 2) * 0.3 + bonus + luk;
 }
 
-function calcHeroDropRate(luk:any, level:any) {
+function calcHeroDropRate(luk, level) {
   return 0;
 }
 
-function calcHeroAtkSpeed(character: Character) {
+function calcHeroAtkSpeed(character) {
   let bonus = 0;
   let agi = character.attributes.agi;
 
