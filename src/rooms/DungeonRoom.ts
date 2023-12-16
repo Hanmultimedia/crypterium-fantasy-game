@@ -19,7 +19,7 @@ export class DungeonRoom extends Room<DungeonState> {
     console.log("Dungeon created!", options);
     this.setState(new DungeonState());
 
-    this.setSeatReservationTime(100000) 
+    this.setSeatReservationTime(10000) 
     const characters = await fetchHeroes(options.ethAddress);
     
  
