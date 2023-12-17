@@ -59,13 +59,13 @@ export class MenuRoom extends Room<MenuState> {
   banList: string[] = []; // Initialize the ban list array
   async onCreate(options:any) {
 
-    await mongoose.connect('mongodb+srv://CPAY-CF-USER:CPh76oCwQsLELHBg@cpay-cf.zcgbftb.mongodb.net/crypterium-fantasy-game?retryWrites=true&w=majority');
+    await mongoose.connect('mongodb+srv://CPAY-CF-USER:CPh76oCwQsLELHBg@cpay-cf.zcgbftb.mongodb.net/crypterium-fantasy-game-cloud?retryWrites=true&w=majority');
     const db = mongoose.connection;
     //db.on('error', console.error.bind(console, 'connection error:'));
 
     options.ethAddress = options.ethAddress.toLowerCase();
     //branch
-    this.setSeatReservationTime(10000) 
+    //this.setSeatReservationTime(10000) 
     const randomNum = Math.floor(Math.random() * 1001);
     this.roomId = `MenuRoom-${options.ethAddress}`;
     console.log("MenuRoom created!", options);
@@ -79,7 +79,7 @@ export class MenuRoom extends Room<MenuState> {
     }
 
     const bannedAddresses = await this.fetchBannedAddressesFromMongoDB();
-    console.log(bannedAddresses)
+    //console.log(bannedAddresses)
     // Populate the ban list with the retrieved banned addresses
     this.banList = bannedAddresses;
 
@@ -318,7 +318,7 @@ export class MenuRoom extends Room<MenuState> {
     this.onMessage("refine", async (client, data) => {
     this.state.refine_state = -1;
     this.state.refine_state = await refine(this.state.ethAddress,data.uid,data.from,data.to,data.mat,data.mat_amount);
-    console.log("Refine state" + this.state.refine_state)
+    //console.log("Refine state" + this.state.refine_state)
     this.reload()
 
  
