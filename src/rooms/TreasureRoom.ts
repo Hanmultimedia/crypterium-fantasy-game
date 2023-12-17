@@ -117,7 +117,7 @@ export class TreasureRoom extends Room<DungeonState> {
     this.setState(new DungeonState());
     //this.setSeatReservationTime(100000) 
 
-    await mongoose.connect('mongodb+srv://CPAY-CF-USER:CPh76oCwQsLELHBg@cpay-cf.zcgbftb.mongodb.net/crypterium-fantasy-game-cloud?retryWrites=true&w=majority');
+    await mongoose.connect('mongodb+srv://CPAY-CF-USER:CPh76oCwQsLELHBg@cpay-cf.zcgbftb.mongodb.net/crypterium-fantasy-game?retryWrites=true&w=majority');
     const db = mongoose.connection;
        // Listen for the 'disconnected' event
     /*db.on('disconnected', () => {

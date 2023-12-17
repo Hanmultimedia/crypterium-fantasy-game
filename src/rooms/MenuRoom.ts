@@ -59,7 +59,7 @@ export class MenuRoom extends Room<MenuState> {
   banList: string[] = []; // Initialize the ban list array
   async onCreate(options:any) {
 
-    await mongoose.connect('mongodb+srv://CPAY-CF-USER:CPh76oCwQsLELHBg@cpay-cf.zcgbftb.mongodb.net/crypterium-fantasy-game-cloud?retryWrites=true&w=majority');
+    await mongoose.connect('mongodb+srv://CPAY-CF-USER:CPh76oCwQsLELHBg@cpay-cf.zcgbftb.mongodb.net/crypterium-fantasy-game?retryWrites=true&w=majority');
     const db = mongoose.connection;
     //db.on('error', console.error.bind(console, 'connection error:'));
 

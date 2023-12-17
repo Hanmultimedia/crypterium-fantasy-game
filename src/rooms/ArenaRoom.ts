@@ -21,7 +21,7 @@ export class ArenaRoom extends Room<ArenaState> {
     this.setState(new ArenaState());
     this.setSeatReservationTime(10000) 
 
-    await mongoose.connect('mongodb+srv://CPAY-CF-USER:CPh76oCwQsLELHBg@cpay-cf.zcgbftb.mongodb.net/crypterium-fantasy-game-cloud?retryWrites=true&w=majority');
+    await mongoose.connect('mongodb+srv://CPAY-CF-USER:CPh76oCwQsLELHBg@cpay-cf.zcgbftb.mongodb.net/crypterium-fantasy-game?retryWrites=true&w=majority');
     const db = mongoose.connection;
     db.on('error', console.error.bind(console, 'connection error:'));
 
