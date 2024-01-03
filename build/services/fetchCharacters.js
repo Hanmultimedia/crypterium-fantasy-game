@@ -53,7 +53,7 @@ async function fetchCharacters(eth) {
     const db = mongoose_1.default.connection;
     //db.on('error', console.error.bind(console, 'connection error:'));
     // we're connected!
-    console.log("Connected with mongo to get characters " + eth);
+    //console.log("Connected with mongo to get characters " + eth);
     const CharacterModel = mongoose_1.default.model('Character', character_schema_1.CharacterSchema);
     const modelName = 'ArenaCharacter';
     const existingModel = mongoose_1.default.models[modelName];

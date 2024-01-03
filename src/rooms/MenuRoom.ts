@@ -320,9 +320,6 @@ export class MenuRoom extends Room<MenuState> {
     this.state.refine_state = await refine(this.state.ethAddress,data.uid,data.from,data.to,data.mat,data.mat_amount);
     //console.log("Refine state" + this.state.refine_state)
     this.reload()
-
- 
-
     })
 
     this.onMessage("refresh", async () => {
@@ -481,9 +478,9 @@ for(let i = 0 ; i < 5 ; i++)
     //this.broadcast("messages", `${ client.sessionId } left.`);
     console.log(client.sessionId, "left!");
     //this.state.characters.delete(client.sessionId);
-    await userNonAuth(this.ethAddress)
+    //await userNonAuth(this.ethAddress)
     MenuRoom.existingRoomIds.delete(this.roomId);
-    console.log("Have online " + MenuRoom.existingRoomIds.size)
+    //console.log("Have online " + MenuRoom.existingRoomIds.size)
 
   }
 
