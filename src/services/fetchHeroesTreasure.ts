@@ -140,7 +140,7 @@ export async function fetchHeroesTreasure(eth:string): Promise<any> {
     }
 
     //characer.statPoint = data.statPoint
-    console.log(stat)
+    //console.log(stat)
     characer.atk = stat.atk
     characer.def = stat.def
     characer.mAtk = stat.mAtk
