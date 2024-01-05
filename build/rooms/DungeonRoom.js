@@ -18,13 +18,14 @@ class DungeonRoom extends colyseus_1.Room {
         this.maxClients = 1;
     }
     async onCreate(options) {
-        await mongoose_1.default.connect('mongodb+srv://CPAY-CF-USER:Pul6GVdRV5C7j82f@cpay-cf.zcgbftb.mongodb.net/crypterium-fantasy-game?retryWrites=true&w=majority');
+        await mongoose_1.default.connect('mongodb+srv://CPAY-CF-USER:CPh76oCwQsLELHBg@cpay-cf.zcgbftb.mongodb.net/crypterium-fantasy-game?retryWrites=true&w=majority');
         const db = mongoose_1.default.connection;
-        db.on('error', console.error.bind(console, 'connection error:'));
+        //db.on('error', console.error.bind(console, 'connection error:'));
+        options.ethAddress = options.ethAddress.toLowerCase();
         this.roomId = options.ethAddress;
         console.log("Dungeon created!", options);
         this.setState(new DungeonState_1.DungeonState());
-        this.setSeatReservationTime(100000);
+        this.setSeatReservationTime(10000);
         const characters = await (0, fetchHeroes_1.fetchHeroes)(options.ethAddress);
         const dungeonId = await (0, makeDungeonRecord_1.createDungeonRecord)(options.ethAddress, characters, options.map);
         this.map = options.map;
@@ -74,7 +75,7 @@ class DungeonRoom extends colyseus_1.Room {
         const monsters = await (0, fetchWaveMonsters_1.fetchWaveMonsters)(this.map, 1);
         this.state.monsters = monsters;
         console.log("FinishedfetchWaveMonsters");
-        console.log(monsters);
+        //console.log(monsters)
     }
     onLeave(client, consented) {
         this.broadcast("messages", `${client.sessionId} left.`);

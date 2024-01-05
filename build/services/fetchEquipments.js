@@ -50,6 +50,10 @@ async function fetchEquipments() {
             equipment.range = 0;
             equipment.hpMAX = data.hpMAX;
             equipment.spMAX = data.spMAX;
+            equipment.rarity = "normal";
+            if (equipment.uid.startsWith("9")) {
+                equipment.rarity = "nft";
+            }
             equipments.push(equipment);
         }
         //mongoose.connection.close()

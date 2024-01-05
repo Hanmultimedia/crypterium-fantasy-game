@@ -47,8 +47,9 @@ const InventorySchema = new mongoose_1.Schema({
 });
 async function addMaterials(eth, mat_uid, amount) {
     const result = [];
+    console.log(mat_uid + " " + amount);
     //Add Material section
-    console.log("Check Material inventory");
+    //console.log("Check Material inventory")
     let Inventory;
     try {
         Inventory = mongoose_1.default.model("InventoryMaterial");
@@ -58,7 +59,7 @@ async function addMaterials(eth, mat_uid, amount) {
     }
     let updatedInventory = await Inventory.findOne({ eth: eth });
     if (updatedInventory) {
-        console.log("Update Material in inventory");
+        //console.log("Update Material in inventory")
         if (!updatedInventory.materials) {
             updatedInventory.materials = new Map();
         }
@@ -69,7 +70,7 @@ async function addMaterials(eth, mat_uid, amount) {
         await updatedInventory.save();
     }
     else {
-        console.log("Create New Materials");
+        //console.log("Create New Materials")
         let MaterialsModel;
         try {
             MaterialsModel = mongoose_1.default.model("Materials");
@@ -83,7 +84,7 @@ async function addMaterials(eth, mat_uid, amount) {
             materials: new Map([[mat_uid, { uid: mat_uid, quantity: newMaterials.quantity }]])
         });
     }
-    console.log("Finish add materials");
+    //console.log("Finish add materials")
     //mongoose.connection.close();
     return true;
 }

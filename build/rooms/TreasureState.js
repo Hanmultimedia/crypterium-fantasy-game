@@ -14,6 +14,7 @@ class Character_T extends schema_1.Schema {
         this.lastWave = 0;
     }
 }
+exports.Character_T = Character_T;
 __decorate([
     (0, schema_1.type)("string")
 ], Character_T.prototype, "id", void 0);
@@ -86,7 +87,6 @@ __decorate([
 __decorate([
     (0, schema_1.type)(["string"])
 ], Character_T.prototype, "skill_equip", void 0);
-exports.Character_T = Character_T;
 //export class RewardState_T extends Schema {
 //  @type({ map: "number"}) data = new MapSchema<number>();
 //}
@@ -98,6 +98,7 @@ class TreasureState_T extends schema_1.Schema {
         this.monsters = new schema_1.ArraySchema();
     }
 }
+exports.TreasureState_T = TreasureState_T;
 __decorate([
     (0, schema_1.type)("uint16")
 ], TreasureState_T.prototype, "wave", void 0);
@@ -116,4 +117,3 @@ __decorate([
 __decorate([
     (0, schema_1.type)([Character_T])
 ], TreasureState_T.prototype, "monsters", void 0);
-exports.TreasureState_T = TreasureState_T;

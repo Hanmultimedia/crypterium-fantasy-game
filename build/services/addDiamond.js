@@ -15,7 +15,7 @@ async function addDiamond(eth, diamond) {
     if (!diamond)
         return;
     try {
-        console.log("Fetch User To update Diamond");
+        //console.log("Fetch User To update Diamond")
         let User;
         try {
             User = mongoose_1.default.model('User');

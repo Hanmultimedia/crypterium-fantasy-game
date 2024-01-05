@@ -21,7 +21,7 @@ const fetchItemPotionPools = () => {
             "effect_type": "healing",
             "effect_amount": 2,
             "sprite": "red_potion",
-            "price": 20
+            "price": 30
         },
         {
             "uid": "1003",
@@ -31,7 +31,7 @@ const fetchItemPotionPools = () => {
             "effect_type": "healing",
             "effect_amount": 3,
             "sprite": "Large_red_potion",
-            "price": 40
+            "price": 50
         },
         {
             "uid": "1004",
@@ -41,7 +41,7 @@ const fetchItemPotionPools = () => {
             "effect_type": "healing_mp",
             "effect_amount": 1,
             "sprite": "mini_blue_potion",
-            "price": 15
+            "price": 20
         },
         {
             "uid": "1005",
@@ -51,12 +51,12 @@ const fetchItemPotionPools = () => {
             "effect_type": "healing_mp",
             "effect_amount": 2,
             "sprite": "Blue_potion",
-            "price": 30
+            "price": 40
         },
         {
             "uid": "1006",
             "type": "potion",
-            "name": "Blue potion m",
+            "name": "Blue potion l",
             "effect": "Mp recover x%",
             "effect_type": "healing_mp",
             "effect_amount": 3,

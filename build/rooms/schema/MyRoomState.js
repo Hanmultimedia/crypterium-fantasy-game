@@ -14,7 +14,7 @@ class MyRoomState extends schema_1.Schema {
         this.mySynchronizedProperty = "Hello world";
     }
 }
+exports.MyRoomState = MyRoomState;
 __decorate([
     (0, schema_1.type)("string")
 ], MyRoomState.prototype, "mySynchronizedProperty", void 0);
-exports.MyRoomState = MyRoomState;

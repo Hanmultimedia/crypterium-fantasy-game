@@ -20,14 +20,21 @@ async function userAuth(eth) {
             User = mongoose_1.default.model('UserAuth', exports.userSchema);
         }
         // Use the model to query for a user with a matching eth address
-        let user = await User.findOne({ eth });
-        if (!user) {
-            user = new User({
-                eth,
-                status: true,
-            });
+        try {
+            let user = await User.findOne({ eth });
+            if (!user) {
+                user = new User({
+                    eth,
+                    status: true,
+                });
+                await user.save();
+            }
+            // Rest of your code
         }
-        await user.save();
+        catch (error) {
+            console.error("Error while querying the database:", error);
+            // Handle the error as needed
+        }
     }
     catch (error) {
         console.log(error);

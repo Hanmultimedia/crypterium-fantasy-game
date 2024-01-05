@@ -59,11 +59,11 @@ async function buyEquipment(eth, equipment_uid, amount) {
     const price = equipment.price * amount;
     const result = [];
     if (diamonds >= price) {
-        console.log(eth + " buy equipment " + equipment_uid);
+        //console.log(eth + " buy equipment " + equipment_uid)
         //
         try {
             // Define your user schema
-            console.log("Fetch User To update Diamond");
+            //console.log("Fetch User To update Diamond")
             // Create a model from the schema
             let User;
             try {
@@ -88,7 +88,7 @@ async function buyEquipment(eth, equipment_uid, amount) {
         result["equipment"] = e;
         result["amount"] = amount;
         //
-        console.log("Check equipment inventory");
+        //console.log("Check equipment inventory")
         let InventoryEquipment;
         try {
             InventoryEquipment = mongoose_1.default.model('InventoryEquipment');
@@ -98,7 +98,7 @@ async function buyEquipment(eth, equipment_uid, amount) {
         }
         let updatedInventory = await InventoryEquipment.findOne({ eth: eth });
         if (updatedInventory) {
-            console.log("Update in inventory");
+            //console.log("Update in inventory")
             if (!updatedInventory.equipments) {
                 updatedInventory.equipments = new Map();
             }
@@ -109,14 +109,14 @@ async function buyEquipment(eth, equipment_uid, amount) {
             await updatedInventory.save();
         }
         else {
-            console.log("Create New Equipment");
+            //console.log("Create New Equipment")
             const newEquipment = new EquipmentModel({ uid: equipment.uid, quantity: amount });
             updatedInventory = await InventoryEquipment.create({
                 eth: eth,
                 equipments: new Map([[newEquipment.uid, { uid: newEquipment.uid, quantity: newEquipment.quantity }]])
             });
         }
-        console.log("Finish buy equipment");
+        console.log("Finish buy equipment " + eth + " " + equipment_uid);
         //mongoose.connection.close();
         return result;
         //

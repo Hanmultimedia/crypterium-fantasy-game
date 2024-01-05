@@ -3,13 +3,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.fetchCoupons = exports.userSchema = void 0;
+exports.fetchCoupons = void 0;
 const MenuState_1 = require("../rooms/MenuState");
 const mongoose_1 = __importDefault(require("mongoose"));
-exports.userSchema = new mongoose_1.default.Schema({
+const userSchema = new mongoose_1.default.Schema({
     eth: String,
     diamond: Number,
     coupon: Number,
+    coupon2: Number,
+    profilename: String,
+    profilepic: Number,
+    stamina: Number,
+    battlepoint: { type: Number, default: 0 }
     // other fields as required
 });
 async function fetchCoupons(eth) {
@@ -18,8 +23,6 @@ async function fetchCoupons(eth) {
     c.uid = "100001";
     c.quantity = 0;
     try {
-        // Connect to MongoDB using your srv string
-        //await mongoose.connect('mongodb+srv://CPAY-CF-USER:Pul6GVdRV5C7j82f@cpay-cf.zcgbftb.mongodb.net/crypterium-fantasy-game?retryWrites=true&w=majority');
         // Define your user schema
         console.log("Fetch Coupon");
         // Create a model from the schema
@@ -28,7 +31,7 @@ async function fetchCoupons(eth) {
             User = mongoose_1.default.model('User');
         }
         catch (error) {
-            User = mongoose_1.default.model('User', exports.userSchema);
+            User = mongoose_1.default.model('User', userSchema);
         }
         // Use the model to query for a user with a matching eth address
         let user = await User.findOne({ eth: eth });
@@ -50,23 +53,8 @@ async function fetchCoupons(eth) {
         }
     }
     catch (error) {
-        mongoose_1.default.connection.close();
         console.log(error);
         return array;
     }
-    /*const snapshot = await db.collection('User').doc(eth).collection('Coupon').get()
-    const coupons:any[] = []
-    snapshot.forEach((doc) => {
-      const data:any = doc.data()
-      const coupon = new Coupon()
-      coupon.uid = data.uid
-      coupon.quantity = data.quantity
-      if(!data.quantity)
-      {
-        coupon.quantity = 0
-      }
-      coupons.push(coupon)
-    });
-    return coupons*/
 }
 exports.fetchCoupons = fetchCoupons;

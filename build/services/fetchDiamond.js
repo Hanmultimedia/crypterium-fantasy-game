@@ -16,7 +16,7 @@ async function fetchDiamond(eth) {
         // Connect to MongoDB using your srv string
         //await mongoose.connect('mongodb+srv://CPAY-CF-USER:Pul6GVdRV5C7j82f@cpay-cf.zcgbftb.mongodb.net/crypterium-fantasy-game?retryWrites=true&w=majority');
         // Define your user schema
-        console.log("Fetch Diamond");
+        //console.log("Fetch Diamond")
         // Create a model from the schema
         let User;
         try {
@@ -32,17 +32,16 @@ async function fetchDiamond(eth) {
             // Close the Mongoose connection
             const diamond = user.diamond;
             //mongoose.connection.close();
-            console.log("user have " + diamond + " diamond");
+            //console.log("user have " + diamond + " diamond")
             return diamond;
         }
         else {
-            console.log("user not found");
+            //console.log("user not found")
             //mongoose.connection.close();
             return 0;
         }
     }
     catch (error) {
-        mongoose_1.default.connection.close();
         console.log(error);
         return 0;
     }

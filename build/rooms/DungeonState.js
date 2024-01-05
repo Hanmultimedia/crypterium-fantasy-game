@@ -14,6 +14,7 @@ class Character extends schema_1.Schema {
         this.lastWave = 0;
     }
 }
+exports.Character = Character;
 __decorate([
     (0, schema_1.type)("string")
 ], Character.prototype, "id", void 0);
@@ -32,6 +33,33 @@ __decorate([
 __decorate([
     (0, schema_1.type)("string")
 ], Character.prototype, "name", void 0);
+__decorate([
+    (0, schema_1.type)("string")
+], Character.prototype, "slot_0", void 0);
+__decorate([
+    (0, schema_1.type)("string")
+], Character.prototype, "slot_1", void 0);
+__decorate([
+    (0, schema_1.type)("string")
+], Character.prototype, "slot_2", void 0);
+__decorate([
+    (0, schema_1.type)("string")
+], Character.prototype, "slot_3", void 0);
+__decorate([
+    (0, schema_1.type)("string")
+], Character.prototype, "slot_4", void 0);
+__decorate([
+    (0, schema_1.type)("string")
+], Character.prototype, "slot_5", void 0);
+__decorate([
+    (0, schema_1.type)("string")
+], Character.prototype, "slot_6", void 0);
+__decorate([
+    (0, schema_1.type)("string")
+], Character.prototype, "slot_7", void 0);
+__decorate([
+    (0, schema_1.type)("string")
+], Character.prototype, "slot_8", void 0);
 __decorate([
     (0, schema_1.type)("uint16")
 ], Character.prototype, "atk", void 0);
@@ -95,27 +123,44 @@ __decorate([
 __decorate([
     (0, schema_1.type)(["string"])
 ], Character.prototype, "skill_equip", void 0);
-exports.Character = Character;
+__decorate([
+    (0, schema_1.type)("uint8")
+], Character.prototype, "str", void 0);
+__decorate([
+    (0, schema_1.type)("uint8")
+], Character.prototype, "agi", void 0);
+__decorate([
+    (0, schema_1.type)("uint8")
+], Character.prototype, "dex", void 0);
+__decorate([
+    (0, schema_1.type)("uint8")
+], Character.prototype, "luk", void 0);
+__decorate([
+    (0, schema_1.type)("uint8")
+], Character.prototype, "vit", void 0);
+__decorate([
+    (0, schema_1.type)("uint8")
+], Character.prototype, "int", void 0);
 class Character_Array extends schema_1.Schema {
     constructor() {
         super(...arguments);
         this.character = new schema_1.ArraySchema();
     }
 }
+exports.Character_Array = Character_Array;
 __decorate([
     (0, schema_1.type)([Character])
 ], Character_Array.prototype, "character", void 0);
-exports.Character_Array = Character_Array;
 class RewardState extends schema_1.Schema {
     constructor() {
         super(...arguments);
         this.data = new schema_1.MapSchema();
     }
 }
+exports.RewardState = RewardState;
 __decorate([
     (0, schema_1.type)({ map: "number" })
 ], RewardState.prototype, "data", void 0);
-exports.RewardState = RewardState;
 class DungeonState extends schema_1.Schema {
     constructor() {
         super(...arguments);
@@ -125,8 +170,15 @@ class DungeonState extends schema_1.Schema {
         this.spawners_monsters = new schema_1.ArraySchema();
         this.spawners_chests = new schema_1.ArraySchema();
         this.spawners_boss = new schema_1.ArraySchema();
+        this.characterBuff1 = false;
+        this.characterBuff2 = false;
+        this.buffDescriptions = new schema_1.ArraySchema();
+        this.buffs1 = new schema_1.ArraySchema();
+        this.buffs2 = new schema_1.ArraySchema();
+        this.buffs3 = new schema_1.ArraySchema();
     }
 }
+exports.DungeonState = DungeonState;
 __decorate([
     (0, schema_1.type)("uint16")
 ], DungeonState.prototype, "wave", void 0);
@@ -145,6 +197,9 @@ __decorate([
 __decorate([
     (0, schema_1.type)("number")
 ], DungeonState.prototype, "coin", void 0);
+__decorate([
+    (0, schema_1.type)("number")
+], DungeonState.prototype, "star", void 0);
 __decorate([
     (0, schema_1.type)("string")
 ], DungeonState.prototype, "ethAddress", void 0);
@@ -172,4 +227,21 @@ __decorate([
 __decorate([
     (0, schema_1.type)([Character_Array])
 ], DungeonState.prototype, "spawners_boss", void 0);
-exports.DungeonState = DungeonState;
+__decorate([
+    (0, schema_1.type)("boolean")
+], DungeonState.prototype, "characterBuff1", void 0);
+__decorate([
+    (0, schema_1.type)("boolean")
+], DungeonState.prototype, "characterBuff2", void 0);
+__decorate([
+    (0, schema_1.type)(["string"])
+], DungeonState.prototype, "buffDescriptions", void 0);
+__decorate([
+    (0, schema_1.type)(["boolean"])
+], DungeonState.prototype, "buffs1", void 0);
+__decorate([
+    (0, schema_1.type)(["boolean"])
+], DungeonState.prototype, "buffs2", void 0);
+__decorate([
+    (0, schema_1.type)(["boolean"])
+], DungeonState.prototype, "buffs3", void 0);

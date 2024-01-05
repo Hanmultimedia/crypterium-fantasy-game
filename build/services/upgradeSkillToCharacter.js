@@ -62,16 +62,16 @@ CharacterSkillSchema.pre('save', function (next) {
 async function upgradeSkillToCharacter(eth, character_id, skill_id, level) {
     let diamonds = await (0, fetchDiamond_1.fetchDiamond)(eth);
     const price = [
-        100,
-        140,
-        180,
-        220,
-        260,
-        300,
-        340,
-        380,
-        420,
-        460
+        150,
+        250,
+        350,
+        500,
+        700,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000
     ];
     if (diamonds >= price[level]) {
         //await mongoose.connect('mongodb+srv://CPAY-CF-USER:Pul6GVdRV5C7j82f@cpay-cf.zcgbftb.mongodb.net/crypterium-fantasy-game?retryWrites=true&w=majority');

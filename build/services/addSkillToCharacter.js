@@ -63,15 +63,15 @@ baseSkillSchema.pre('save', function (next) {
 async function addSkillToCharacter(eth, character_id, skill_id) {
     let diamonds = await (0, fetchDiamond_1.fetchDiamond)(eth);
     const price = [
-        100,
-        140,
-        180,
-        220,
-        260,
-        300,
-        340,
-        380,
-        420
+        150,
+        250,
+        350,
+        500,
+        700,
+        1000,
+        1000,
+        1000,
+        1000
     ];
     if (diamonds >= price[0]) {
         const skills = await (0, fetchSkills_1.fetchSkills)();
@@ -87,7 +87,7 @@ async function addSkillToCharacter(eth, character_id, skill_id) {
         //db.on('error', console.error.bind(console, 'connection error:'));
         /////////////////////////
         //Add potion section
-        console.log("Check skill inventory");
+        //console.log("Check skill inventory")
         let Inventory;
         try {
             Inventory = mongoose_1.default.model("Character_Skill");
@@ -97,19 +97,19 @@ async function addSkillToCharacter(eth, character_id, skill_id) {
         }
         let updatedInventory = await Inventory.findOne({ character_id: character_id });
         if (updatedInventory) {
-            console.log("Update skill in inventory");
+            //console.log("Update skill in inventory")
             if (!updatedInventory.skills) {
-                console.log("No Skill Field");
+                //console.log("No Skill Field")
                 updatedInventory.skills = new Map();
             }
             if (!updatedInventory.skills.has(skill.uid)) {
-                console.log("Skill Field but no skill");
+                //console.log("Skill Field but no skill")
                 updatedInventory.skills.set(skill.uid, { uid: skill.uid, level: 1, name: skill.name, jobRequired: skill.jobRequired });
             }
             await updatedInventory.save();
         }
         else {
-            console.log("Create New Skill");
+            //console.log("Create New Skill")
             let BaseSkillModel;
             try {
                 BaseSkillModel = mongoose_1.default.model("SkillInventory");
@@ -123,12 +123,12 @@ async function addSkillToCharacter(eth, character_id, skill_id) {
                 skills: new Map([[skill.uid, { uid: skill.uid, level: 1, name: skill.name, jobRequired: skill.jobRequired }]])
             });
         }
-        console.log("Finish buy skill");
+        console.log("Finish buy skill " + eth + " " + character_id);
         /////////////////////////
         try {
             // Connect to MongoDB using your srv string
             // Define your user schema
-            console.log("Fetch User To update Diamond");
+            //console.log("Fetch User To update Diamond")
             // Create a model from the schema
             let User;
             try {

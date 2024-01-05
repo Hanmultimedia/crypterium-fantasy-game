@@ -78,7 +78,7 @@ async function addPotion(eth, amount) {
     }
     let updatedInventory = await Inventory.findOne({ eth: eth });
     if (updatedInventory) {
-        console.log("Update in inventory");
+        //console.log("Update in inventory")
         if (!updatedInventory.potions) {
             updatedInventory.potions = new Map();
         }
@@ -89,7 +89,7 @@ async function addPotion(eth, amount) {
         await updatedInventory.save();
     }
     else {
-        console.log("Create New Potion");
+        //console.log("Create New Potion")
         let PotionModel;
         try {
             PotionModel = mongoose_1.default.model("Potion");
@@ -103,7 +103,7 @@ async function addPotion(eth, amount) {
             potions: new Map([[newPotion.uid, { uid: newPotion.uid, quantity: newPotion.quantity }]])
         });
     }
-    console.log("Finish add potion reward");
+    //console.log("Finish add potion reward")
     //mongoose.connection.close();
     return result;
 }

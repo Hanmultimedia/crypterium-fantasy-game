@@ -1,32 +1,9 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.fetchRandomMonster = void 0;
 //import { db } from "../arena.config";
 const DungeonState_1 = require("../rooms/DungeonState");
-const mongoose_1 = __importStar(require("mongoose"));
+const mongoose_1 = require("mongoose");
 const baseMonsterSchema = new mongoose_1.Schema({
     uid: { type: String, required: true },
     atk: { type: Number, required: true },
@@ -48,21 +25,18 @@ const baseMonsterSchema = new mongoose_1.Schema({
     created_date: { type: Date, default: Date.now },
     updated_date: { type: Date, default: Date.now },
 });
-async function fetchRandomMonster(slug, wave) {
-    /* const doc = await db.collection('DungeonConfig').doc(slug).get();
-     let config = null
-     if (doc.exists) {
-       config = doc.data()
-     }*/
-    let MonsterModel;
+async function fetchRandomMonster(slug, wave, monsters_data) {
+    /*let MonsterModel;
+
+    try
+    {
+      MonsterModel = mongoose.model('BaseMonster');
+    }catch (error)
+    {
+      MonsterModel = mongoose.model('BaseMonster',baseMonsterSchema);
+    }*/
     try {
-        MonsterModel = mongoose_1.default.model('BaseMonster');
-    }
-    catch (error) {
-        MonsterModel = mongoose_1.default.model('BaseMonster', baseMonsterSchema);
-    }
-    try {
-        const monsters_data = await MonsterModel.find({});
+        //const monsters_data = await MonsterModel.find({});
         const monsters = [];
         const data = {};
         monsters_data.forEach((monster) => {
@@ -107,6 +81,7 @@ async function fetchRandomMonster(slug, wave) {
         characer.aspd = m.aspd;
         characer.speed = m.speed;
         characer.range = m.range;
+        characer.exp = m.exp;
         characer.hp = m.hp;
         characer.sp = 0;
         //monsters.push(characer)

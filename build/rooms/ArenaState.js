@@ -14,6 +14,7 @@ class Character extends schema_1.Schema {
         this.lastWave = 0;
     }
 }
+exports.Character = Character;
 __decorate([
     (0, schema_1.type)("string")
 ], Character.prototype, "id", void 0);
@@ -101,7 +102,33 @@ __decorate([
 __decorate([
     (0, schema_1.type)("number")
 ], Character.prototype, "arenaDefendPosition", void 0);
-exports.Character = Character;
+__decorate([
+    (0, schema_1.type)("string")
+], Character.prototype, "slot_0", void 0);
+__decorate([
+    (0, schema_1.type)("string")
+], Character.prototype, "slot_1", void 0);
+__decorate([
+    (0, schema_1.type)("string")
+], Character.prototype, "slot_2", void 0);
+__decorate([
+    (0, schema_1.type)("string")
+], Character.prototype, "slot_3", void 0);
+__decorate([
+    (0, schema_1.type)("string")
+], Character.prototype, "slot_4", void 0);
+__decorate([
+    (0, schema_1.type)("string")
+], Character.prototype, "slot_5", void 0);
+__decorate([
+    (0, schema_1.type)("string")
+], Character.prototype, "slot_6", void 0);
+__decorate([
+    (0, schema_1.type)("string")
+], Character.prototype, "slot_7", void 0);
+__decorate([
+    (0, schema_1.type)("string")
+], Character.prototype, "slot_8", void 0);
 class ArenaState extends schema_1.Schema {
     constructor() {
         super(...arguments);
@@ -109,6 +136,7 @@ class ArenaState extends schema_1.Schema {
         this.enemies = new schema_1.ArraySchema();
     }
 }
+exports.ArenaState = ArenaState;
 __decorate([
     (0, schema_1.type)("string")
 ], ArenaState.prototype, "ethAddress", void 0);
@@ -118,4 +146,3 @@ __decorate([
 __decorate([
     (0, schema_1.type)([Character])
 ], ArenaState.prototype, "enemies", void 0);
-exports.ArenaState = ArenaState;

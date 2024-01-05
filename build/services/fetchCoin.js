@@ -44,7 +44,6 @@ async function fetchCoin(eth, type) {
         }
     }
     catch (error) {
-        mongoose_1.default.connection.close();
         console.log(error);
         return 0;
     }

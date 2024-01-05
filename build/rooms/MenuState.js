@@ -10,6 +10,7 @@ exports.MenuState = exports.SummonData = exports.Skill_Character = exports.Skill
 const schema_1 = require("@colyseus/schema");
 class Character extends schema_1.Schema {
 }
+exports.Character = Character;
 __decorate([
     (0, schema_1.type)("string")
 ], Character.prototype, "id", void 0);
@@ -25,6 +26,9 @@ __decorate([
 __decorate([
     (0, schema_1.type)("string")
 ], Character.prototype, "name", void 0);
+__decorate([
+    (0, schema_1.type)("string")
+], Character.prototype, "ethAddress", void 0);
 __decorate([
     (0, schema_1.type)("uint16")
 ], Character.prototype, "str", void 0);
@@ -43,6 +47,24 @@ __decorate([
 __decorate([
     (0, schema_1.type)("uint16")
 ], Character.prototype, "luk", void 0);
+__decorate([
+    (0, schema_1.type)("uint16")
+], Character.prototype, "oristr", void 0);
+__decorate([
+    (0, schema_1.type)("uint16")
+], Character.prototype, "orivit", void 0);
+__decorate([
+    (0, schema_1.type)("uint16")
+], Character.prototype, "oriint", void 0);
+__decorate([
+    (0, schema_1.type)("uint16")
+], Character.prototype, "oridex", void 0);
+__decorate([
+    (0, schema_1.type)("uint16")
+], Character.prototype, "oriagi", void 0);
+__decorate([
+    (0, schema_1.type)("uint16")
+], Character.prototype, "oriluk", void 0);
 __decorate([
     (0, schema_1.type)("uint16")
 ], Character.prototype, "exp", void 0);
@@ -119,14 +141,35 @@ __decorate([
     (0, schema_1.type)("string")
 ], Character.prototype, "slot_5", void 0);
 __decorate([
+    (0, schema_1.type)("string")
+], Character.prototype, "slot_6", void 0);
+__decorate([
+    (0, schema_1.type)("string")
+], Character.prototype, "slot_7", void 0);
+__decorate([
+    (0, schema_1.type)("string")
+], Character.prototype, "slot_8", void 0);
+__decorate([
     (0, schema_1.type)("number")
 ], Character.prototype, "arenaAttackPosition", void 0);
 __decorate([
     (0, schema_1.type)("number")
 ], Character.prototype, "arenaDefendPosition", void 0);
-exports.Character = Character;
+__decorate([
+    (0, schema_1.type)("uint16")
+], Character.prototype, "hp", void 0);
+__decorate([
+    (0, schema_1.type)("uint16")
+], Character.prototype, "sp", void 0);
+__decorate([
+    (0, schema_1.type)("uint16")
+], Character.prototype, "position", void 0);
+__decorate([
+    (0, schema_1.type)("number")
+], Character.prototype, "star", void 0);
 class Potion extends schema_1.Schema {
 }
+exports.Potion = Potion;
 __decorate([
     (0, schema_1.type)("string")
 ], Potion.prototype, "uid", void 0);
@@ -151,27 +194,27 @@ __decorate([
 __decorate([
     (0, schema_1.type)("number")
 ], Potion.prototype, "price", void 0);
-exports.Potion = Potion;
 class Potion_Inventory extends schema_1.Schema {
 }
+exports.Potion_Inventory = Potion_Inventory;
 __decorate([
     (0, schema_1.type)("string")
 ], Potion_Inventory.prototype, "uid", void 0);
 __decorate([
     (0, schema_1.type)("number")
 ], Potion_Inventory.prototype, "amount", void 0);
-exports.Potion_Inventory = Potion_Inventory;
 class Materials_Inventory extends schema_1.Schema {
 }
+exports.Materials_Inventory = Materials_Inventory;
 __decorate([
     (0, schema_1.type)("string")
 ], Materials_Inventory.prototype, "uid", void 0);
 __decorate([
     (0, schema_1.type)("number")
 ], Materials_Inventory.prototype, "amount", void 0);
-exports.Materials_Inventory = Materials_Inventory;
 class Potion_Setting extends schema_1.Schema {
 }
+exports.Potion_Setting = Potion_Setting;
 __decorate([
     (0, schema_1.type)("string")
 ], Potion_Setting.prototype, "hp_uid", void 0);
@@ -184,18 +227,21 @@ __decorate([
 __decorate([
     (0, schema_1.type)("number")
 ], Potion_Setting.prototype, "sp_percent", void 0);
-exports.Potion_Setting = Potion_Setting;
 class Equipment_Inventory extends schema_1.Schema {
 }
+exports.Equipment_Inventory = Equipment_Inventory;
 __decorate([
     (0, schema_1.type)("string")
 ], Equipment_Inventory.prototype, "uid", void 0);
 __decorate([
     (0, schema_1.type)("number")
 ], Equipment_Inventory.prototype, "amount", void 0);
-exports.Equipment_Inventory = Equipment_Inventory;
+__decorate([
+    (0, schema_1.type)("number")
+], Equipment_Inventory.prototype, "enchantmentLevel", void 0);
 class Equipment extends schema_1.Schema {
 }
+exports.Equipment = Equipment;
 __decorate([
     (0, schema_1.type)("string")
 ], Equipment.prototype, "uid", void 0);
@@ -280,22 +326,25 @@ __decorate([
 __decorate([
     (0, schema_1.type)("number")
 ], Equipment.prototype, "hpMAX", void 0);
-exports.Equipment = Equipment;
+__decorate([
+    (0, schema_1.type)("string")
+], Equipment.prototype, "rarity", void 0);
 class Coupon extends schema_1.Schema {
 }
+exports.Coupon = Coupon;
 __decorate([
     (0, schema_1.type)("string")
 ], Coupon.prototype, "uid", void 0);
 __decorate([
     (0, schema_1.type)("number")
 ], Coupon.prototype, "quantity", void 0);
-exports.Coupon = Coupon;
 class Skill extends schema_1.Schema {
     constructor() {
         super(...arguments);
         this.jobRequired = new schema_1.ArraySchema();
     }
 }
+exports.Skill = Skill;
 __decorate([
     (0, schema_1.type)("string")
 ], Skill.prototype, "uid", void 0);
@@ -311,9 +360,9 @@ __decorate([
 __decorate([
     (0, schema_1.type)("string")
 ], Skill.prototype, "des", void 0);
-exports.Skill = Skill;
 class Skill_Character extends schema_1.Schema {
 }
+exports.Skill_Character = Skill_Character;
 __decorate([
     (0, schema_1.type)("string")
 ], Skill_Character.prototype, "uid", void 0);
@@ -326,31 +375,37 @@ __decorate([
 __decorate([
     (0, schema_1.type)("string")
 ], Skill_Character.prototype, "des", void 0);
-exports.Skill_Character = Skill_Character;
 class SummonData extends schema_1.Schema {
     constructor() {
         super(...arguments);
         this.data = new schema_1.ArraySchema();
     }
 }
+exports.SummonData = SummonData;
 __decorate([
     (0, schema_1.type)(["string"])
 ], SummonData.prototype, "data", void 0);
-exports.SummonData = SummonData;
 class MenuState extends schema_1.Schema {
     constructor() {
         super(...arguments);
         this.page = "mainMenu";
         this.characters = new schema_1.ArraySchema();
         this.coupons = new schema_1.ArraySchema();
+        this.coupons2 = new schema_1.ArraySchema();
         this.potions_inventory = new schema_1.ArraySchema();
         this.potions = new schema_1.ArraySchema();
         this.equipments = new schema_1.ArraySchema();
         this.equipments_inventory = new schema_1.ArraySchema();
         this.skills = new schema_1.ArraySchema();
         this.materials_inventory = new schema_1.ArraySchema();
+        this.enemies1 = new schema_1.ArraySchema();
+        this.enemies2 = new schema_1.ArraySchema();
+        this.enemies3 = new schema_1.ArraySchema();
+        this.enemies4 = new schema_1.ArraySchema();
+        this.enemies5 = new schema_1.ArraySchema();
     }
 }
+exports.MenuState = MenuState;
 __decorate([
     (0, schema_1.type)("string")
 ], MenuState.prototype, "page", void 0);
@@ -359,7 +414,16 @@ __decorate([
 ], MenuState.prototype, "ethAddress", void 0);
 __decorate([
     (0, schema_1.type)("number")
+], MenuState.prototype, "profilepic", void 0);
+__decorate([
+    (0, schema_1.type)("string")
+], MenuState.prototype, "profilename", void 0);
+__decorate([
+    (0, schema_1.type)("number")
 ], MenuState.prototype, "diamonds", void 0);
+__decorate([
+    (0, schema_1.type)("number")
+], MenuState.prototype, "battlepoint", void 0);
 __decorate([
     (0, schema_1.type)("boolean")
 ], MenuState.prototype, "upgrade_ready", void 0);
@@ -372,6 +436,9 @@ __decorate([
 __decorate([
     (0, schema_1.type)([Coupon])
 ], MenuState.prototype, "coupons", void 0);
+__decorate([
+    (0, schema_1.type)([Coupon])
+], MenuState.prototype, "coupons2", void 0);
 __decorate([
     (0, schema_1.type)([Potion_Inventory])
 ], MenuState.prototype, "potions_inventory", void 0);
@@ -393,4 +460,63 @@ __decorate([
 __decorate([
     (0, schema_1.type)([Materials_Inventory])
 ], MenuState.prototype, "materials_inventory", void 0);
-exports.MenuState = MenuState;
+__decorate([
+    (0, schema_1.type)("number")
+], MenuState.prototype, "bit", void 0);
+__decorate([
+    (0, schema_1.type)("number")
+], MenuState.prototype, "doge", void 0);
+__decorate([
+    (0, schema_1.type)("number")
+], MenuState.prototype, "coin", void 0);
+__decorate([
+    (0, schema_1.type)("number")
+], MenuState.prototype, "stamina", void 0);
+__decorate([
+    (0, schema_1.type)("number")
+], MenuState.prototype, "arenastamina", void 0);
+__decorate([
+    (0, schema_1.type)("number")
+], MenuState.prototype, "refine_state", void 0);
+__decorate([
+    (0, schema_1.type)([Character])
+], MenuState.prototype, "enemies1", void 0);
+__decorate([
+    (0, schema_1.type)([Character])
+], MenuState.prototype, "enemies2", void 0);
+__decorate([
+    (0, schema_1.type)([Character])
+], MenuState.prototype, "enemies3", void 0);
+__decorate([
+    (0, schema_1.type)([Character])
+], MenuState.prototype, "enemies4", void 0);
+__decorate([
+    (0, schema_1.type)([Character])
+], MenuState.prototype, "enemies5", void 0);
+__decorate([
+    (0, schema_1.type)("number")
+], MenuState.prototype, "battlepoint1", void 0);
+__decorate([
+    (0, schema_1.type)("number")
+], MenuState.prototype, "battlepoint2", void 0);
+__decorate([
+    (0, schema_1.type)("number")
+], MenuState.prototype, "battlepoint3", void 0);
+__decorate([
+    (0, schema_1.type)("number")
+], MenuState.prototype, "battlepoint4", void 0);
+__decorate([
+    (0, schema_1.type)("number")
+], MenuState.prototype, "battlepoint5", void 0);
+__decorate([
+    (0, schema_1.type)(["number"])
+], MenuState.prototype, "battlepoints", void 0);
+__decorate([
+    (0, schema_1.type)(["string"])
+], MenuState.prototype, "eths", void 0);
+__decorate([
+    (0, schema_1.type)("number")
+], MenuState.prototype, "mypoint", void 0);
+__decorate([
+    (0, schema_1.type)("number")
+], MenuState.prototype, "myrank", void 0);

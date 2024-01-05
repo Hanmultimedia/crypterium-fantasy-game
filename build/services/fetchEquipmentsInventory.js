@@ -47,7 +47,11 @@ exports.InventoryEquipmentSchema = new mongoose_1.Schema({
         type: Map,
         of: {
             uid: { type: String, required: true },
-            quantity: { type: Number, required: true }
+            quantity: { type: Number, required: true },
+            enchantmentLevel: {
+                type: Number,
+                default: 0
+            }
         }
     }
 });
@@ -58,7 +62,8 @@ async function fetchEquipmentsInventory(eth) {
     inventory[0].equipments.forEach((value, key) => {
         equipments.push({
             uid: key,
-            amount: value.quantity
+            amount: value.quantity,
+            enchantmentLevel: value.enchantmentLevel
         });
     });
     //console.log('InventoryEquipment');

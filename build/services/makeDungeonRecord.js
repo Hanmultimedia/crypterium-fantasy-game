@@ -260,15 +260,18 @@ async function addExpToHeroes(heroes, totalExp) {
     });
     heroes.forEach(async (h) => {
         let rating = h.lastWave / sum;
-        const exp = Math.round(rating * totalExp);
+        let exp = Math.round(rating * totalExp);
+        //exp = 0
         let level = h.level;
+        console.log("dungeon need exp " + getExpNextLevel(h.level) + " have " + (h.exp + exp) + " exp " + exp);
         if (h.exp + exp >= getExpNextLevel(h.level)) {
             level++;
+            //console.log("dungeon need exp " + getExpNextLevel(hero.level) + " have " + (hero.exp + exp))
             const increment = { $inc: { exp: exp, level: 1, statPoint: 10 } };
-            const character = await CharacterModel.findOneAndUpdate({ _id: h.id }, increment, { new: true });
-            if (!character) {
-                throw new Error('Character not found');
-            }
+            //const character = await CharacterModel.findOneAndUpdate({ _id: h.id }, increment, { new: true });
+            //if (!character) {
+            //  throw new Error('Character not found');
+            //}
             /*await db.collection("Character").doc(h.id).set({
               exp: firestore.FieldValue.increment(exp),
               level: level,
@@ -276,11 +279,11 @@ async function addExpToHeroes(heroes, totalExp) {
             }, {merge: true})*/
         }
         else {
-            const increment = { $inc: { exp: exp } };
-            const character = await CharacterModel.findOneAndUpdate({ _id: h.id }, increment, { new: true });
-            if (!character) {
-                throw new Error('Character not found');
-            }
+            //const increment = { $inc: { exp: exp } };
+            //const character = await CharacterModel.findOneAndUpdate({ _id: h.id }, increment, { new: true });
+            //if (!character) {
+            //  throw new Error('Character not found');
+            //}
             /*  await db.collection("Character").doc(h.id).set({
                 exp: firestore.FieldValue.increment(exp),
               }, {merge: true})
@@ -290,22 +293,40 @@ async function addExpToHeroes(heroes, totalExp) {
 }
 exports.addExpToHeroes = addExpToHeroes;
 function getExpNextLevel(lv) {
-    if (lv < 84) {
+    if (lv < 14) {
         let exponent = 1.5;
         let baseXP = 240;
         return Math.floor(baseXP * Math.pow(lv, exponent));
     }
-    else if (lv < 90) {
-        let exponent = 1.5;
-        let baseExp = 270;
-        let modifier = (lv - 83) / 100;
-        return Math.floor(baseExp * Math.pow(lv, exponent + modifier));
+    else if (lv < 24) {
+        let exponent = 1.7;
+        let baseExp = 20;
+        return Math.floor((baseExp * lv) * Math.pow(lv, exponent));
+    }
+    else if (lv < 39) {
+        let exponent = 1.7;
+        let baseExp = 35;
+        return Math.floor((baseExp * lv) * Math.pow(lv, exponent));
     }
     else {
-        let exponent = 1.5;
-        let baseExp = 300;
-        let modifier = (lv - 83) / 100;
-        return Math.floor(baseExp * Math.pow(lv, exponent + modifier));
+        let exponent = 1.8;
+        let baseExp = 45;
+        return Math.floor((baseExp * lv) * Math.pow(lv, exponent));
     }
+    /*if (lv < 84) {
+      let exponent = 1.5;
+      let baseXP = 240;
+      return Math.floor(baseXP * Math.pow(lv, exponent));
+    } else if (lv < 90) {
+      let exponent = 1.5
+      let baseExp = 270
+      let modifier = (lv - 83)/100
+      return Math.floor(baseExp * Math.pow(lv, exponent + modifier))
+    } else {
+      let exponent = 1.5
+      let baseExp = 300
+      let modifier = (lv - 83)/100
+      return Math.floor(baseExp * Math.pow(lv, exponent + modifier))
+    }*/
 }
 exports.getExpNextLevel = getExpNextLevel;

@@ -24,7 +24,8 @@ async function checkUserExist(eth) {
         else {
             // If no user was found, return false
             console.log(eth + " Not Exist");
-            user = new user_model_1.UserModel({ eth: eth, diamond: 2000, coupon: 10 });
+            const formattedEth = eth.slice(0, 4) + "..." + eth.slice(-4);
+            user = new user_model_1.UserModel({ eth: eth, diamond: 0, coupon: 0, profilepic: 6, profilename: formattedEth, coupon2: 0, stamina: 10 });
             await user.save();
             const totalUsers = await user_model_1.UserModel.countDocuments();
             //mongoose.connection.close();

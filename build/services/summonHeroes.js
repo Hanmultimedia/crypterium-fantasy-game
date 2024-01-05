@@ -15,6 +15,7 @@ exports.userSchema = new mongoose_1.default.Schema({
     eth: String,
     diamond: Number,
     coupon: Number,
+    coupon2: Number
     // other fields as required
 });
 async function summonHeroes(eth, summon) {
@@ -107,6 +108,7 @@ async function summonHeroes(eth, summon) {
             bonus,
             free: true,
             ethAddress: eth,
+            star: 0,
             statPoint: 0,
             exp: 0,
         };
