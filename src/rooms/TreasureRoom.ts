@@ -115,7 +115,7 @@ export class TreasureRoom extends Room<DungeonState> {
     this.roomId = options.ethAddress;
     //console.log("Treasure created!", options);
     this.setState(new DungeonState());
-    //this.setSeatReservationTime(100000) 
+    this.setSeatReservationTime(100000) 
 
     await mongoose.connect('mongodb+srv://CPAY-CF-USER:CPh76oCwQsLELHBg@cpay-cf.zcgbftb.mongodb.net/crypterium-fantasy-game?retryWrites=true&w=majority');
     const db = mongoose.connection;
