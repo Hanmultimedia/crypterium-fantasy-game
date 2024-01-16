@@ -17,7 +17,7 @@ export default config({
         /**
          * Define your room handlers:
          */
-        gameServer.define('my_room', MyRoom);
+        //gameServer.define('my_room', MyRoom);
         gameServer.define('MenuRoom', MenuRoom);
         gameServer.define('TreasureRoom', TreasureRoom);
         gameServer.define('ArenaRoom', ArenaRoom);
